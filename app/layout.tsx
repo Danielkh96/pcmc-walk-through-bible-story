@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Walk Through Bible | Bible Stories in Chinese & English",
+  title: "PCMC | Walk Through Bible Story",
   description: "A bilingual digital Bible storybook for young readers.",
   icons: {
     icon: "/favicon.svg",
