@@ -15,9 +15,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "PCMC | Walk Through Bible Story",
   description: "A bilingual digital Bible storybook for young readers.",
+  manifest: "/manifest.webmanifest",
+  themeColor: "#090909",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Bible Story",
+  },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: "/pwa-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/pwa-icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/pwa-icon-192.png",
   },
 };
 
