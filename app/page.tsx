@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { detailedPages } from "./story-data";
 
-type Page = { section: string; titleZh: string; titleEn: string; zh: string; en: string; reference: string; scene: string; image?: string };
+type Page = { section: string; titleZh: string; titleEn: string; zh: string; en: string; reference: string; scene: string; image?: string; isReflection?: boolean; questionsZh?: string[]; questionsEn?: string[] };
 
 const legacyPages: Page[] = [
   { section: "起初 · In the Beginning", titleZh: "神创造天地", titleEn: "God Creates the World", zh: "起初，神创造天地。那时，地是空虚混沌，深渊上面一片黑暗；但神的灵运行在水面上。神说：“要有光。”光就出现了。神把光暗分开，称光为昼，称暗为夜。这个故事一开始就告诉我们：光、生命、秩序和美好，都从创造主神而来。", en: "In the beginning, God created the heavens and the earth. The earth was formless and empty, darkness covered the deep waters, and the Spirit of God moved over the waters. Then God said, “Let there be light,” and there was light. God separated the light from the darkness, calling the light day and the darkness night. From the very beginning, light, life, order, and goodness come from God our Creator.", reference: "创世记 Genesis 1:1–5", scene: "light", image: "/genesis-creation.png" },
@@ -21,7 +21,7 @@ const legacyPages: Page[] = [
 
 const pages = detailedPages;
 
-const sceneArt: Record<string, string> = { light: "✦", garden: "❋", people: "◐", tree: "♧", choice: "◒", shadow: "◑", field: "⌁", rain: "☂", ark: "⌒", dove: "⌁", rainbow: "◜" };
+const sceneArt: Record<string, string> = { light: "✦", garden: "❋", people: "◐", tree: "♧", choice: "◒", shadow: "◑", field: "⌁", rain: "☂", ark: "⌒", dove: "⌁", rainbow: "◜", reflection: "✦" };
 
 const books = [
   ["创世记", "Genesis"], ["出埃及记", "Exodus"], ["利未记", "Leviticus"], ["民数记", "Numbers"], ["申命记", "Deuteronomy"], ["约书亚记", "Joshua"], ["士师记", "Judges"], ["路得记", "Ruth"], ["撒母耳记上", "1 Samuel"], ["撒母耳记下", "2 Samuel"], ["列王纪上", "1 Kings"], ["列王纪下", "2 Kings"], ["历代志上", "1 Chronicles"], ["历代志下", "2 Chronicles"], ["以斯拉记", "Ezra"], ["尼希米记", "Nehemiah"], ["以斯帖记", "Esther"], ["约伯记", "Job"], ["诗篇", "Psalms"], ["箴言", "Proverbs"], ["传道书", "Ecclesiastes"], ["雅歌", "Song of Songs"], ["以赛亚书", "Isaiah"], ["耶利米书", "Jeremiah"], ["耶利米哀歌", "Lamentations"], ["以西结书", "Ezekiel"], ["但以理书", "Daniel"], ["何西阿书", "Hosea"], ["约珥书", "Joel"], ["阿摩司书", "Amos"], ["俄巴底亚书", "Obadiah"], ["约拿书", "Jonah"], ["弥迦书", "Micah"], ["那鸿书", "Nahum"], ["哈巴谷书", "Habakkuk"], ["西番雅书", "Zephaniah"], ["哈该书", "Haggai"], ["撒迦利亚书", "Zechariah"], ["玛拉基书", "Malachi"],
