@@ -45,11 +45,13 @@ const reflectionAfter: Record<string, { section: string; titleZh: string; titleE
       "你通常会用什么来衡量自己的价值：成绩、外表、能力、朋友的认可，还是别的？“按神形象被造”会怎样改变这个看法？",
       "神把世界交给人管理。作为学生或年轻人，你觉得自己能从哪一件小事开始，好好管理神交托给你的时间、身体、关系或环境？",
       "神在第七日安息。你平时真的有“休息”吗？还是只是换一种方式继续滑手机、赶功课和焦虑？",
+      "如果你相信自己不是偶然存在的，你觉得神可能希望你怎样使用自己的恩赐？",
     ],
     questionsEn: [
       "What usually shapes your sense of worth—grades, appearance, ability, or other people’s approval? How does being made in God’s image change that?",
       "God entrusted people with caring for the world. What is one small way you can steward your time, body, relationships, or environment well?",
       "God rested on the seventh day. Do you experience real rest, or simply switch to scrolling, studying, and worrying?",
+      "If you believe you are not here by accident, how might God want you to use your gifts?",
     ],
   },
   "罪的后果，也有应许": {
@@ -58,12 +60,16 @@ const reflectionAfter: Record<string, { section: string; titleZh: string; titleE
     titleEn: "Reflect: Eden, Temptation, and the Fall",
     questionsZh: [
       "夏娃面对试探时，开始怀疑神是否真的为她好。你在哪些事情上也容易有这种想法：例如感情、未来、金钱、自由或选择？",
+      "当身边朋友都在做一件你觉得不太对的事时，你通常会怎样回应？最难坚持的地方是什么？",
       "亚当和夏娃犯罪后先躲起来，也互相推卸责任。你犯错时比较像哪一种：逃避、解释、怪环境、怪别人，还是愿意承认？",
+      "你觉得“自由”是想做什么就做什么，还是有能力选择真正对自己和别人好的事？为什么？",
       "如果今天神问你：“你在哪里？”你觉得祂可能在问你生命中的哪一个部分？",
     ],
     questionsEn: [
       "Eve began to doubt whether God truly wanted what was good for her. In what areas do you find yourself asking the same question—relationships, future plans, money, freedom, or choices?",
+      "When friends are doing something you believe is not right, how do you usually respond? What makes it hardest to stand firm?",
       "After they sinned, Adam and Eve hid and blamed each other. When you are wrong, do you avoid, explain, blame, or admit it?",
+      "Is freedom simply doing whatever we want, or having the ability to choose what is truly good for ourselves and others? Why?",
       "If God asked you today, “Where are you?” what part of your life might He be asking about?",
     ],
   },
@@ -74,12 +80,16 @@ const reflectionAfter: Record<string, { section: string; titleZh: string; titleE
     questionsZh: [
       "你有没有因为比较而感到嫉妒、失落或不甘心？比较常发生在什么方面：成绩、外表、家庭、感情、机会或社交媒体？",
       "该隐生气时没有及时处理，最后伤害了别人。你生气时通常会怎样表现：沉默、冷战、说重话、发朋友圈，还是直接爆发？",
+      "当你发现自己正在嫉妒或愤怒时，什么方法能帮助你暂停下来，不让情绪替你做决定？",
       "“我岂是看守我兄弟的吗？”你认为我们对身边朋友的情绪、困难和选择，应该关心到什么程度？",
+      "你有没有一个需要主动关心、和好，或向他道歉的人？",
     ],
     questionsEn: [
       "Have comparisons ever made you jealous, disappointed, or resentful? Where does this happen most—grades, appearance, family, relationships, opportunities, or social media?",
       "Cain did not deal with his anger and hurt someone else. When you are angry, do you go silent, give the cold shoulder, say hurtful words, post online, or explode?",
+      "When you notice jealousy or anger rising, what could help you pause rather than let that emotion make decisions for you?",
       "Cain asked, “Am I my brother’s keeper?” How far should our care for a friend’s emotions, struggles, and choices go?",
+      "Is there someone you need to reach out to, reconcile with, or apologise to?",
     ],
   },
   "神守约的记号": {
@@ -90,12 +100,14 @@ const reflectionAfter: Record<string, { section: string; titleZh: string; titleE
       "挪亚在大多数人都不跟随神时仍选择顺服。你有没有因为信仰或价值观与朋友不一样，而觉得孤单或压力很大？",
       "挪亚在看不见洪水前就开始造方舟。你生命中有没有一件事，是你现在还看不见结果，却需要先忠心去做的？",
       "等待洪水退去需要很长时间。你现在正在等什么？等待中最难的是什么？",
+      "彩虹提醒人神没有忘记祂的应许。低潮时，你最需要记得神的哪一种性情：祂的信实、怜悯、同在，还是带领？",
       "如果神给你一个“重新开始”的机会，你最想在哪个生活领域作出新的选择？",
     ],
     questionsEn: [
       "Noah obeyed God when most people did not. Have your faith or values ever made you feel alone or pressured among friends?",
       "Noah built the ark before he saw the flood. Is there something you need to do faithfully even though you cannot see the result yet?",
       "Waiting for the floodwaters to recede took a long time. What are you waiting for now, and what is hardest about it?",
+      "The rainbow reminds us that God has not forgotten His promises. In a low season, which part of God’s character do you most need to remember: faithfulness, mercy, presence, or guidance?",
       "If God gave you an opportunity for a new beginning, in what area of life would you most want to make a new choice?",
     ],
   },
@@ -130,6 +142,7 @@ export const detailedPages = withStoryDetails.flatMap((page) => {
       en: reflection.questionsEn.map((question, index) => `${index + 1}. ${question}`).join("\n\n"),
       reference: "小组讨论 · Small-group discussion",
       scene: "reflection",
+      image: "/reflection-discussion.png",
       isReflection: true,
     },
   ];
