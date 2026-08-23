@@ -252,7 +252,7 @@ export default function Home() {
       return;
     }
     window.sessionStorage.setItem("pcmc-launch-seen", "true");
-    const timer = window.setTimeout(() => setIsLaunching(false), 1200);
+    const timer = window.setTimeout(() => setIsLaunching(false), 3000);
     return () => window.clearTimeout(timer);
   }, []);
   useEffect(() => {

@@ -45,6 +45,7 @@ test("includes cinematic motion, touch navigation, and reduced-motion support", 
   ]);
 
   assert.match(page, /pcmc-launch-seen/);
+  assert.match(page, /setIsLaunching\(false\), 3000/);
   assert.match(page, /startViewTransition/);
   assert.match(page, /IntersectionObserver/);
   assert.match(page, /onTouchStart=\{handleTouchStart\}/);
