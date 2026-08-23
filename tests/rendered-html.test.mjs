@@ -41,10 +41,11 @@ test("server-renders the PCMC Bible Story app", async () => {
 });
 
 test("includes cinematic motion, touch navigation, and reduced-motion support", async () => {
-  const [page, css, serviceWorker] = await Promise.all([
+  const [page, css, serviceWorker, layout] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../public/sw.js", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /pcmc-launch-seen/);
@@ -66,4 +67,6 @@ test("includes cinematic motion, touch navigation, and reduced-motion support", 
   assert.match(css, /\.featured-book/);
   assert.match(serviceWorker, /pcmc-bible-story-v3/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
+  assert.match(layout, /Newsreader/);
+  assert.match(layout, /Noto_Serif_SC/);
 });
