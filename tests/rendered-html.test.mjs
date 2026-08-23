@@ -33,18 +33,22 @@ test("server-renders the PCMC Bible Story app", async () => {
   assert.match(html, /PCMC Walk Through Bible Story/);
   assert.match(html, /class="launch-screen"/);
   assert.match(html, /src="\/pcmc-logo\.png"/);
-  assert.match(html, /class="continue-reading app-reveal reveal-2"/);
   assert.match(html, /六十六卷书，一个大故事。/);
+  assert.match(html, /class="featured-book"/);
+  assert.match(html, /浏览完整圣经书架/);
+  assert.match(html, /class="mobile-app-nav"/);
   assert.match(html, /创世记/);
 });
 
 test("includes cinematic motion, touch navigation, and reduced-motion support", async () => {
-  const [page, css] = await Promise.all([
+  const [page, css, serviceWorker] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../public/sw.js", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /pcmc-launch-seen/);
+  assert.match(page, /localStorage\.getItem\("pcmc-launch-seen"\)/);
   assert.match(page, /setIsLaunching\(false\), 3000/);
   assert.match(page, /startViewTransition/);
   assert.match(page, /IntersectionObserver/);
@@ -58,4 +62,8 @@ test("includes cinematic motion, touch navigation, and reduced-motion support", 
   assert.match(css, /::view-transition-old\(root\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /touch-action:\s*pan-y/);
+  assert.match(css, /\.mobile-settings-sheet/);
+  assert.match(css, /\.featured-book/);
+  assert.match(serviceWorker, /pcmc-bible-story-v3/);
+  assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
 });

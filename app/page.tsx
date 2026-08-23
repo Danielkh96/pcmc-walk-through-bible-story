@@ -220,6 +220,8 @@ export default function Home() {
   const [hasHydratedProgress, setHasHydratedProgress] = useState(false);
   const [isLaunching, setIsLaunching] = useState(true);
   const [libraryVisible, setLibraryVisible] = useState(false);
+  const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
+  const [mobileSection, setMobileSection] = useState<"home" | "library">("home");
   const [pageDirection, setPageDirection] = useState<"next" | "previous">(
     "next",
   );
@@ -246,12 +248,12 @@ export default function Home() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const hasSeenLaunch =
-      window.sessionStorage.getItem("pcmc-launch-seen") === "true";
+      window.localStorage.getItem("pcmc-launch-seen") === "true";
     if (reducedMotion || hasSeenLaunch) {
       setIsLaunching(false);
       return;
     }
-    window.sessionStorage.setItem("pcmc-launch-seen", "true");
+    window.localStorage.setItem("pcmc-launch-seen", "true");
     const timer = window.setTimeout(() => setIsLaunching(false), 3000);
     return () => window.clearTimeout(timer);
   }, []);
@@ -291,18 +293,51 @@ export default function Home() {
     setHasSavedPosition(true);
     setPageDirection(clampedIndex > pageIndex ? "next" : "previous");
     runTransition(() => setPageIndex(clampedIndex));
+    window.setTimeout(
+      () => document.querySelector("#book")?.scrollIntoView({ behavior: "smooth" }),
+      60,
+    );
   };
   const go = (direction: number) => {
     setHasSavedPosition(true);
     goToPage(pageIndex + direction);
   };
-  const changeView = (nextView: "home" | "reader") =>
-    runTransition(() => setView(nextView));
-  const continueReading = () => changeView("reader");
+  const continueReading = () => {
+    setHasSavedPosition(true);
+    setMobileSettingsOpen(false);
+    runTransition(() => setView("reader"));
+    window.setTimeout(
+      () => document.querySelector("#book")?.scrollIntoView({ behavior: "smooth" }),
+      60,
+    );
+  };
   const changeLanguage = (nextLanguage: "zh" | "en") =>
     runTransition(() => setLanguage(nextLanguage));
   const changeTheme = () =>
     runTransition(() => setTheme(theme === "light" ? "dark" : "light"));
+  const showHome = () => {
+    setMobileSettingsOpen(false);
+    setMobileSection("home");
+    runTransition(() => setView("home"));
+    window.setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 50);
+  };
+  const showLibrary = () => {
+    setMobileSettingsOpen(false);
+    setMobileSection("library");
+    runTransition(() => setView("home"));
+    window.setTimeout(
+      () => document.querySelector("#library")?.scrollIntoView({ behavior: "smooth" }),
+      80,
+    );
+  };
+  useEffect(() => {
+    if (!mobileSettingsOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileSettingsOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileSettingsOpen]);
   const handleTouchStart = (event: React.TouchEvent<HTMLElement>) => {
     const touch = event.touches[0];
     touchStart.current = {
@@ -351,15 +386,16 @@ export default function Home() {
       <header className="topbar app-reveal reveal-1">
         <button
           className="brand"
-          onClick={() => changeView("home")}
+          onClick={showHome}
           aria-label="PCMC Walk Through Bible Story home"
         >
           <img className="brand-mark" src="/pcmc-logo.png" alt="" />
-          <span>PCMC Walk Through Bible Story</span>
+          <span className="brand-full">PCMC Walk Through Bible Story</span>
+          <span className="brand-short">PCMC Bible Story</span>
         </button>
-        <div className="header-right">
+        <div className="header-right desktop-controls">
           <PwaInstaller language={language} />
-          <button className="home-link" onClick={() => changeView("home")}>
+          <button className="home-link" onClick={showHome}>
             {language === "zh" ? "首页" : "Home"}
           </button>
           <div
@@ -389,8 +425,16 @@ export default function Home() {
             {theme === "light" ? "Dark" : "Light"}
           </button>
         </div>
+        <button
+          className="mobile-settings-trigger"
+          onClick={() => setMobileSettingsOpen(true)}
+          aria-label={language === "zh" ? "打开阅读设置" : "Open reading settings"}
+          aria-expanded={mobileSettingsOpen}
+        >
+          <span aria-hidden="true">•••</span>
+        </button>
       </header>
-      {view === "home" && (
+      {view === "home" && hasSavedPosition && (
         <section
           className="continue-reading app-reveal reveal-2"
           aria-label={language === "zh" ? "继续阅读" : "Continue reading"}
@@ -444,9 +488,9 @@ export default function Home() {
                 : "A DIGITAL BIBLE STORYBOOK"}
             </p>
             <h1>
-              PCMC
-              <br />
-              <em>Walk Through Bible Story</em>
+              <span className="hero-pcmc">PCMC</span>
+              <span className="hero-title-main">Walk Through Bible</span>
+              <span className="hero-title-sub">Story</span>
             </h1>
             <p className="hero-copy">
               {language === "zh" ? (
@@ -464,7 +508,7 @@ export default function Home() {
                 </>
               )}
             </p>
-            <a className="begin" href="#library">
+            <a className="begin" href="#library" onClick={() => setMobileSection("library")}>
               {language === "zh" ? "探索六十六卷书" : "Explore all 66 books"}{" "}
               <span>↓</span>
             </a>
@@ -484,49 +528,69 @@ export default function Home() {
                   : "Sixty-six books. One great story."}
               </h2>
             </div>
-            <div className="testament">
-              <span>{language === "zh" ? "旧约" : "OLD TESTAMENT"}</span>
-              <span>39</span>
-            </div>
-            <div className="book-grid">
-              {books.slice(0, 39).map(([zh, en], index) => (
-                <button
-                  key={en}
-                  className={`book-card ${index === 0 ? "available" : "coming"}`}
-                  style={{ "--card-order": index % 5 } as React.CSSProperties}
-                  onClick={() => index === 0 && changeView("reader")}
-                >
-                  <b>{language === "zh" ? zh : en}</b>
-                  <small>
-                    {index === 0
-                      ? language === "zh"
-                        ? "开始阅读"
-                        : "Read now"
-                      : language === "zh"
-                        ? "即将收录"
-                        : "Coming soon"}
-                  </small>
-                </button>
-              ))}
-            </div>
-            <div className="testament">
-              <span>{language === "zh" ? "新约" : "NEW TESTAMENT"}</span>
-              <span>27</span>
-            </div>
-            <div className="book-grid">
-              {books.slice(39).map(([zh, en], index) => (
-                <button
-                  key={en}
-                  className="book-card coming"
-                  style={{ "--card-order": index % 5 } as React.CSSProperties}
-                >
-                  <b>{language === "zh" ? zh : en}</b>
-                  <small>
-                    {language === "zh" ? "即将收录" : "Coming soon"}
-                  </small>
-                </button>
-              ))}
-            </div>
+            <button className="featured-book" onClick={continueReading}>
+              <span className="featured-book-art" aria-hidden="true">
+                <img src="/genesis-creation.png" alt="" />
+              </span>
+              <span className="featured-book-copy">
+                <small>{language === "zh" ? "现已开放 · 第一卷" : "AVAILABLE NOW · BOOK ONE"}</small>
+                <strong>{language === "zh" ? "创世记：起初的故事" : "Genesis: The Beginning"}</strong>
+                <span>
+                  {language === "zh"
+                    ? `4 个故事 · ${pages.length} 页 · 中英文阅读`
+                    : `4 stories · ${pages.length} pages · Bilingual reading`}
+                </span>
+                <b>{language === "zh" ? "开始阅读" : "Read now"} →</b>
+              </span>
+            </button>
+            <details className="complete-library">
+              <summary>
+                <span>
+                  {language === "zh" ? "浏览完整圣经书架" : "Explore the complete Bible library"}
+                  <small>{language === "zh" ? "旧约 39 卷 · 新约 27 卷" : "39 Old Testament · 27 New Testament"}</small>
+                </span>
+                <b aria-hidden="true">＋</b>
+              </summary>
+              <div className="testament">
+                <span>{language === "zh" ? "旧约" : "OLD TESTAMENT"}</span>
+                <span>39</span>
+              </div>
+              <div className="book-grid">
+                {books.slice(0, 39).map(([zh, en], index) => (
+                  <button
+                    key={en}
+                    className={`book-card ${index === 0 ? "available" : "coming"}`}
+                    style={{ "--card-order": index % 5 } as React.CSSProperties}
+                    onClick={() => index === 0 && continueReading()}
+                    disabled={index !== 0}
+                  >
+                    <b>{language === "zh" ? zh : en}</b>
+                    <small>
+                      {index === 0
+                        ? language === "zh" ? "开始阅读" : "Read now"
+                        : language === "zh" ? "即将收录" : "Coming soon"}
+                    </small>
+                  </button>
+                ))}
+              </div>
+              <div className="testament">
+                <span>{language === "zh" ? "新约" : "NEW TESTAMENT"}</span>
+                <span>27</span>
+              </div>
+              <div className="book-grid">
+                {books.slice(39).map(([zh, en], index) => (
+                  <button
+                    key={en}
+                    className="book-card coming"
+                    style={{ "--card-order": index % 5 } as React.CSSProperties}
+                    disabled
+                  >
+                    <b>{language === "zh" ? zh : en}</b>
+                    <small>{language === "zh" ? "即将收录" : "Coming soon"}</small>
+                  </button>
+                ))}
+              </div>
+            </details>
           </section>
         </>
       ) : (
@@ -539,7 +603,7 @@ export default function Home() {
         >
           <button
             className="back-to-library"
-            onClick={() => changeView("home")}
+            onClick={showLibrary}
           >
             ← {language === "zh" ? "回到书架" : "Back to library"}
           </button>
@@ -632,6 +696,49 @@ export default function Home() {
             </button>
           </nav>
         </section>
+      )}
+      {mobileSettingsOpen && (
+        <div className="mobile-settings-layer">
+          <button
+            className="mobile-settings-backdrop"
+            onClick={() => setMobileSettingsOpen(false)}
+            aria-label={language === "zh" ? "关闭设置" : "Close settings"}
+          />
+          <section className="mobile-settings-sheet" role="dialog" aria-modal="true" aria-label={language === "zh" ? "阅读设置" : "Reading settings"}>
+            <div className="sheet-handle" aria-hidden="true" />
+            <div className="sheet-heading">
+              <div>
+                <small>PCMC</small>
+                <h2>{language === "zh" ? "阅读设置" : "Reading settings"}</h2>
+              </div>
+              <button onClick={() => setMobileSettingsOpen(false)} aria-label={language === "zh" ? "关闭" : "Close"}>×</button>
+            </div>
+            <div className="setting-row">
+              <span>{language === "zh" ? "语言" : "Language"}</span>
+              <div className="language-switch" role="group" aria-label="Language selector">
+                <button className={language === "zh" ? "selected" : ""} onClick={() => changeLanguage("zh")}>中文</button>
+                <button className={language === "en" ? "selected" : ""} onClick={() => changeLanguage("en")}>English</button>
+              </div>
+            </div>
+            <button className="setting-row setting-action" onClick={changeTheme}>
+              <span>{language === "zh" ? "外观" : "Appearance"}</span>
+              <b>{theme === "light" ? (language === "zh" ? "深色模式" : "Dark mode") : (language === "zh" ? "浅色模式" : "Light mode")}</b>
+            </button>
+          </section>
+        </div>
+      )}
+      {view === "home" && (
+        <nav className="mobile-app-nav" aria-label={language === "zh" ? "应用导航" : "App navigation"}>
+          <button className={mobileSection === "home" ? "active" : ""} onClick={showHome} aria-current={mobileSection === "home" ? "page" : undefined}>
+            <span aria-hidden="true">⌂</span>{language === "zh" ? "首页" : "Home"}
+          </button>
+          <button className={mobileSection === "library" ? "active" : ""} onClick={showLibrary} aria-current={mobileSection === "library" ? "page" : undefined}>
+            <span aria-hidden="true">▦</span>{language === "zh" ? "书架" : "Library"}
+          </button>
+          <button onClick={continueReading}>
+            <span aria-hidden="true">◉</span>{language === "zh" ? "阅读" : "Read"}
+          </button>
+        </nav>
       )}
       <footer>
         <img className="footer-logo" src="/pcmc-logo.png" alt="" />

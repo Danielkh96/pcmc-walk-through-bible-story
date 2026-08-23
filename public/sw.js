@@ -1,4 +1,4 @@
-const CACHE_NAME = "pcmc-bible-story-v2";
+const CACHE_NAME = "pcmc-bible-story-v3";
 const APP_SHELL = [
   "/",
   "/manifest.webmanifest",
@@ -50,15 +50,14 @@ self.addEventListener("fetch", (event) => {
     return;
   }
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const network = fetch(event.request).then((response) => {
+    fetch(event.request)
+      .then((response) => {
         if (response.ok)
           caches
             .open(CACHE_NAME)
             .then((cache) => cache.put(event.request, response.clone()));
         return response;
-      });
-      return cached || network;
-    }),
+      })
+      .catch(() => caches.match(event.request)),
   );
 });

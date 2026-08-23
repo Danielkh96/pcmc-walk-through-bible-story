@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap");
 /* Wide-screen reading layout: keep the story spacious while retaining the full-bleed cinema image. */
 .topbar,
 .hero,
@@ -1503,4 +1503,565 @@ footer {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* Premium app refinement: editorial typography, native mobile chrome, and a focused library. */
+:root {
+  --ink: #11100e;
+  --paper: #fffdf9;
+  --gold: #8f681f;
+  --muted: #68645c;
+  --font-ui: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-story: "Noto Serif SC", "Songti SC", SimSun, serif;
+}
+body {
+  font-family: var(--font-ui);
+  background: var(--paper);
+}
+.theme-dark {
+  --ink: #f4efe4;
+  --paper: #080807;
+  --gold: #d4a542;
+  --muted: #b8b0a2;
+}
+.grain {
+  opacity: 0.06;
+}
+.eyebrow,
+.chapter,
+.reader-label,
+.reference,
+.topbar,
+.home-link,
+.back-to-library,
+.language-switch button,
+.theme-switch,
+.install-app,
+.continue-copy p,
+.continue-copy span,
+.continue-button,
+.testament,
+.book-card small,
+.launch-screen p,
+.launch-screen span {
+  font-family: var(--font-ui);
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 24;
+  min-height: 72px;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  background: rgba(255, 253, 249, 0.91);
+  border-bottom: 1px solid rgba(17, 16, 14, 0.08);
+  backdrop-filter: blur(18px) saturate(1.2);
+}
+.theme-dark .topbar {
+  background: rgba(8, 8, 7, 0.88);
+  border-bottom-color: rgba(212, 165, 66, 0.16);
+}
+.brand {
+  min-height: 44px;
+  font-size: 11px;
+  letter-spacing: 0.085em;
+}
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+}
+.brand-short,
+.mobile-settings-trigger,
+.mobile-app-nav,
+.mobile-settings-layer {
+  display: none;
+}
+.header-right button,
+.language-switch {
+  min-height: 38px;
+}
+.language-switch button {
+  min-height: 30px;
+}
+.hero {
+  min-height: min(740px, 74svh);
+  padding-top: clamp(88px, 10vw, 132px) !important;
+  padding-bottom: clamp(92px, 10vw, 136px) !important;
+  background:
+    linear-gradient(90deg, rgba(255, 253, 249, .99) 0%, rgba(255, 253, 249, .95) 34%, rgba(255, 253, 249, .58) 59%, rgba(255, 253, 249, .08) 100%),
+    url("/bible-epic-cover.png") 58% center/cover;
+}
+.theme-dark .hero {
+  background:
+    linear-gradient(90deg, rgba(8, 8, 7, .99) 0%, rgba(8, 8, 7, .95) 34%, rgba(8, 8, 7, .62) 60%, rgba(8, 8, 7, .18) 100%),
+    url("/bible-epic-cover.png") 58% center/cover;
+}
+.hero h1 {
+  display: flex;
+  flex-direction: column;
+  max-width: 760px;
+  font-family: var(--font-display);
+  font-size: clamp(62px, 6.6vw, 88px);
+  font-weight: 500;
+  line-height: .92;
+  letter-spacing: -.045em;
+}
+.hero-pcmc {
+  margin-bottom: 18px;
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .24em;
+  line-height: 1;
+}
+.hero-title-main,
+.hero-title-sub {
+  display: block;
+}
+.hero-title-sub {
+  color: #6f4e20;
+}
+.theme-dark .hero-title-sub {
+  color: #e2b75e;
+}
+.hero-copy {
+  max-width: 570px;
+  color: #444039;
+  font-family: var(--font-story);
+  font-size: 17px;
+  line-height: 1.9;
+}
+.theme-dark .hero-copy {
+  color: #d8d0c2;
+}
+.begin {
+  min-height: 44px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 550;
+}
+.continue-copy h2,
+.library-head h2,
+.featured-book-copy strong,
+.launch-screen h1,
+.page-content h2 {
+  font-family: var(--font-display);
+}
+.library {
+  padding-top: clamp(78px, 9vw, 126px) !important;
+  padding-bottom: clamp(98px, 10vw, 144px) !important;
+}
+.library-head {
+  max-width: 760px;
+  margin-bottom: 42px;
+}
+.library-head h2 {
+  font-size: clamp(42px, 5vw, 66px);
+  font-weight: 500;
+  letter-spacing: -.035em;
+}
+.featured-book {
+  width: 100%;
+  min-height: 360px;
+  padding: 0;
+  border: 1px solid rgba(143, 104, 31, .3);
+  display: grid;
+  grid-template-columns: minmax(280px, .92fr) minmax(380px, 1.08fr);
+  overflow: hidden;
+  color: #fff8e8;
+  background: #0b0b09;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 22px 60px rgba(20, 16, 8, .14);
+  transition: transform .45s cubic-bezier(.16, 1, .3, 1), box-shadow .45s ease, border-color .3s ease;
+}
+.featured-book:hover {
+  transform: translateY(-4px);
+  border-color: #d4a542;
+  box-shadow: 0 30px 76px rgba(20, 16, 8, .22);
+}
+.featured-book:active {
+  transform: scale(.992);
+}
+.featured-book-art {
+  min-height: 360px;
+  overflow: hidden;
+}
+.featured-book-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(.16, 1, .3, 1);
+}
+.featured-book:hover .featured-book-art img {
+  transform: scale(1.04);
+}
+.featured-book-copy {
+  position: relative;
+  padding: clamp(34px, 5vw, 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: radial-gradient(circle at 90% 10%, rgba(212, 165, 66, .16), transparent 45%);
+}
+.featured-book-copy small {
+  color: #d4a542;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+}
+.featured-book-copy strong {
+  margin: 18px 0 14px;
+  font-size: clamp(37px, 4.7vw, 64px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+}
+.featured-book-copy span {
+  color: #cfc6b7;
+  font-size: 13px;
+}
+.featured-book-copy b {
+  margin-top: 34px;
+  color: #f2d99c;
+  font-size: 14px;
+  font-weight: 550;
+}
+.complete-library {
+  margin-top: 26px;
+  border-top: 1px solid rgba(17, 16, 14, .14);
+  border-bottom: 1px solid rgba(17, 16, 14, .14);
+}
+.theme-dark .complete-library {
+  border-color: rgba(212, 165, 66, .22);
+}
+.complete-library summary {
+  min-height: 96px;
+  padding: 22px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+  list-style: none;
+}
+.complete-library summary::-webkit-details-marker {
+  display: none;
+}
+.complete-library summary > span {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+}
+.complete-library summary small {
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 450;
+  letter-spacing: .04em;
+}
+.complete-library summary b {
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 26px;
+  font-weight: 300;
+  transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+.complete-library[open] summary b {
+  transform: rotate(45deg);
+}
+.complete-library .book-grid:last-child {
+  padding-bottom: 30px;
+}
+.book-card b {
+  font-family: var(--font-story);
+}
+.page-content h2 {
+  font-weight: 500;
+  letter-spacing: -.035em;
+}
+.page-content .story.zh {
+  font-family: var(--font-story);
+}
+.page-content .story.en {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.18vw, 21px) !important;
+  line-height: 1.72 !important;
+}
+.launch-screen h1 {
+  font-style: normal;
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .topbar {
+    min-height: 68px;
+    padding: 10px 16px !important;
+  }
+  .brand {
+    max-width: calc(100vw - 92px);
+    gap: 10px;
+    letter-spacing: .04em;
+    text-transform: none;
+  }
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+  .brand-full,
+  .desktop-controls {
+    display: none;
+  }
+  .brand-short {
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 650;
+  }
+  .mobile-settings-trigger {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(17, 16, 14, .16);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    letter-spacing: 2px;
+  }
+  .theme-dark .mobile-settings-trigger {
+    border-color: rgba(212, 165, 66, .28);
+  }
+  .hero {
+    min-height: 610px;
+    padding: 88px 20px 96px !important;
+    background:
+      linear-gradient(180deg, rgba(255, 253, 249, .97) 0%, rgba(255, 253, 249, .86) 44%, rgba(255, 253, 249, .42) 72%, rgba(255, 253, 249, .68) 100%),
+      url("/bible-epic-cover.png") 62% center/cover;
+  }
+  .theme-dark .hero {
+    background:
+      linear-gradient(180deg, rgba(8, 8, 7, .96) 0%, rgba(8, 8, 7, .84) 45%, rgba(8, 8, 7, .45) 73%, rgba(8, 8, 7, .73) 100%),
+      url("/bible-epic-cover.png") 62% center/cover;
+  }
+  .hero h1 {
+    max-width: 350px;
+    font-size: clamp(47px, 14vw, 58px);
+    line-height: .94;
+    letter-spacing: -.045em;
+  }
+  .hero-pcmc {
+    margin-bottom: 14px;
+    font-size: 10px;
+  }
+  .hero-copy {
+    max-width: 340px;
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 1.78;
+  }
+  .begin {
+    margin-top: 2px;
+  }
+  .continue-reading {
+    margin: 14px 14px 6px;
+    border-radius: 18px;
+  }
+  .library {
+    padding-top: 76px !important;
+    padding-bottom: 116px !important;
+  }
+  .library-head h2 {
+    font-size: 42px;
+  }
+  .featured-book {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+  .featured-book-art {
+    min-height: 220px;
+    max-height: 240px;
+  }
+  .featured-book-copy {
+    padding: 30px 24px 32px;
+  }
+  .featured-book-copy strong {
+    margin: 13px 0 10px;
+    font-size: 37px;
+  }
+  .featured-book-copy b {
+    margin-top: 25px;
+  }
+  .complete-library {
+    margin-top: 22px;
+  }
+  .complete-library summary {
+    min-height: 86px;
+  }
+  .complete-library summary > span {
+    font-size: 21px;
+  }
+  .book-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .book-card {
+    min-height: 88px;
+    border-radius: 12px;
+  }
+  .mobile-app-nav {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 30;
+    min-height: 66px;
+    padding: 7px;
+    border: 1px solid rgba(212, 165, 66, .22);
+    border-radius: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: rgba(12, 12, 10, .94);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, .28);
+    backdrop-filter: blur(20px) saturate(1.2);
+  }
+  .mobile-app-nav button {
+    min-height: 50px;
+    border: 0;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: transparent;
+    color: #bdb5a6;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    cursor: pointer;
+  }
+  .mobile-app-nav button span {
+    color: #d4a542;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .mobile-app-nav button.active {
+    background: rgba(212, 165, 66, .14);
+    color: #fff8e8;
+  }
+  .mobile-settings-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: block;
+  }
+  .mobile-settings-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(0, 0, 0, .58);
+    backdrop-filter: blur(6px);
+  }
+  .mobile-settings-sheet {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 20px calc(28px + env(safe-area-inset-bottom));
+    border-radius: 26px 26px 0 0;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 -24px 70px rgba(0, 0, 0, .3);
+    animation: sheetRise .42s cubic-bezier(.16, 1, .3, 1) both;
+  }
+  .sheet-handle {
+    width: 42px;
+    height: 4px;
+    margin: 0 auto 20px;
+    border-radius: 99px;
+    background: rgba(128, 120, 105, .36);
+  }
+  .sheet-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(128, 120, 105, .18);
+  }
+  .sheet-heading small {
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: .18em;
+  }
+  .sheet-heading h2 {
+    margin-top: 4px;
+    font-family: var(--font-story);
+    font-size: 28px;
+    letter-spacing: -.02em;
+  }
+  .sheet-heading button {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(128, 120, 105, .2);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    font-size: 24px;
+  }
+  .setting-row {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid rgba(128, 120, 105, .14);
+    font-family: var(--font-ui);
+    font-size: 14px;
+  }
+  .setting-row .language-switch {
+    min-height: 40px;
+  }
+  .setting-row .language-switch button {
+    min-width: 72px;
+    min-height: 34px;
+  }
+  .setting-action {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    color: var(--ink);
+  }
+  .setting-action b {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 550;
+  }
+  .cinematic-reader .page.has-cinematic-image .page-content {
+    padding-bottom: 86px !important;
+  }
+  footer {
+    padding-bottom: 108px;
+  }
+}
+
+@keyframes sheetRise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
 }
