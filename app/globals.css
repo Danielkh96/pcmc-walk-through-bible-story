@@ -92,14 +92,20 @@ a {
   font-weight: 500;
 }
 .brand-mark {
-  width: 26px;
-  height: 26px;
-  border: 1px solid var(--ink);
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-family: "Playfair Display", serif;
-  font-size: 15px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(184, 138, 45, 0.36);
+}
+.footer-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
 }
 .volume {
   color: var(--muted);
@@ -1185,15 +1191,11 @@ body {
 }
 .launch-mark {
   position: relative;
-  width: 74px;
-  height: 74px;
-  display: grid;
-  place-items: center;
-  border: 1px solid #d4a542;
+  width: 118px;
+  height: 118px;
+  object-fit: cover;
   border-radius: 50%;
-  color: #e9bd65;
-  font-family: "Playfair Display", serif;
-  font-size: 35px;
+  box-shadow: 0 0 0 1px rgba(212, 165, 66, 0.58);
   animation: launchMark 0.72s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .launch-screen p,
@@ -1460,9 +1462,8 @@ footer {
 
 @media (max-width: 720px) {
   .launch-mark {
-    width: 64px;
-    height: 64px;
-    font-size: 30px;
+    width: 98px;
+    height: 98px;
   }
   .launch-screen h1 {
     font-size: clamp(30px, 9vw, 44px);

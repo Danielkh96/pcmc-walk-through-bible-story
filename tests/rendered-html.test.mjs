@@ -32,6 +32,7 @@ test("server-renders the PCMC Bible Story app", async () => {
   assert.match(html, /<title>PCMC \| Walk Through Bible Story<\/title>/i);
   assert.match(html, /PCMC Walk Through Bible Story/);
   assert.match(html, /class="launch-screen"/);
+  assert.match(html, /src="\/pcmc-logo\.png"/);
   assert.match(html, /class="continue-reading app-reveal reveal-2"/);
   assert.match(html, /六十六卷书，一个大故事。/);
   assert.match(html, /创世记/);

@@ -337,7 +337,11 @@ export default function Home() {
           aria-label="PCMC Walk Through Bible Story"
         >
           <div className="launch-halo" aria-hidden="true" />
-          <div className="launch-mark">P</div>
+          <img
+            className="launch-mark"
+            src="/pcmc-logo.png"
+            alt="PCMC church logo"
+          />
           <p>PCMC</p>
           <h1>Walk Through Bible Story</h1>
           <span>THE GREAT STORY BEGINS</span>
@@ -350,7 +354,7 @@ export default function Home() {
           onClick={() => changeView("home")}
           aria-label="PCMC Walk Through Bible Story home"
         >
-          <span className="brand-mark">P</span>
+          <img className="brand-mark" src="/pcmc-logo.png" alt="" />
           <span>PCMC Walk Through Bible Story</span>
         </button>
         <div className="header-right">
@@ -630,6 +634,7 @@ export default function Home() {
         </section>
       )}
       <footer>
+        <img className="footer-logo" src="/pcmc-logo.png" alt="" />
         PCMC · Walk Through Bible Story ·{" "}
         {language === "zh"
           ? "让圣经的大故事，一页一页走进心里。"
