@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { detailedPages } from "./story-data";
 import { PwaInstaller } from "./pwa-installer";
 
@@ -30,15 +30,31 @@ const books = [
 ];
 
 export default function Home() {
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(() => {
+    if (typeof window === "undefined") return 0;
+    const saved = Number(window.localStorage.getItem("pcmc-bible-story-page"));
+    return Number.isInteger(saved) && saved >= 0 && saved < pages.length ? saved : 0;
+  });
   const [language, setLanguage] = useState<"zh" | "en">("zh");
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [view, setView] = useState<"home" | "reader">("home");
+  const [hasSavedPosition, setHasSavedPosition] = useState(false);
+  useEffect(() => {
+    setHasSavedPosition(window.localStorage.getItem("pcmc-bible-story-page") !== null);
+  }, []);
+  useEffect(() => {
+    window.localStorage.setItem("pcmc-bible-story-page", String(pageIndex));
+  }, [pageIndex]);
   const page = pages[pageIndex];
-  const go = (direction: number) => setPageIndex((current) => Math.min(Math.max(current + direction, 0), pages.length - 1));
+  const go = (direction: number) => {
+    setHasSavedPosition(true);
+    setPageIndex((current) => Math.min(Math.max(current + direction, 0), pages.length - 1));
+  };
+  const continueReading = () => setView("reader");
   return <main className={`theme-${theme}`}>
     <div className="grain" aria-hidden="true" />
     <header className="topbar"><button className="brand" onClick={() => setView("home")} aria-label="PCMC Walk Through Bible Story home"><span className="brand-mark">P</span><span>PCMC Walk Through Bible Story</span></button><div className="header-right"><PwaInstaller language={language} /><button className="home-link" onClick={() => setView("home")}>{language === "zh" ? "首页" : "Home"}</button><div className="language-switch" role="group" aria-label="Language selector"><button className={language === "zh" ? "selected" : ""} onClick={() => setLanguage("zh")}>中</button><button className={language === "en" ? "selected" : ""} onClick={() => setLanguage("en")}>EN</button></div><button className="theme-switch" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label="Toggle light or dark theme"><span>{theme === "light" ? "☾" : "☀"}</span>{theme === "light" ? "Dark" : "Light"}</button></div></header>
+    {view === "home" && <section className="continue-reading" aria-label={language === "zh" ? "继续阅读" : "Continue reading"}><div className="continue-art" aria-hidden="true"><img src="/genesis-creation.png" alt="" /></div><div className="continue-copy"><p>{language === "zh" ? "继续阅读" : "CONTINUE READING"}</p><h2>{language === "zh" ? "创世记 · 起初的故事" : "Genesis · The Beginning"}</h2><span>{language === "zh" ? "你已读到第 " + (pageIndex + 1) + " 页，共 " + pages.length + " 页" : "Page " + (pageIndex + 1) + " of " + pages.length}</span><div className="progress-track"><i style={{ width: String(((pageIndex + 1) / pages.length) * 100) + "%" }} /></div></div><button className="continue-button" onClick={continueReading}>{hasSavedPosition ? (language === "zh" ? "继续" : "Continue") : (language === "zh" ? "开始阅读" : "Start reading")} <span>→</span></button></section>}
     {view === "home" ? <><section className="hero" id="top"><p className="eyebrow">PCMC PRESENTS · {language === "zh" ? "圣经故事电子书" : "A DIGITAL BIBLE STORYBOOK"}</p><h1>PCMC<br /><em>Walk Through Bible Story</em></h1><p className="hero-copy">{language === "zh" ? <>从《创世记》到《启示录》，一卷一卷走进圣经的大故事。<br />选择一本书，开始你的阅读旅程。</> : <>From Genesis to Revelation, walk through the great story of the Bible—one book at a time.<br />Choose a book and begin your journey.</>}</p><a className="begin" href="#library">{language === "zh" ? "探索六十六卷书" : "Explore all 66 books"} <span>↓</span></a></section><section className="library" id="library"><div className="library-head"><p className="eyebrow">{language === "zh" ? "圣经书架" : "THE BIBLE LIBRARY"}</p><h2>{language === "zh" ? "六十六卷书，一个大故事。" : "Sixty-six books. One great story."}</h2></div><div className="testament"><span>{language === "zh" ? "旧约" : "OLD TESTAMENT"}</span><span>39</span></div><div className="book-grid">{books.slice(0,39).map(([zh,en], index) => <button key={en} className={`book-card ${index === 0 ? "available" : "coming"}`} onClick={() => index === 0 && setView("reader")}><b>{language === "zh" ? zh : en}</b><small>{index === 0 ? (language === "zh" ? "开始阅读" : "Read now") : (language === "zh" ? "即将收录" : "Coming soon")}</small></button>)}</div><div className="testament"><span>{language === "zh" ? "新约" : "NEW TESTAMENT"}</span><span>27</span></div><div className="book-grid">{books.slice(39).map(([zh,en]) => <button key={en} className="book-card coming"><b>{language === "zh" ? zh : en}</b><small>{language === "zh" ? "即将收录" : "Coming soon"}</small></button>)}</div></section></> : <section className={`book-area ${page.image ? "cinematic-reader" : ""}`} id="book" aria-label="Bible story reader"><button className="back-to-library" onClick={() => setView("home")}>← {language === "zh" ? "回到书架" : "Back to library"}</button><div className="reader-label"><span>{language === "zh" ? `第 ${String(pageIndex + 1).padStart(2, "0")} 页` : `PAGE ${String(pageIndex + 1).padStart(2, "0")}`}</span><span>{language === "zh" ? page.section.split(" · ")[0] : page.section.split(" · ")[1]}</span></div><article className={`page scene-${page.scene} ${page.image ? "has-cinematic-image" : ""}`}>{page.image && <><img src={page.image} alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",zIndex:0}} /><div aria-hidden="true" style={{position:"absolute",inset:0,zIndex:0,background:"linear-gradient(90deg, rgba(3,3,3,.86) 0%, rgba(3,3,3,.67) 36%, rgba(3,3,3,.14) 72%, rgba(3,3,3,.18) 100%)"}} /></>}{!page.image && <div className="art" aria-hidden="true"><span>{sceneArt[page.scene]}</span></div>}<div className="page-content"><p className="chapter">{language === "zh" ? page.section.split(" · ")[0] : page.section.split(" · ")[1]}</p><h2>{language === "zh" ? page.titleZh : page.titleEn}</h2><div className="rule" /><p className={`story ${language}`}>{language === "zh" ? page.zh : page.en}</p><p className="reference">{page.reference}</p></div></article><nav className="navigation" aria-label="Page navigation"><button onClick={() => go(-1)} disabled={pageIndex === 0}>← {language === "zh" ? "上一页" : "Previous"}</button><div className="dots" aria-label={`Page ${pageIndex + 1} of ${pages.length}`}>{pages.map((_, index) => <button key={index} className={index === pageIndex ? "active" : ""} onClick={() => setPageIndex(index)} aria-label={`Go to page ${index + 1}`} />)}</div><button onClick={() => go(1)} disabled={pageIndex === pages.length - 1}>{language === "zh" ? "下一页" : "Next"} →</button></nav></section>}
     <footer>PCMC · Walk Through Bible Story · {language === "zh" ? "让圣经的大故事，一页一页走进心里。" : "Let the great story of the Bible enter one page at a time."}</footer>
   </main>;
