@@ -1,4 +1,4 @@
-const CACHE_NAME = "pcmc-bible-story-v3";
+const CACHE_NAME = "pcmc-bible-story-v4";
 const APP_SHELL = [
   "/",
   "/manifest.webmanifest",
