@@ -6,7 +6,7 @@
 
 ## 制作状态
 
-- 16页、78格图片已完成逐格校对并接入 App；15张重制、1张保留。GitHub/Vercel 发布结果将在正式服务验证后单独记录。
+- 16页、78格图片已完成逐格校对并接入 App；15张重制、1张保留。GitHub/Vercel发布及正式域名全页校验已完成。
 - 使用内建 imagegen；每页提示词与生成原件保存在本机 `output/comic/creation-mystery-v4/`。
 - 新版前15页按精修稿制作；第16页保留符合对白和分镜的批准结尾，只隐藏旧底部页码。所有图片1024×1536，新页无裁剪。
 - 正文不向学生显示分镜、提示词或校对说明。
@@ -24,4 +24,7 @@
 - `npm test`：19/19通过，含16页资源、尺寸、路由、旧章重定向与归档无依赖测试。
 - `VERCEL=1 npm run build`：通过，生成Vercel/Nitro产物。
 - 阅读版本改为 `creation-mystery-v4`，旧进度不跳过新前奏；SW缓存改为 `pcmc-bible-story-v15-creation-mystery`。
-- GitHub推送、Vercel Ready与正式资源校验：待发布步骤完成后记录。
+- GitHub：`4b9d9d562b3ec8398934c0a7e8cd599504066707` 已推送 `main`。
+- Vercel：既有GitHub连接自动触发Production部署 `dpl_BJDp6Xd2QKoEDZ1ZE65fyYNoqcyH`，状态Ready，正式域名别名已切换。
+- 本机和 `https://pcmc-walk-through-bible-story.vercel.app`：16张PNG逐张SHA-256匹配，16条阅读路由均引用新版图片且总页数16；SW版本正确；抽查旧版图片URL均404。
+- 测试/构建无误，代码eslint及diff whitespace检查通过。两份无关未跟踪制作文档和WhatsApp海报未纳入本次提交。

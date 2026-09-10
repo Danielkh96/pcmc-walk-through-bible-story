@@ -6,10 +6,10 @@
 
 | 层级 | 状态 |
 | --- | --- |
-| App 已发布版本 | 创造天地 `creation-prologue-v3`，14 页、67 格。学校放学到明亮图书馆的前奏；运行数据在 `app/comic/creation-pages.json`。此前 GitHub 提交 `2cce285` 已完成 Vercel 部署验证。 |
+| App 已发布版本 | 创造天地 `creation-mystery-v4`，16页、78格。GitHub提交 `4b9d9d5` 已由已连接的Vercel项目部署为Production Ready，正式域名16页图片SHA-256及路由全部核对通过。运行数据在 `app/comic/creation-pages.json`。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
 | 最近完整审核稿 | `docs/comic/creation-mystery-v4-storyboard.md`：16 页、78 格，包含 5 页神秘开场和 11 页创造故事。2026-09-11 用户已确认并明确授权漫画生成。 |
-| 当前制作任务 | 新稿16页已接入本机App（15张重制、1张保留），19项测试和Vercel正式构建通过。276个旧文件已实际移至本机archive。GitHub/Vercel发布结果见 `creation-mystery-v4-release.md`，不能把本机完成当作已上线。 |
+| 当前制作任务 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |
 | 第二章《伊甸园》 | 有过 8 页、38 格提案；因第一章开场调整，连接位置需重新检查。未因此获得生成或发布授权。 |
 
 ## 用户强调的因果链
