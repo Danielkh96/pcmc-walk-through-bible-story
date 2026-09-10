@@ -34,11 +34,12 @@
   "chapters": [
     {
       "id": "creation",
+      "edition": "creation-prologue-v3",
       "number": 1,
       "title": "创造天地",
       "book": "创世记",
       "reference": "创世记 1:1–2:3",
-      "summary": "书页里的光粒子浮起来了！跟着小昆和小君，从阅读角走进创造的故事，看见光、天地与生命，一起迎接第七日的安息。",
+      "summary": "说了好几次的读经约定，今天终于开始了。跟着小昆和小君，从放学后的图书馆走进创造的故事，看见光、天地与生命，一起迎接第七日的安息。",
       "dataKey": "creation",
       "characterIds": [
         "xiao-kun",

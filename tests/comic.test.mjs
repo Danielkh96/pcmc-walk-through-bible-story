@@ -2,22 +2,35 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { runInNewContext } from "node:vm";
 import test from "node:test";
-import { comicChapterEntry, getComicPageIndex } from "../app/comic/navigation.mjs";
+import { comicChapterEntry, getComicPageIndex, savedComicPage } from "../app/comic/navigation.mjs";
 
 const pages = JSON.parse(await readFile(new URL("../app/comic/comic-data.json", import.meta.url), "utf8"));
 const catalog = JSON.parse(await readFile(new URL("../app/comic/book-catalog.json", import.meta.url), "utf8"));
 const revised = JSON.parse(await readFile(new URL("../app/comic/dialogue-v2.json", import.meta.url), "utf8"));
 
-test("published reader uses all thirteen approved condensed illustrations without production scripts", async () => {
+test("reading progress resumes this edition and does not skip the new prologue", () => {
+  const chapter = { id: "creation", edition: "creation-prologue-v3", pages: Array(14) };
+  const saved = (page, extra = {}) => JSON.stringify({ chapter: chapter.id, edition: chapter.edition, page, ...extra });
+  for (const raw of ["", "broken json", "null", saved(0), saved(15), saved(1.5), saved("2"), saved(8, { edition: "old" }), saved(8, { chapter: "episode-01" }), JSON.stringify({ chapter: "creation", page: 13 })]) {
+    assert.equal(savedComicPage(raw, chapter), 1);
+  }
+  assert.equal(savedComicPage(saved(2), chapter), 2);
+  assert.equal(savedComicPage(saved(14), chapter), 14);
+  assert.equal(getComicPageIndex("99", 14), 13);
+});
+
+test("published reader uses all fourteen prologue edition illustrations without production scripts", async () => {
   const publicPages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
-  assert.equal(publicPages.length, 13);
-  assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 13 }, (_, i) => i + 1));
+  assert.equal(publicPages.length, 14);
+  assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 14 }, (_, i) => i + 1));
   assert.deepEqual(catalog.chapters.map(c => c.id), ["creation"]);
   assert.equal(catalog.chapters[0].reference, "创世记 1:1–2:3");
   assert.equal(catalog.chapters[0].hidePrintedFolio, true);
   for (const page of publicPages) {
     assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
-    assert.equal(page.image, `/comics/creation-condensed-v2/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.equal(page.image, page.id <= 2
+      ? `/comics/creation-prologue-v3/page-${String(page.id).padStart(2, "0")}.png`
+      : `/comics/creation-condensed-v2/page-${String(page.id - 1).padStart(2, "0")}.png`);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
     assert.equal(bytes.readUInt32BE(16), 1024);

@@ -5,7 +5,7 @@
 import { useSyncExternalStore } from "react";
 import { useAppearance } from "../use-appearance";
 import { comicBook, comicChapters, charactersThroughChapter } from "./book-data";
-import { comicChapterEntry } from "./navigation.mjs";
+import { comicChapterEntry, savedComicPage } from "./navigation.mjs";
 import reader from "./comic.module.css";
 import styles from "./book.module.css";
 
@@ -23,11 +23,7 @@ export default function BookFrontmatter({ section, chapterId }: { section: "cont
   const chapter = comicChapters.find((item) => item.id === chapterId) ?? comicChapters[0];
   const characters = charactersThroughChapter(chapter);
   const progress = useSyncExternalStore(subscribeProgress, savedProgress, noProgress);
-  let page = 1;
-  try {
-    const saved = JSON.parse(progress);
-    if (saved.chapter === chapter.id && Number.isInteger(saved.page) && saved.page >= 1 && saved.page <= chapter.pages.length) page = saved.page;
-  } catch { /* A fresh reader simply starts on page one. */ }
+  const page = savedComicPage(progress, chapter);
   return (
     <main className={reader.reader} data-theme={theme}>
       <header className={reader.header}>

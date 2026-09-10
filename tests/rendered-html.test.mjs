@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v13-creation-condensed/);
+  assert.match(serviceWorker, /pcmc-bible-story-v14-creation-prologue/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -74,7 +74,7 @@ test("server-renders the comic reader as the only reading edition", async () => 
   const response = await render("/comic/read");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /\/comics\/creation-condensed-v2\/page-01\.png/);
+  assert.match(html, /\/comics\/creation-prologue-v3\/page-01\.png/);
   assert.match(html, /选择漫画页码/);
   assert.doesNotMatch(html, /本页分镜|对白润色|漫画初稿|文字稿仍|本章人物与分镜/);
   assert.doesNotMatch(html, /<h1[^>]*>故事开始以前/);
@@ -90,9 +90,9 @@ test("comic journey goes from contents to growing cast to artwork without produc
     ["/comic/characters", ["认识故事里的伙伴", "现代学生", "等一下，我有个问题", "开始阅读"]],
     ["/comic/contents", ["目录", "创造天地", "/comic/chapter/creation"]],
     ["/comic/chapter/creation", ["认识故事里的伙伴", "小昆", "小君", "开始阅读"]],
-    ["/comic/read?chapter=creation", ["漫画阅读", "/comics/creation-condensed-v2/page-01.png"]],
-    ["/comic?page=7", ["选择漫画页码", "/comics/creation-condensed-v2/page-07.png"]],
-    ["/comic/read?chapter=creation&page=10", ["/comics/creation-condensed-v2/page-10.png"]],
+    ["/comic/read?chapter=creation", ["漫画阅读", "/comics/creation-prologue-v3/page-01.png"]],
+    ["/comic?page=7", ["选择漫画页码", "/comics/creation-condensed-v2/page-06.png"]],
+    ["/comic/read?chapter=creation&page=10", ["/comics/creation-condensed-v2/page-09.png"]],
   ];
   for (const [path, expected] of cases) {
     const response = await render(path);
@@ -109,21 +109,25 @@ test("unknown comic chapters do not masquerade as the first chapter", async () =
   }
 });
 
-test("condensed creation is the only published chapter and all thirteen pages render", async () => {
+test("condensed creation is the only published chapter and all fourteen pages render", async () => {
   const contents = await (await render("/comic/contents")).text();
   assert.match(contents, /创造天地/);
   assert.ok(contents.includes('href="/comic/chapter/creation"'));
   assert.doesNotMatch(contents, /episode-0[1-4]|天空、海洋与陆地|海里的生命，天空的飞鸟/);
-  for (const page of [...Array.from({ length: 13 }, (_, i) => i + 1), 99]) {
+  for (const page of [...Array.from({ length: 14 }, (_, i) => i + 1), 99]) {
     const response = await render(`/comic/read?chapter=creation&page=${page}`);
     assert.equal(response.status, 200);
     const html = await response.text();
-    assert.ok(html.includes(`/comics/creation-condensed-v2/page-${String(Math.min(page, 13)).padStart(2, "0")}.png`));
+    const id = Math.min(page, 14);
+    const asset = id <= 2
+      ? `/comics/creation-prologue-v3/page-${String(id).padStart(2, "0")}.png`
+      : `/comics/creation-condensed-v2/page-${String(id - 1).padStart(2, "0")}.png`;
+    assert.ok(html.includes(asset));
     assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
     assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
-    assert.match(html, /aria-valuemax="13"/);
+    assert.match(html, /aria-valuemax="14"/);
     assert.match(html, /reindexedArtwork/);
-    if (page >= 13) {
+    if (page >= 14) {
       assert.doesNotMatch(html, /aria-label="下一章：/);
       assert.match(html, /这一章读完啦/);
     }

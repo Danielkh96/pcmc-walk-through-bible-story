@@ -89,10 +89,11 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
     try {
       localStorage.setItem("pcmc-comic-progress", JSON.stringify({
         chapter: chapter.id,
+        edition: chapter.edition,
         page: currentPage(comicPages.length) + 1,
       }));
     } catch { /* Storage is optional; URL navigation remains available. */ }
-  }, [chapter.id, comicPages.length, pageIndex]);
+  }, [chapter.id, chapter.edition, comicPages.length, pageIndex]);
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
       if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
