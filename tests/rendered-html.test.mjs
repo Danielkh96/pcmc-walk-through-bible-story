@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v10-episode-02/);
+  assert.match(serviceWorker, /pcmc-bible-story-v11-episode-03/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -122,6 +122,21 @@ test("second chapter is discoverable and chapter one continues directly to its a
     const html = await response.text();
     assert.ok(html.includes(`/comics/episode-02-v1/page-${String(page).padStart(2, "0")}.png`));
     assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
-    if (page === 12) assert.doesNotMatch(html, /aria-label="下一章：/);
+    if (page === 12) assert.match(html, /aria-label="下一章：日月星辰"/);
+  }
+});
+
+test("third chapter is linked from contents and reads all ten pages with correct bounds", async () => {
+  const contents = await (await render("/comic/contents")).text();
+  assert.match(contents, /日月星辰/);
+  assert.ok(contents.includes('href="/comic/read?chapter=episode-03&amp;page=1"'));
+  for (const page of [1, 5, 10, 99]) {
+    const response = await render(`/comic/read?chapter=episode-03&page=${page}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes(`/comics/episode-03-v1/page-${String(Math.min(page, 10)).padStart(2, "0")}.png`));
+    assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
+    assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
+    if (page >= 10) assert.doesNotMatch(html, /aria-label="下一章：/);
   }
 });

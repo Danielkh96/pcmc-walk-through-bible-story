@@ -60,6 +60,19 @@
       "newCharacterIds": [],
       "introduction": "小昆和小君继续探索第二、第三日的创造。本章没有新登场人物，直接进入漫画。",
       "status": "published"
+    },
+    {
+      "id": "episode-03",
+      "number": 3,
+      "title": "日月星辰",
+      "book": "创世记",
+      "reference": "创世记 1:14–19",
+      "summary": "一直寻找的太阳终于出现了。小昆和小君看见月亮与众星，也发现日子和年岁跟自己的生活息息相关。",
+      "dataKey": "episode-03",
+      "characterIds": ["xiao-kun", "xiao-jun"],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君继续探索第四日的创造。本章没有新登场人物，直接进入漫画。",
+      "status": "published"
     }
   ]
 }
