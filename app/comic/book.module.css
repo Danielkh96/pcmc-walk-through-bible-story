@@ -41,6 +41,13 @@
 .chapterCopy > span { line-height: 1.8; max-width: 840px; color: var(--comic-muted); }
 .chapterCopy .chapterMeta { font-size: .9rem; }
 .chapterArrow { font-size: 1.5rem; }
+.chapterArrow { display: grid; place-items: center; min-width: 28px; min-height: 32px; border: 1px solid var(--comic-line); border-radius: 10px; background: var(--toon-pop); color: #233b45; }
+.chapterList > li { transition: transform .2s, box-shadow .2s; }
+.chapterList > li:hover { transform: translateY(-3px); box-shadow: 7px 8px 0 var(--toon-shadow); }
+.characterCard:first-child { border-top: 7px solid var(--toon-pop); }
+.characterCard:nth-child(2) { border-top: 7px solid var(--comic-accent); }
+.primary { transition: transform .18s, box-shadow .18s; }
+.primary:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--comic-line); }
 .chapterFacts { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
 .chapterFacts span { border: 1px solid var(--comic-line); padding: 8px 14px; border-radius: 8px; font-size: .9rem; }
 .castSection > h2 { font-size: 1.4rem; }
@@ -60,9 +67,12 @@
   .coverCopy h2 { font-size: 1.6rem; }
   .coverCopy { padding-bottom: 12px; }
   .body { padding-top: 24px; }
-  .chapterList a { grid-template-columns: 40px minmax(0, 1fr) 16px; gap: 14px; padding-inline: 0; }
+  .chapterList a { grid-template-columns: 40px minmax(0, 1fr) 28px; gap: 14px; padding-inline: 12px; }
   .chapterNumber { font-size: 2.2rem; }
   .chapterCopy strong { font-size: 1.3rem; }
   .steps { gap: 0; padding-inline: 8px; }
   .steps a { padding-inline: 12px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .chapterList > li, .primary { transition:none; }
 }

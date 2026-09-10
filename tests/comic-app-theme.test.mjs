@@ -18,6 +18,9 @@ test("comic and story surfaces share the same light and dark palette", async () 
   assert.doesNotMatch(book, /var\(--font-noto-serif-sc\)/);
   assert.match(theme, /prefers-reduced-motion: reduce/);
   assert.match(theme, /max-width: 720px/);
+  assert.match(theme, /--toon-pop: #ffd17a/);
+  assert.match(theme, /9px 10px 0 var\(--toon-card-depth\)/);
+  assert.match(theme, /border: 3px solid var\(--toon-line\)/);
 });
 
 test("home exclusively links to comic reading and retains interface language and theme controls", async () => {
@@ -32,4 +35,13 @@ test("home exclusively links to comic reading and retains interface language and
   assert.match(page, /setTheme\(theme === "light"/);
   assert.equal(JSON.parse(manifest).theme_color, "#eaf7fb");
   assert.equal(JSON.parse(manifest).display, "standalone");
+});
+
+test("cross-page reading links do not depend on broken client-side RSC navigation", async () => {
+  for (const path of ["../app/page.tsx", "../app/comic/book-frontmatter.tsx", "../app/comic/comic-reader.tsx"]) {
+    const source = await read(path);
+    assert.doesNotMatch(source, /from "next\/link"|<Link\b/);
+    assert.match(source, /<a\b/);
+    assert.match(source, /useAppearance\(\)/);
+  }
 });

@@ -1,9 +1,11 @@
 "use client";
 
+/* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
+
 import { useEffect, useState, useSyncExternalStore } from "react";
-import Link from "next/link";
 import { comicChapters, type ComicChapter } from "./book-data";
 import { getComicPageIndex } from "./navigation.mjs";
+import { useAppearance } from "../use-appearance";
 import styles from "./comic.module.css";
 
 const navigationEvent = "pcmc-comic-navigation";
@@ -65,7 +67,9 @@ function PageArtwork({ image, title, id }: { image: string; title: string; id: n
 export default function ComicReader({ chapter = comicChapters[0] }: { chapter?: ComicChapter }) {
   const comicPages = chapter.pages;
   const pageIndex = useSyncExternalStore(subscribe, () => currentPage(comicPages.length), serverPage);
-  const [dark, setDark] = useState(false);
+  const [theme, setTheme] = useAppearance();
+  const dark = theme === "dark";
+  const setDark = (value: boolean) => setTheme(value ? "dark" : "light");
   const page = comicPages[pageIndex];
   const revised = chapter.revisedDialogue.find((item) => item.id === page.id);
   const missingPages = comicPages.filter((item) => !item.image).map((item) => item.id).join("、");
@@ -93,13 +97,13 @@ export default function ComicReader({ chapter = comicChapters[0] }: { chapter?: 
     <main className={styles.reader} data-theme={dark ? "dark" : "light"}>
       <a className={styles.skip} href="#comic-page">跳到漫画内容</a>
       <header className={styles.header}>
-        <Link className={styles.brand} href="/" aria-label="PCMC Walk Through Bible Story 首页">
+        <a className={styles.brand} href="/" aria-label="PCMC Walk Through Bible Story 首页">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/pcmc-logo.png" alt="" width={36} height={36} />
           <span>PCMC Walk Through Bible Story</span>
-        </Link>
+        </a>
         <div className={styles.headerActions}>
-          <Link href="/comic/contents" className={styles.control}>总目录</Link>
+          <a href="/comic/contents" className={styles.control}>总目录</a>
           <button className={styles.control} aria-pressed={dark} onClick={() => setDark(!dark)}>
             {dark ? "浅色" : "深色"}
           </button>
@@ -108,7 +112,7 @@ export default function ComicReader({ chapter = comicChapters[0] }: { chapter?: 
       <div className={styles.intro}>
         <p className={styles.eyebrow}>小昆 &amp; 小君 · EPISODE {String(chapter.number).padStart(2, "0")}</p>
         <h1>{chapter.title}</h1>
-        <div className={styles.meta}><span className={styles.badge}>漫画初稿</span><span>中文版 · {chapter.illustratedCount} / {comicPages.length} 页已绘制</span><span>{chapter.reference}</span><Link href={"/comic/chapter/" + chapter.id}>本章人物与分镜提要 →</Link></div>
+        <div className={styles.meta}><span className={styles.badge}>漫画初稿</span><span>中文版 · {chapter.illustratedCount} / {comicPages.length} 页已绘制</span><span>{chapter.reference}</span><a href={"/comic/chapter/" + chapter.id}>本章人物与分镜提要 →</a></div>
         <p className={styles.context}>小昆和小君的穿越是虚构框架，矩形旁白引用经文。{missingPages ? `本册尚未定稿，第 ${missingPages} 页暂以分镜文字呈现。` : "本册为漫画预览初稿。"}</p>
       </div>
       <nav className={styles.toolbar} aria-label="漫画翻页">
@@ -175,7 +179,7 @@ export default function ComicReader({ chapter = comicChapters[0] }: { chapter?: 
             <span>{page.id} / {comicPages.length}</span>
             <button className={styles.control} onClick={() => navigate(pageIndex + 1, comicPages.length)} disabled={pageIndex === comicPages.length - 1}>下一页 →</button>
           </nav>
-          {pageIndex === comicPages.length - 1 && <p className={styles.endNote}>这一章到这里结束。<Link href="/comic/contents">返回漫画总目录 →</Link></p>}
+          {pageIndex === comicPages.length - 1 && <p className={styles.endNote}>这一章到这里结束。<a href="/comic/contents">返回漫画总目录 →</a></p>}
         </article>
       </div>
     </main>

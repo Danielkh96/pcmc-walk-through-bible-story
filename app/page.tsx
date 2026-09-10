@@ -1,9 +1,11 @@
 "use client";
 
+/* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
+
 import { useEffect, useState, useSyncExternalStore } from "react";
-import Link from "next/link";
 import { comicChapters } from "./comic/book-data";
 import { PwaInstaller } from "./pwa-installer";
+import { useAppearance } from "./use-appearance";
 
 const books = [
   ["创世记", "Genesis"],
@@ -87,7 +89,7 @@ function noProgress() { return ""; }
 
 export default function Home() {
   const [language, setLanguage] = useState<"zh" | "en">("zh");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useAppearance();
   const [isLaunching, setIsLaunching] = useState(true);
   const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
   const progress = useSyncExternalStore(subscribeProgress, savedProgress, noProgress);
@@ -127,15 +129,15 @@ export default function Home() {
         <span>{zh ? "一起翻开新的冒险！" : "A new adventure awaits!"}</span>
       </div>}
       <header className="topbar app-reveal reveal-1">
-        <Link className="brand" href="/" aria-label="PCMC Walk Through Bible Story home">
+        <a className="brand" href="/" aria-label="PCMC Walk Through Bible Story home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="brand-mark" src="/pcmc-logo.png" alt="" />
           <span className="brand-full">PCMC Walk Through Bible Story</span>
           <span className="brand-short">PCMC Bible Story</span>
-        </Link>
+        </a>
         <div className="header-right desktop-controls">
           <PwaInstaller language={language} />
-          <Link className="home-link" href="/comic/contents">{zh ? "漫画目录" : "Contents"}</Link>
+          <a className="home-link" href="/comic/contents">{zh ? "漫画目录" : "Contents"}</a>
           <div className="language-switch" role="group" aria-label="Interface language">
             <button className={zh ? "selected" : ""} onClick={() => setLanguage("zh")}>中</button>
             <button className={!zh ? "selected" : ""} onClick={() => setLanguage("en")}>EN</button>
@@ -156,7 +158,7 @@ export default function Home() {
           <h2>{resumeChapter.title}</h2><span>{zh ? `第 ${resume.page} 页，共 ${resumeChapter.pages.length} 页` : `Page ${resume.page} of ${resumeChapter.pages.length}`}</span>
           <div className="progress-track"><i style={{width: resume.page / resumeChapter.pages.length * 100 + "%"}} /></div>
         </div>
-        <Link className="continue-button" href={readHref}>{zh ? "继续看漫画" : "Continue"} →</Link>
+        <a className="continue-button" href={readHref}>{zh ? "继续看漫画" : "Continue"} →</a>
       </section>}
 
       <section className="hero app-reveal reveal-3" id="top">
@@ -164,21 +166,21 @@ export default function Home() {
           <p className="eyebrow">PCMC · {zh ? "小昆 & 小君的圣经探索" : "EXPLORE WITH XIAO KUN & XIAO JUN"}</p>
           <h1><span className="hero-title-main">{zh ? "翻开漫画，" : "Turn a page."}</span><span className="hero-title-sub">{zh ? "一起走进圣经！" : "Step into the story!"}</span></h1>
           <p className="hero-copy">{zh ? "跟着小昆和小君，一边看、一边问，发现圣经里的大故事。" : "Join Xiao Kun and Xiao Jun. Look closer, ask questions, and discover the great story of the Bible."}<br />{zh ? "先从《创世记》的第一声「要有光」开始吧。" : "Start in Genesis, with “Let there be light.”"}</p>
-          <Link className="begin" href="/comic">{zh ? "开始看漫画" : "Read the comic"} <span>→</span></Link>
+          <a className="begin" href="/comic">{zh ? "开始看漫画" : "Read the comic"} <span>→</span></a>
           <a className="comic-preview-link" href="#library">{zh ? "逛逛漫画书架" : "Explore the comic shelf"} ↓</a>
           <p className="hero-edition">{zh ? "第一集 · 故事开始以前 · 中文漫画预览" : "Episode 01 · Before the story begins · Chinese comic preview"}</p>
         </div>
-        <Link className="hero-comic-cover" href="/comic" aria-label={zh ? "打开圣经漫画故事封面" : "Open the Bible comic cover"}>
+        <a className="hero-comic-cover" href="/comic" aria-label={zh ? "打开圣经漫画故事封面" : "Open the Bible comic cover"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/comics/book-v1/cover-v1.png" alt={zh ? "小昆、小君与圣经人物的漫画封面" : "Comic cover with Xiao Kun, Xiao Jun and Bible characters"} width={1024} height={1536} fetchPriority="high" />
-        </Link>
+        </a>
       </section>
 
       <section className="library app-reveal reveal-4 is-visible" id="library">
         <div className="library-head"><p className="eyebrow">{zh ? "漫画书架" : "THE COMIC SHELF"}</p>
           <h2>{zh ? "下一段冒险，从这里开始。" : "Your next adventure starts here."}</h2>
         </div>
-        {comicChapters.map((chapter) => <Link key={chapter.id} className="comic-feature" href={"/comic/chapter/" + chapter.id}>
+        {comicChapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={"/comic/chapter/" + chapter.id}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/comics/book-v1/cover-v1.png" alt="" loading="lazy" width={1024} height={1536} />
           <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画初稿` : `Episode ${chapter.number} · Chinese comic draft`}</small>
@@ -186,13 +188,13 @@ export default function Home() {
             <span>{zh ? `${chapter.illustratedCount} / ${chapter.pages.length} 页已绘制 · ${chapter.reference}` : `${chapter.illustratedCount} of ${chapter.pages.length} pages illustrated · ${chapter.reference}`}</span>
             <b>{zh ? "进入这一集" : "Open episode"} →</b>
           </span>
-        </Link>)}
+        </a>)}
         <details className="complete-library">
           <summary><span>{zh ? "浏览六十六卷书" : "Explore all 66 books"}<small>{zh ? "漫画章节会陆续添加 · 旧约 39 卷 · 新约 27 卷" : "Comic chapters added over time · 39 Old Testament · 27 New Testament"}</small></span><b aria-hidden="true">＋</b></summary>
           {[{name: zh ? "旧约" : "OLD TESTAMENT", list: books.slice(0,39)}, {name: zh ? "新约" : "NEW TESTAMENT", list: books.slice(39)}].map((group) => <div key={group.name}>
             <div className="testament"><span>{group.name}</span><span>{group.list.length}</span></div>
             <div className="book-grid">{group.list.map(([nameZh,nameEn]) => nameZh === "创世记"
-              ? <Link key={nameEn} className="book-card available" href="/comic/contents"><b>{zh ? nameZh : nameEn}</b><small>{zh ? "看漫画" : "Read comic"}</small></Link>
+              ? <a key={nameEn} className="book-card available" href="/comic/contents"><b>{zh ? nameZh : nameEn}</b><small>{zh ? "看漫画" : "Read comic"}</small></a>
               : <button key={nameEn} className="book-card coming" disabled><b>{zh ? nameZh : nameEn}</b><small>{zh ? "漫画筹备中" : "Comics coming later"}</small></button>
             )}</div>
           </div>)}
@@ -213,9 +215,9 @@ export default function Home() {
         </section>
       </div>}
       <nav className="mobile-app-nav" aria-label={zh ? "应用导航" : "App navigation"}>
-        <Link className="active" href="/" aria-current="page"><span aria-hidden="true">⌂</span>{zh ? "首页" : "Home"}</Link>
-        <Link href="/comic/contents"><span aria-hidden="true">▦</span>{zh ? "漫画目录" : "Contents"}</Link>
-        <Link href={readHref}><span aria-hidden="true">◉</span>{zh ? "看漫画" : "Read"}</Link>
+        <a className="active" href="/" aria-current="page"><span aria-hidden="true">⌂</span>{zh ? "首页" : "Home"}</a>
+        <a href="/comic/contents"><span aria-hidden="true">▦</span>{zh ? "漫画目录" : "Contents"}</a>
+        <a href={readHref}><span aria-hidden="true">◉</span>{zh ? "看漫画" : "Read"}</a>
       </nav>
       <footer>
         {/* eslint-disable-next-line @next/next/no-img-element */}

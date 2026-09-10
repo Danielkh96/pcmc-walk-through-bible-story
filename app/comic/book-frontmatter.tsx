@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+/* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
+
+import { useAppearance } from "../use-appearance";
 import { comicBook, comicChapters } from "./book-data";
 import reader from "./comic.module.css";
 import styles from "./book.module.css";
@@ -14,7 +15,9 @@ const steps = [
 ];
 
 export default function BookFrontmatter({ section, chapterId }: { section: Section; chapterId?: string }) {
-  const [dark, setDark] = useState(false);
+  const [theme, setTheme] = useAppearance();
+  const dark = theme === "dark";
+  const setDark = (value: boolean) => setTheme(value ? "dark" : "light");
   const chapter = comicChapters.find((item) => item.id === chapterId);
   const title = section === "cover" ? comicBook.title : section === "characters" ? "先认识两位旅伴" : section === "contents" ? "目录" : chapter?.title;
   const characters = section === "chapter"
@@ -23,15 +26,15 @@ export default function BookFrontmatter({ section, chapterId }: { section: Secti
   return (
     <main className={reader.reader} data-theme={dark ? "dark" : "light"}>
       <header className={reader.header}>
-        <Link className={reader.brand} href="/" aria-label="PCMC Walk Through Bible Story 首页">
+        <a className={reader.brand} href="/" aria-label="PCMC Walk Through Bible Story 首页">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/pcmc-logo.png" alt="" width={36} height={36} />
           <span>{comicBook.imprint}</span>
-        </Link>
+        </a>
         <button className={reader.control} aria-pressed={dark} onClick={() => setDark(!dark)}>{dark ? "浅色" : "深色"}</button>
       </header>
       <nav className={styles.steps} aria-label="漫画书前置页">
-        {steps.map((step, index) => <Link key={step.id} href={step.href} aria-current={section === step.id ? "page" : undefined}><small>0{index + 1}</small>{step.label}</Link>)}
+        {steps.map((step, index) => <a key={step.id} href={step.href} aria-current={section === step.id ? "page" : undefined}><small>0{index + 1}</small>{step.label}</a>)}
       </nav>
       <div className={styles.body}>
         <div className={styles.heading}>
@@ -59,8 +62,8 @@ export default function BookFrontmatter({ section, chapterId }: { section: Secti
               <span className={reader.badge}>可爱漫画 · 圣经探索</span>
               <h2>从一个问题，<br />走进一个大故事。</h2>
               <p>小昆想问个明白，小君想看得仔细。两人一边探索、一边发问，走进他们原本只在书里读过的世界。</p>
-              <Link className={styles.primary} href="/comic/characters">翻开人物介绍 →</Link>
-              <Link className={styles.secondary} href="/comic/contents">直接查看目录</Link>
+              <a className={styles.primary} href="/comic/characters">翻开人物介绍 →</a>
+              <a className={styles.secondary} href="/comic/contents">直接查看目录</a>
               <p className={styles.disclaimer}>两位主角与穿越框架为虚构；圣经事件依据经文展开。两人到福音书才在剧情中遇见耶稣。</p>
             </div>
           </div>
@@ -80,7 +83,7 @@ export default function BookFrontmatter({ section, chapterId }: { section: Secti
               <p>{person.bio}</p><span>{person.appearance}</span>
             </section>)}</div>
             <p className={styles.disclaimer}>小君并不是什么都懂，小昆也不只是负责出糗。他们会害怕、会判断错，也会一起学习。</p>
-            <div className={styles.actions}><Link className={reader.control} href="/comic">← 封面</Link><Link className={styles.primary} href="/comic/contents">认识了，去看看目录 →</Link></div>
+            <div className={styles.actions}><a className={reader.control} href="/comic">← 封面</a><a className={styles.primary} href="/comic/contents">认识了，去看看目录 →</a></div>
           </>
         )}
 
@@ -88,15 +91,15 @@ export default function BookFrontmatter({ section, chapterId }: { section: Secti
           <>
             <ol className={styles.chapterList}>
               {comicChapters.map((item) => <li key={item.id}>
-                <Link href={"/comic/chapter/" + item.id}>
+                <a href={"/comic/chapter/" + item.id}>
                   <span className={styles.chapterNumber}>{String(item.number).padStart(2, "0")}</span>
                   <span className={styles.chapterCopy}><small>{item.book} · {item.reference}</small><strong>{item.title}</strong><span>{item.summary}</span><span className={styles.chapterMeta}>{item.pages.length} 页 · {item.panelCount} 格 · {item.illustratedCount} 页已有画面</span></span>
                   <span className={styles.chapterArrow} aria-hidden="true">→</span>
-                </Link>
+                </a>
               </li>)}
             </ol>
             <p className={styles.disclaimer}>当前第一章为预览初稿。新增章节会加入这里；每章新人物会在正文前介绍。</p>
-            <div className={styles.actions}><Link className={reader.control} href="/comic/characters">← 主角介绍</Link><Link className={reader.control} href="/#library">返回 App 书架</Link></div>
+            <div className={styles.actions}><a className={reader.control} href="/comic/characters">← 主角介绍</a><a className={reader.control} href="/#library">返回 App 书架</a></div>
           </>
         )}
 
@@ -114,10 +117,10 @@ export default function BookFrontmatter({ section, chapterId }: { section: Secti
             </section>
             <details className={styles.breakdown}>
               <summary>这一章怎样展开？查看每页内容与格数</summary>
-              <ol>{chapter.pages.map((page) => <li key={page.id}><Link href={"/comic/read?chapter=" + chapter.id + "&page=" + page.id}><span>第 {page.id} 页 · {page.title}</span><small>{page.panels.length} 格{!page.image ? " · 待绘制" : ""}</small></Link><p>{page.panels[0].shot}</p></li>)}</ol>
+              <ol>{chapter.pages.map((page) => <li key={page.id}><a href={"/comic/read?chapter=" + chapter.id + "&page=" + page.id}><span>第 {page.id} 页 · {page.title}</span><small>{page.panels.length} 格{!page.image ? " · 待绘制" : ""}</small></a><p>{page.panels[0].shot}</p></li>)}</ol>
             </details>
             <p className={styles.disclaimer}>阅读提示：矩形框是经文旁白，圆角气泡是人物对白。每页下方有详细分镜，以及尚未写回图片的对白润色稿。</p>
-            <div className={styles.actions}><Link className={reader.control} href="/comic/contents">← 总目录</Link><Link className={styles.primary} href={"/comic/read?chapter=" + chapter.id + "&page=1"}>进入第一幕 →</Link></div>
+            <div className={styles.actions}><a className={reader.control} href="/comic/contents">← 总目录</a><a className={styles.primary} href={"/comic/read?chapter=" + chapter.id + "&page=1"}>进入第一幕 →</a></div>
           </>
         )}
       </div>
