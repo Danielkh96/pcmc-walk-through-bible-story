@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { comicChapters, type ComicChapter } from "./book-data";
 import { getComicPageIndex } from "./navigation.mjs";
 import { useAppearance } from "../use-appearance";
@@ -33,6 +33,19 @@ function navigate(index: number, count: number) {
 function PageArtwork({ image, title, id }: { image: string; title: string; id: number }) {
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
   const [attempt, setAttempt] = useState(0);
+  const imageRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    const element = imageRef.current;
+    let cancelled = false;
+    // Cached/SSR images can finish before React attaches its load handler.
+    if (element?.complete) {
+      element.decode().then(
+        () => { if (!cancelled) setState("ready"); },
+        () => { if (!cancelled) setState("error"); },
+      );
+    }
+    return () => { cancelled = true; };
+  }, [image, attempt]);
   return (
     <div className={styles.artwork} aria-busy={state === "loading"}>
       {state === "loading" && <p className={styles.imageMessage} role="status">正在载入第 {id} 页…</p>}
@@ -48,6 +61,7 @@ function PageArtwork({ image, title, id }: { image: string; title: string; id: n
       {/* Full-page artwork is intentional: never crop comic panels with object-fit: cover. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
+        ref={imageRef}
         key={attempt}
         src={attempt ? image + "?retry=" + attempt : image}
         alt={"漫画第 " + id + " 页：" + title}

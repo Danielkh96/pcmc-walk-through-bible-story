@@ -21,6 +21,7 @@ test("comic and story surfaces share the same light and dark palette", async () 
   assert.match(theme, /--toon-pop: #ffd17a/);
   assert.match(theme, /9px 10px 0 var\(--toon-card-depth\)/);
   assert.match(theme, /border: 3px solid var\(--toon-line\)/);
+  assert.ok(theme.includes('.comic-app .begin > span { color: inherit; }'));
 });
 
 test("home exclusively links to comic reading and retains interface language and theme controls", async () => {

@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v8-reader-flow/);
+  assert.match(serviceWorker, /pcmc-bible-story-v9-dialogue-artwork/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -74,7 +74,7 @@ test("server-renders the comic reader as the only reading edition", async () => 
   const response = await render("/comic/read");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /\/comics\/episode-01-v1\/page-01\.png/);
+  assert.match(html, /\/comics\/episode-01-v2\/page-01\.png/);
   assert.match(html, /选择漫画页码/);
   assert.doesNotMatch(html, /本页分镜|对白润色|漫画初稿|文字稿仍|本章人物与分镜/);
   assert.doesNotMatch(html, /<h1[^>]*>故事开始以前/);
@@ -90,9 +90,9 @@ test("comic journey goes from contents to growing cast to artwork without produc
     ["/comic/characters", ["认识故事里的伙伴", "现代学生", "等一下，我有个问题", "开始阅读"]],
     ["/comic/contents", ["目录", "故事开始以前", "/comic/chapter/episode-01"]],
     ["/comic/chapter/episode-01", ["认识故事里的伙伴", "小昆", "小君", "开始阅读"]],
-    ["/comic/read?chapter=episode-01", ["漫画阅读", "/comics/episode-01-v1/page-01.png"]],
-    ["/comic?page=7", ["选择漫画页码", "/comics/episode-01-v1/page-07.png"]],
-    ["/comic/read?chapter=episode-01&page=10", ["这一页正在绘制中"]],
+    ["/comic/read?chapter=episode-01", ["漫画阅读", "/comics/episode-01-v2/page-01.png"]],
+    ["/comic?page=7", ["选择漫画页码", "/comics/episode-01-v2/page-07.png"]],
+    ["/comic/read?chapter=episode-01&page=10", ["/comics/episode-01-v2/page-10.png"]],
   ];
   for (const [path, expected] of cases) {
     const response = await render(path);

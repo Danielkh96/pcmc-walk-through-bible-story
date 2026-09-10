@@ -8,9 +8,17 @@ const pages = JSON.parse(await readFile(new URL("../app/comic/comic-data.json", 
 const catalog = JSON.parse(await readFile(new URL("../app/comic/book-catalog.json", import.meta.url), "utf8"));
 const revised = JSON.parse(await readFile(new URL("../app/comic/dialogue-v2.json", import.meta.url), "utf8"));
 
-test("public reader metadata excludes production scripts and stays synchronized with artwork", async () => {
+test("published reader uses all twelve refreshed illustrations without production scripts", async () => {
   const publicPages = JSON.parse(await readFile(new URL("../app/comic/reader-pages.json", import.meta.url), "utf8"));
-  assert.deepEqual(publicPages, pages.map(({ id, title, image }) => ({ id, title, image })));
+  assert.deepEqual(publicPages.map(({ id, title }) => ({ id, title })), pages.map(({ id, title }) => ({ id, title })));
+  for (const page of publicPages) {
+    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
+    assert.equal(page.image, `/comics/episode-01-v2/page-${String(page.id).padStart(2, "0")}.png`);
+    const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
+    assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+    assert.equal(bytes.readUInt32BE(16), 1024);
+    assert.equal(bytes.readUInt32BE(20), 1536);
+  }
   const source = await readFile(new URL("../app/comic/book-data.ts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /import.*(?:comic-data|dialogue-v2)/);
   assert.match(source, /item\.number <= chapter\.number/);
@@ -66,7 +74,7 @@ test("cover and approved character sheet are real local PNG assets", async () =>
   }
 });
 
-test("comic keeps all 12 page positions, 64 panels, and the missing tenth page explicit", () => {
+test("original production archive preserves 12 page positions, 64 panels and previous notes", () => {
   assert.equal(pages.length, 12);
   assert.deepEqual(pages.map((p) => p.id), Array.from({ length: 12 }, (_, i) => i + 1));
   assert.equal(pages.reduce((n, p) => n + p.panels.length, 0), 64);

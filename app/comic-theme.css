@@ -186,6 +186,8 @@
 .comic-app .begin { box-shadow: 0 6px 0 var(--toon-line), 0 10px 18px rgba(35,59,69,.12); transition: transform .18s, box-shadow .18s; }
 .comic-app .begin:hover { background: var(--toon-sticker); transform: translateY(-2px); box-shadow: 0 8px 0 var(--toon-line), 0 12px 22px rgba(35,59,69,.14); }
 .comic-app .begin:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--toon-line); }
+/* The legacy .begin span rule uses theme accent, which disappears on yellow in dark mode. */
+.comic-app .begin > span { color: inherit; }
 .comic-app .library { scroll-margin-top: 90px; }
 .comic-app .library-head .eyebrow { display: inline-block; border-radius: 8px; background: var(--toon-soft); padding: 7px 12px; font-weight: 700; }
 .comic-app .library-head h2 { margin-top: 16px; }

@@ -9,5 +9,5 @@ Home → Contents → Chapter characters → Comic reader.
 - The introduction's single reading CTA resumes the saved page for that chapter when available.
 - The reader displays artwork and one persistent page control. It must not display production scripts, shot descriptions, dialogue drafts or review notes.
 - comic-data.json remains the original production storyboard. dialogue-v2.json remains the proposed dialogue revision. These are production inputs, not student-facing reading content.
-- reader-pages.json contains only id, title and image for publication. Keep it synchronized when adding or replacing artwork; tests enforce that synchronization.
-- The missing tenth illustration is still missing. Keep its explicit reader-friendly placeholder until a real approved image exists. Do not substitute the storyboard.
+- reader-pages.json contains only id, title and image for publication. The current publication uses episode-01-v2, generated with dialogue-v2.json. The original episode-01-v1 art and original production storyboard are retained for comparison, not shown to readers.
+- All twelve refreshed pages, including page ten, are present in the published edition. Keep a reader-friendly missing-artwork fallback for any future unillustrated pages; never substitute production scripts.
