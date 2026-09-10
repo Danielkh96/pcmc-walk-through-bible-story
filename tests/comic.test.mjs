@@ -114,6 +114,7 @@ test("chapter entry introduces new cast without repeating introductions for esta
   assert.equal(comicChapterEntry({ id: "episode-01", number: 1, newCharacterIds: [] }), "/comic/chapter/episode-01");
   assert.equal(comicChapterEntry({ id: "episode-02", number: 2, newCharacterIds: [] }), "/comic/read?chapter=episode-02&page=1");
   assert.equal(comicChapterEntry({ id: "episode-03", number: 3, newCharacterIds: [] }), "/comic/read?chapter=episode-03&page=1");
+  assert.equal(comicChapterEntry({ id: "episode-04", number: 4, newCharacterIds: [] }), "/comic/read?chapter=episode-04&page=1");
   assert.equal(comicChapterEntry({ id: "later", number: 3, newCharacterIds: ["new-person"] }), "/comic/chapter/later");
 });
 
@@ -161,6 +162,28 @@ test("third chapter publishes the approved ten pages and 46 panels without produ
   assert.deepEqual(chapter?.newCharacterIds, []);
 });
 
+test("fourth chapter publishes the approved ten pages and 46 panels without production notes", async () => {
+  const published = JSON.parse(await readFile(new URL("../app/comic/episode-04-pages.json", import.meta.url), "utf8"));
+  const storyboard = await readFile(new URL("../docs/comic/episode-04-storyboard-review-v1.md", import.meta.url), "utf8");
+  const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
+  assert.deepEqual(panels.map((p) => Number(p[2])), [4, 4, 5, 5, 5, 5, 4, 5, 4, 5]);
+  assert.equal(panels.reduce((n, p) => n + Number(p[2]), 0), 46);
+  assert.equal(published.length, 10);
+  assert.equal(new Set(published.map((p) => p.image)).size, 10);
+  for (const [index, page] of published.entries()) {
+    assert.equal(page.id, index + 1);
+    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
+    assert.equal(page.image, `/comics/episode-04-v1/page-${String(page.id).padStart(2, "0")}.png`);
+    const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
+    assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+    assert.equal(bytes.readUInt32BE(16), 1024);
+    assert.equal(bytes.readUInt32BE(20), 1536);
+  }
+  const chapter = catalog.chapters.find((item) => item.id === "episode-04");
+  assert.equal(chapter?.reference, "创世记 1:20–23");
+  assert.deepEqual(chapter?.newCharacterIds, []);
+});
+
 test("service worker caches comic navigation separately from the homepage", async () => {
   const script = await readFile(new URL("../public/sw.js", import.meta.url), "utf8");
   const handlers = {};
@@ -169,7 +192,7 @@ test("service worker caches comic navigation separately from the homepage", asyn
   runInNewContext(script, {
     self: { location: { origin: "https://example.test" }, addEventListener: (name, fn) => { handlers[name] = fn; } },
     URL, Response,
-    fetch: async (request) => { if (offline) throw new Error("offline"); return new Response(request.url.includes("episode-03") ? "chapter three" : request.url.includes("episode-02") ? "chapter two" : "updated comic"); },
+    fetch: async (request) => { if (offline) throw new Error("offline"); return new Response(request.url.includes("episode-04") ? "chapter four" : request.url.includes("episode-03") ? "chapter three" : request.url.includes("episode-02") ? "chapter two" : "updated comic"); },
     caches: {
       open: async () => ({ put: async (key, response) => { saved.set(key, response); } }),
       match: async (key) => saved.get(key)?.clone(),
@@ -192,10 +215,12 @@ test("service worker caches comic navigation separately from the homepage", asyn
   assert.equal(await (await navigate("/comic/read?chapter=episode-01&page=12")).text(), "updated comic");
   assert.equal(await (await navigate("/comic/read?chapter=episode-02&page=1")).text(), "chapter two");
   assert.equal(await (await navigate("/comic/read?chapter=episode-03&page=1")).text(), "chapter three");
+  assert.equal(await (await navigate("/comic/read?chapter=episode-04&page=1")).text(), "chapter four");
   offline = true;
   assert.equal(await (await navigate("/comic/read?chapter=episode-01&page=3")).text(), "updated comic");
   assert.equal(await (await navigate("/comic/read?chapter=episode-02&page=6")).text(), "chapter two");
   assert.equal(await (await navigate("/comic/read?chapter=episode-03&page=10")).text(), "chapter three");
+  assert.equal(await (await navigate("/comic/read?chapter=episode-04&page=8")).text(), "chapter four");
   assert.equal((await navigate("/comic/read?chapter=unvisited")).status, 503);
   assert.equal(await (await navigate("/comic?page=10")).text(), "updated comic");
   assert.equal(await (await navigate("/")).text(), "home");

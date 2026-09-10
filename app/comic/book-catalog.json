@@ -73,6 +73,19 @@
       "newCharacterIds": [],
       "introduction": "小昆和小君继续探索第四日的创造。本章没有新登场人物，直接进入漫画。",
       "status": "published"
+    },
+    {
+      "id": "episode-04",
+      "number": 4,
+      "title": "海里的生命，天空的飞鸟",
+      "book": "创世记",
+      "reference": "创世记 1:20–23",
+      "summary": "鱼群游过清水，飞鸟展开翅膀。小昆终于听见期待的鸟叫，两人一起看见第五日丰富的生命与神的赐福。",
+      "dataKey": "episode-04",
+      "characterIds": ["xiao-kun", "xiao-jun"],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君继续探索第五日的创造。本章没有新登场的具名人物，直接进入漫画。",
+      "status": "published"
     }
   ]
 }

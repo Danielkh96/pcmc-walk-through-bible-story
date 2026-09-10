@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v11-episode-03/);
+  assert.match(serviceWorker, /pcmc-bible-story-v12-episode-04/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -135,6 +135,21 @@ test("third chapter is linked from contents and reads all ten pages with correct
     assert.equal(response.status, 200);
     const html = await response.text();
     assert.ok(html.includes(`/comics/episode-03-v1/page-${String(Math.min(page, 10)).padStart(2, "0")}.png`));
+    assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
+    assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
+    if (page >= 10) assert.match(html, /aria-label="下一章：海里的生命，天空的飞鸟"/);
+  }
+});
+
+test("fourth chapter is discoverable and the reader preserves ten-page navigation", async () => {
+  const contents = await (await render("/comic/contents")).text();
+  assert.match(contents, /海里的生命，天空的飞鸟/);
+  assert.ok(contents.includes('href="/comic/read?chapter=episode-04&amp;page=1"'));
+  for (const page of [1, 5, 10, 99]) {
+    const response = await render(`/comic/read?chapter=episode-04&page=${page}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes(`/comics/episode-04-v1/page-${String(Math.min(page, 10)).padStart(2, "0")}.png`));
     assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
     assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
     if (page >= 10) assert.doesNotMatch(html, /aria-label="下一章：/);
