@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v12-episode-04/);
+  assert.match(serviceWorker, /pcmc-bible-story-v13-creation-condensed/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -74,7 +74,7 @@ test("server-renders the comic reader as the only reading edition", async () => 
   const response = await render("/comic/read");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /\/comics\/episode-01-v2\/page-01\.png/);
+  assert.match(html, /\/comics\/creation-condensed-v2\/page-01\.png/);
   assert.match(html, /选择漫画页码/);
   assert.doesNotMatch(html, /本页分镜|对白润色|漫画初稿|文字稿仍|本章人物与分镜/);
   assert.doesNotMatch(html, /<h1[^>]*>故事开始以前/);
@@ -86,13 +86,13 @@ test("server-renders the comic reader as the only reading edition", async () => 
 
 test("comic journey goes from contents to growing cast to artwork without production notes", async () => {
   const cases = [
-    ["/comic", ["漫画目录", "/comic/chapter/episode-01"]],
+    ["/comic", ["漫画目录", "/comic/chapter/creation"]],
     ["/comic/characters", ["认识故事里的伙伴", "现代学生", "等一下，我有个问题", "开始阅读"]],
-    ["/comic/contents", ["目录", "故事开始以前", "/comic/chapter/episode-01"]],
-    ["/comic/chapter/episode-01", ["认识故事里的伙伴", "小昆", "小君", "开始阅读"]],
-    ["/comic/read?chapter=episode-01", ["漫画阅读", "/comics/episode-01-v2/page-01.png"]],
-    ["/comic?page=7", ["选择漫画页码", "/comics/episode-01-v2/page-07.png"]],
-    ["/comic/read?chapter=episode-01&page=10", ["/comics/episode-01-v2/page-10.png"]],
+    ["/comic/contents", ["目录", "创造天地", "/comic/chapter/creation"]],
+    ["/comic/chapter/creation", ["认识故事里的伙伴", "小昆", "小君", "开始阅读"]],
+    ["/comic/read?chapter=creation", ["漫画阅读", "/comics/creation-condensed-v2/page-01.png"]],
+    ["/comic?page=7", ["选择漫画页码", "/comics/creation-condensed-v2/page-07.png"]],
+    ["/comic/read?chapter=creation&page=10", ["/comics/creation-condensed-v2/page-10.png"]],
   ];
   for (const [path, expected] of cases) {
     const response = await render(path);
@@ -109,49 +109,36 @@ test("unknown comic chapters do not masquerade as the first chapter", async () =
   }
 });
 
-test("second chapter is discoverable and chapter one continues directly to its artwork", async () => {
+test("condensed creation is the only published chapter and all thirteen pages render", async () => {
   const contents = await (await render("/comic/contents")).text();
-  assert.match(contents, /天空、海洋与陆地/);
-  assert.ok(contents.includes('href="/comic/read?chapter=episode-02&amp;page=1"'));
-  const last = await (await render("/comic/read?chapter=episode-01&page=12")).text();
-  assert.match(last, /aria-label="下一章：天空、海洋与陆地"/);
-  assert.equal((last.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
-  for (const page of [1, 6, 12]) {
-    const response = await render(`/comic/read?chapter=episode-02&page=${page}`);
+  assert.match(contents, /创造天地/);
+  assert.ok(contents.includes('href="/comic/chapter/creation"'));
+  assert.doesNotMatch(contents, /episode-0[1-4]|天空、海洋与陆地|海里的生命，天空的飞鸟/);
+  for (const page of [...Array.from({ length: 13 }, (_, i) => i + 1), 99]) {
+    const response = await render(`/comic/read?chapter=creation&page=${page}`);
     assert.equal(response.status, 200);
     const html = await response.text();
-    assert.ok(html.includes(`/comics/episode-02-v1/page-${String(page).padStart(2, "0")}.png`));
+    assert.ok(html.includes(`/comics/creation-condensed-v2/page-${String(Math.min(page, 13)).padStart(2, "0")}.png`));
     assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
-    if (page === 12) assert.match(html, /aria-label="下一章：日月星辰"/);
+    assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
+    assert.match(html, /aria-valuemax="13"/);
+    assert.match(html, /reindexedArtwork/);
+    if (page >= 13) {
+      assert.doesNotMatch(html, /aria-label="下一章：/);
+      assert.match(html, /这一章读完啦/);
+    }
   }
 });
 
-test("third chapter is linked from contents and reads all ten pages with correct bounds", async () => {
-  const contents = await (await render("/comic/contents")).text();
-  assert.match(contents, /日月星辰/);
-  assert.ok(contents.includes('href="/comic/read?chapter=episode-03&amp;page=1"'));
-  for (const page of [1, 5, 10, 99]) {
-    const response = await render(`/comic/read?chapter=episode-03&page=${page}`);
-    assert.equal(response.status, 200);
-    const html = await response.text();
-    assert.ok(html.includes(`/comics/episode-03-v1/page-${String(Math.min(page, 10)).padStart(2, "0")}.png`));
-    assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
-    assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
-    if (page >= 10) assert.match(html, /aria-label="下一章：海里的生命，天空的飞鸟"/);
-  }
-});
-
-test("fourth chapter is discoverable and the reader preserves ten-page navigation", async () => {
-  const contents = await (await render("/comic/contents")).text();
-  assert.match(contents, /海里的生命，天空的飞鸟/);
-  assert.ok(contents.includes('href="/comic/read?chapter=episode-04&amp;page=1"'));
-  for (const page of [1, 5, 10, 99]) {
-    const response = await render(`/comic/read?chapter=episode-04&page=${page}`);
-    assert.equal(response.status, 200);
-    const html = await response.text();
-    assert.ok(html.includes(`/comics/episode-04-v1/page-${String(Math.min(page, 10)).padStart(2, "0")}.png`));
-    assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
-    assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
-    if (page >= 10) assert.doesNotMatch(html, /aria-label="下一章：/);
+test("old chapter bookmarks redirect to the new edition without reusing old page positions", async () => {
+  for (const id of ["episode-01", "episode-02", "episode-03", "episode-04"]) {
+    for (const [path, destination] of [
+      [`/comic/read?chapter=${id}&page=10`, "/comic/read?chapter=creation&page=1"],
+      [`/comic/chapter/${id}`, "/comic/chapter/creation"],
+    ]) {
+      const response = await render(path);
+      assert.equal(response.status, 307, path);
+      assert.equal(response.headers.get("location"), destination);
+    }
   }
 });

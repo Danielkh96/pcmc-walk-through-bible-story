@@ -1,4 +1,4 @@
-const CACHE_NAME = "pcmc-bible-story-v12-episode-04";
+const CACHE_NAME = "pcmc-bible-story-v13-creation-condensed";
 const APP_SHELL = [
   "/",
   "/comic",
@@ -42,7 +42,7 @@ self.addEventListener("fetch", (event) => {
     // Chapter is server-rendered: never reuse chapter one's shell for chapter two.
     // Page-number queries still hydrate on the client within the same chapter.
     const url = new URL(event.request.url);
-    const chapter = url.searchParams.get("chapter") || "episode-01";
+    const chapter = url.searchParams.get("chapter") || "creation";
     const pageKey = url.pathname === "/comic/read"
       ? url.pathname + "?chapter=" + encodeURIComponent(chapter)
       : url.pathname;

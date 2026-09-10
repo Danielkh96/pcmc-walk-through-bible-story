@@ -1,15 +1,9 @@
 import catalog from "./book-catalog.json";
-import episode01 from "./reader-pages.json";
-import episode02 from "./episode-02-pages.json";
-import episode03 from "./episode-03-pages.json";
-import episode04 from "./episode-04-pages.json";
+import creation from "./creation-pages.json";
 
-export type ComicPageData = (typeof episode01)[number];
+export type ComicPageData = (typeof creation)[number];
 const episodeData: Record<string, ComicPageData[]> = {
-  "episode-01": episode01,
-  "episode-02": episode02,
-  "episode-03": episode03,
-  "episode-04": episode04,
+  creation,
 };
 
 export const comicBook = catalog;

@@ -1,0 +1,91 @@
+{
+  "title": "圣经漫画故事",
+  "subtitle": "跟着小昆和小君，一起走进圣经的大故事。",
+  "imprint": "PCMC Walk Through Bible Story",
+  "coverImage": "/comics/book-v1/cover-v1.png",
+  "coverStatus": "draft",
+  "characterSheet": "/comics/book-v1/characters-approved.png",
+  "mainCharacterIds": [
+    "xiao-kun",
+    "xiao-jun"
+  ],
+  "characters": [
+    {
+      "id": "xiao-kun",
+      "name": "小昆",
+      "kind": "fictional",
+      "tagline": "想到什么，就想问个明白。",
+      "bio": "好奇心很强，看到没见过的东西，总想凑近一点。想到什么常常就问出来，有时动作比脑袋还快。嘴上开着玩笑，其实也会害怕；遇到不明白的事，他愿意和小君一起找答案。",
+      "quote": "等一下，我有个问题！",
+      "appearance": "蓬松短发 · 橙色上衣 · 深蓝背包",
+      "reference": null
+    },
+    {
+      "id": "xiao-jun",
+      "name": "小君",
+      "kind": "fictional",
+      "tagline": "先看看，再一起找答案。",
+      "bio": "她会先看看周围，注意到别人容易错过的小变化。小昆问得急，她就陪他慢慢找线索。她也有不知道的时候，不会假装自己什么都懂；认真起来很细心，放松时也会吐槽两句。",
+      "quote": "先别急，我们看看。",
+      "appearance": "半扎发 · 湖绿色上衣 · 棕色斜挎包",
+      "reference": null
+    }
+  ],
+  "chapters": [
+    {
+      "id": "episode-01",
+      "number": 1,
+      "title": "故事开始以前",
+      "book": "创世记",
+      "reference": "创世记 1:1–5",
+      "summary": "一次从第一页开始的阅读，把小昆和小君带进陌生的深水与黑暗。他们将看见故事的第一个开始。",
+      "dataKey": "episode-01",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun"
+      ],
+      "newCharacterIds": [],
+      "introduction": "这一章先认识小昆和小君。神的创造通过《创世记》的经文旁白呈现，不把神画成带领两人穿越的虚构人物。",
+      "status": "published"
+    },
+    {
+      "id": "episode-02",
+      "number": 2,
+      "title": "天空、海洋与陆地",
+      "book": "创世记",
+      "reference": "创世记 1:6–13",
+      "summary": "水与水之间展开了天空，旱地显露，青草和果树出现。小昆和小君一边发现新的细节，一边等着下一个惊喜。",
+      "dataKey": "episode-02",
+      "characterIds": ["xiao-kun", "xiao-jun"],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君继续探索第二、第三日的创造。本章没有新登场人物，直接进入漫画。",
+      "status": "published"
+    },
+    {
+      "id": "episode-03",
+      "number": 3,
+      "title": "日月星辰",
+      "book": "创世记",
+      "reference": "创世记 1:14–19",
+      "summary": "一直寻找的太阳终于出现了。小昆和小君看见月亮与众星，也发现日子和年岁跟自己的生活息息相关。",
+      "dataKey": "episode-03",
+      "characterIds": ["xiao-kun", "xiao-jun"],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君继续探索第四日的创造。本章没有新登场人物，直接进入漫画。",
+      "status": "published"
+    },
+    {
+      "id": "episode-04",
+      "number": 4,
+      "title": "海里的生命，天空的飞鸟",
+      "book": "创世记",
+      "reference": "创世记 1:20–23",
+      "summary": "鱼群游过清水，飞鸟展开翅膀。小昆终于听见期待的鸟叫，两人一起看见第五日丰富的生命与神的赐福。",
+      "dataKey": "episode-04",
+      "characterIds": ["xiao-kun", "xiao-jun"],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君继续探索第五日的创造。本章没有新登场的具名人物，直接进入漫画。",
+      "status": "published"
+    }
+  ]
+}

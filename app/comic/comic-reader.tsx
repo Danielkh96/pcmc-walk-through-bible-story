@@ -17,7 +17,7 @@ function subscribe(callback: () => void) {
     window.removeEventListener(navigationEvent, callback);
   };
 }
-function currentPage(count = 12) {
+function currentPage(count: number) {
   return getComicPageIndex(new URLSearchParams(window.location.search).get("page"), count);
 }
 function navigate(index: number, count: number) {
@@ -30,7 +30,7 @@ function navigate(index: number, count: number) {
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
-function PageArtwork({ image, title, id }: { image: string; title: string; id: number }) {
+function PageArtwork({ image, title, id, hidePrintedFolio }: { image: string; title: string; id: number; hidePrintedFolio: boolean }) {
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
   const [attempt, setAttempt] = useState(0);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -47,7 +47,7 @@ function PageArtwork({ image, title, id }: { image: string; title: string; id: n
     return () => { cancelled = true; };
   }, [image, attempt]);
   return (
-    <div className={styles.artwork} aria-busy={state === "loading"}>
+    <div className={styles.artwork + (hidePrintedFolio ? " " + styles.reindexedArtwork : "")} aria-busy={state === "loading"}>
       {state === "loading" && <p className={styles.imageMessage} role="status">正在载入第 {id} 页…</p>}
       {state === "error" && (
         <div className={styles.imageMessage} role="alert">
@@ -58,7 +58,7 @@ function PageArtwork({ image, title, id }: { image: string; title: string; id: n
           }}>重新载入</button>
         </div>
       )}
-      {/* Full-page artwork is intentional: never crop comic panels with object-fit: cover. */}
+      {/* Preserve all panels. The approved condensed edition masks only the obsolete bottom folio. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         ref={imageRef}
@@ -128,7 +128,7 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
       <h1 className={styles.srOnly}>漫画阅读</h1>
       <div className={styles.workspace}>
         <article id="comic-page" className={styles.content} aria-label={"漫画第 " + page.id + " 页"}>
-          {page.image ? <PageArtwork key={chapter.id + ":" + page.id} id={page.id} image={page.image} title={page.title} /> : (
+          {page.image ? <PageArtwork key={chapter.id + ":" + page.id} id={page.id} image={page.image} title={page.title} hidePrintedFolio={chapter.hidePrintedFolio} /> : (
             <section className={styles.missing}>
               <p className={styles.eyebrow}>第 {page.id} 页</p>
               <h2>这一页正在绘制中</h2>

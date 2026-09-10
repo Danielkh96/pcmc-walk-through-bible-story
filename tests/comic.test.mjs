@@ -8,12 +8,16 @@ const pages = JSON.parse(await readFile(new URL("../app/comic/comic-data.json", 
 const catalog = JSON.parse(await readFile(new URL("../app/comic/book-catalog.json", import.meta.url), "utf8"));
 const revised = JSON.parse(await readFile(new URL("../app/comic/dialogue-v2.json", import.meta.url), "utf8"));
 
-test("published reader uses all twelve refreshed illustrations without production scripts", async () => {
-  const publicPages = JSON.parse(await readFile(new URL("../app/comic/reader-pages.json", import.meta.url), "utf8"));
-  assert.deepEqual(publicPages.map(({ id, title }) => ({ id, title })), pages.map(({ id, title }) => ({ id, title })));
+test("published reader uses all thirteen approved condensed illustrations without production scripts", async () => {
+  const publicPages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
+  assert.equal(publicPages.length, 13);
+  assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 13 }, (_, i) => i + 1));
+  assert.deepEqual(catalog.chapters.map(c => c.id), ["creation"]);
+  assert.equal(catalog.chapters[0].reference, "创世记 1:1–2:3");
+  assert.equal(catalog.chapters[0].hidePrintedFolio, true);
   for (const page of publicPages) {
     assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
-    assert.equal(page.image, `/comics/episode-01-v2/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.equal(page.image, `/comics/creation-condensed-v2/page-${String(page.id).padStart(2, "0")}.png`);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
     assert.equal(bytes.readUInt32BE(16), 1024);
@@ -118,7 +122,7 @@ test("chapter entry introduces new cast without repeating introductions for esta
   assert.equal(comicChapterEntry({ id: "later", number: 3, newCharacterIds: ["new-person"] }), "/comic/chapter/later");
 });
 
-test("second chapter preserves all approved page positions and has twelve distinct full-page assets", async () => {
+test("second chapter archive preserves all approved page positions and has twelve distinct full-page assets", async () => {
   const published = JSON.parse(await readFile(new URL("../app/comic/episode-02-pages.json", import.meta.url), "utf8"));
   const storyboard = await readFile(new URL("../docs/comic/episode-02-storyboard-review-v1.md", import.meta.url), "utf8");
   const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
@@ -136,11 +140,10 @@ test("second chapter preserves all approved page positions and has twelve distin
     assert.equal(bytes.readUInt32BE(20), 1536);
   }
   const chapter = catalog.chapters.find((item) => item.id === "episode-02");
-  assert.equal(chapter?.reference, "创世记 1:6–13");
-  assert.deepEqual(chapter?.newCharacterIds, []);
+  assert.equal(chapter, undefined, "retired chapter remains archived, not published");
 });
 
-test("third chapter publishes the approved ten pages and 46 panels without production notes", async () => {
+test("third chapter archive preserves the approved ten pages and 46 panels without production notes", async () => {
   const published = JSON.parse(await readFile(new URL("../app/comic/episode-03-pages.json", import.meta.url), "utf8"));
   const storyboard = await readFile(new URL("../docs/comic/episode-03-storyboard-review-v1.md", import.meta.url), "utf8");
   const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
@@ -158,11 +161,10 @@ test("third chapter publishes the approved ten pages and 46 panels without produ
     assert.equal(bytes.readUInt32BE(20), 1536);
   }
   const chapter = catalog.chapters.find((item) => item.id === "episode-03");
-  assert.equal(chapter?.reference, "创世记 1:14–19");
-  assert.deepEqual(chapter?.newCharacterIds, []);
+  assert.equal(chapter, undefined, "retired chapter remains archived, not published");
 });
 
-test("fourth chapter publishes the approved ten pages and 46 panels without production notes", async () => {
+test("fourth chapter archive preserves the approved ten pages and 46 panels without production notes", async () => {
   const published = JSON.parse(await readFile(new URL("../app/comic/episode-04-pages.json", import.meta.url), "utf8"));
   const storyboard = await readFile(new URL("../docs/comic/episode-04-storyboard-review-v1.md", import.meta.url), "utf8");
   const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
@@ -180,8 +182,7 @@ test("fourth chapter publishes the approved ten pages and 46 panels without prod
     assert.equal(bytes.readUInt32BE(20), 1536);
   }
   const chapter = catalog.chapters.find((item) => item.id === "episode-04");
-  assert.equal(chapter?.reference, "创世记 1:20–23");
-  assert.deepEqual(chapter?.newCharacterIds, []);
+  assert.equal(chapter, undefined, "retired chapter remains archived, not published");
 });
 
 test("service worker caches comic navigation separately from the homepage", async () => {
