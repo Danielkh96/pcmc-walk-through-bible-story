@@ -34,12 +34,12 @@
   "chapters": [
     {
       "id": "creation",
-      "edition": "creation-prologue-v3",
+      "edition": "creation-mystery-v4",
       "number": 1,
       "title": "创造天地",
       "book": "创世记",
       "reference": "创世记 1:1–2:3",
-      "summary": "说了好几次的读经约定，今天终于开始了。跟着小昆和小君，从放学后的图书馆走进创造的故事，看见光、天地与生命，一起迎接第七日的安息。",
+      "summary": "说了好几次的读经约定，今天终于开始了。忘带圣经的小昆和小君来到安静的图书馆，在旧书室发现一本尘封的圣经；从书页浮起的光，带他们走进创造天地的故事。",
       "dataKey": "creation",
       "characterIds": [
         "xiao-kun",
@@ -47,7 +47,7 @@
       ],
       "newCharacterIds": [],
       "introduction": "小昆和小君的穿越是虚构框架；创造的故事依据《创世记》1:1–2:3呈现。",
-      "hidePrintedFolio": true,
+      "hidePrintedFolio": false,
       "status": "published"
     }
   ]

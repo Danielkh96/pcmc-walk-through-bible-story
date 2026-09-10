@@ -1,40 +1,37 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { runInNewContext } from "node:vm";
 import test from "node:test";
 import { comicChapterEntry, getComicPageIndex, savedComicPage } from "../app/comic/navigation.mjs";
 
-const pages = JSON.parse(await readFile(new URL("../app/comic/comic-data.json", import.meta.url), "utf8"));
 const catalog = JSON.parse(await readFile(new URL("../app/comic/book-catalog.json", import.meta.url), "utf8"));
-const revised = JSON.parse(await readFile(new URL("../app/comic/dialogue-v2.json", import.meta.url), "utf8"));
 
 test("reading progress resumes this edition and does not skip the new prologue", () => {
-  const chapter = { id: "creation", edition: "creation-prologue-v3", pages: Array(14) };
+  const chapter = { id: "creation", edition: "creation-mystery-v4", pages: Array(16) };
   const saved = (page, extra = {}) => JSON.stringify({ chapter: chapter.id, edition: chapter.edition, page, ...extra });
-  for (const raw of ["", "broken json", "null", saved(0), saved(15), saved(1.5), saved("2"), saved(8, { edition: "old" }), saved(8, { chapter: "episode-01" }), JSON.stringify({ chapter: "creation", page: 13 })]) {
+  for (const raw of ["", "broken json", "null", saved(0), saved(17), saved(1.5), saved("2"), saved(8, { edition: "old" }), saved(8, { chapter: "episode-01" }), JSON.stringify({ chapter: "creation", page: 13 })]) {
     assert.equal(savedComicPage(raw, chapter), 1);
   }
   assert.equal(savedComicPage(saved(2), chapter), 2);
-  assert.equal(savedComicPage(saved(14), chapter), 14);
-  assert.equal(getComicPageIndex("99", 14), 13);
+  assert.equal(savedComicPage(saved(16), chapter), 16);
+  assert.equal(getComicPageIndex("99", 16), 15);
 });
 
-test("published reader uses all fourteen prologue edition illustrations without production scripts", async () => {
+test("published reader uses sixteen mystery edition pages with no runtime archive dependency", async () => {
   const publicPages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
-  assert.equal(publicPages.length, 14);
-  assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 14 }, (_, i) => i + 1));
+  assert.equal(publicPages.length, 16);
+  assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 16 }, (_, i) => i + 1));
   assert.deepEqual(catalog.chapters.map(c => c.id), ["creation"]);
   assert.equal(catalog.chapters[0].reference, "创世记 1:1–2:3");
-  assert.equal(catalog.chapters[0].hidePrintedFolio, true);
+  assert.equal(catalog.chapters[0].hidePrintedFolio, false);
   for (const page of publicPages) {
-    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
-    assert.equal(page.image, page.id <= 2
-      ? `/comics/creation-prologue-v3/page-${String(page.id).padStart(2, "0")}.png`
-      : `/comics/creation-condensed-v2/page-${String(page.id - 1).padStart(2, "0")}.png`);
+    assert.deepEqual(Object.keys(page), page.id === 16 ? ["id", "title", "image", "hidePrintedFolio"] : ["id", "title", "image"]);
+    assert.equal(page.image, `/comics/creation-mystery-v4/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.equal(page.hidePrintedFolio ?? false, page.id === 16);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
-    assert.equal(bytes.readUInt32BE(16), 1024);
-    assert.equal(bytes.readUInt32BE(20), 1536);
+    assert.ok(bytes.readUInt32BE(16) >= 1024);
+    assert.equal(bytes.readUInt32BE(16) / bytes.readUInt32BE(20), 2 / 3);
   }
   const source = await readFile(new URL("../app/comic/book-data.ts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /import.*(?:comic-data|dialogue-v2)/);
@@ -62,56 +59,11 @@ test("book catalog declares character introductions before any new chapter cast"
   }
 });
 
-test("dialogue revision retains every panel, Scripture caption and original illustration transcript", () => {
-  assert.equal(revised.length, pages.length);
-  let changed = 0;
-  for (const [index, page] of pages.entries()) {
-    const next = revised[index];
-    assert.equal(next.id, page.id);
-    assert.equal(next.panels.length, page.panels.length);
-    for (const [panelIndex, panel] of page.panels.entries()) {
-      const text = next.panels[panelIndex].text;
-      assert.equal(next.panels[panelIndex].shot, panel.shot);
-      for (const line of panel.text.filter((line) => line.startsWith("经文旁白：") || line === "小昆：起初，神创造天地。")) {
-        assert.ok(text.includes(line), "Scripture must not be rewritten");
-      }
-      if (JSON.stringify(text) !== JSON.stringify(panel.text)) changed++;
-    }
-  }
-  assert.equal(changed, 43);
-  assert.equal(pages[11].panels[1].text[0], "小昆：可以让我停下来，看这么久。");
-  assert.equal(revised[11].panels[1].text[0], "小昆：真的看到，感觉完全不一样耶。");
-});
-
 test("cover and approved character sheet are real local PNG assets", async () => {
   for (const path of [catalog.coverImage, catalog.characterSheet]) {
     assert.ok(path?.startsWith("/comics/book-v1/"));
     const bytes = await readFile(new URL("../public" + path, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
-  }
-});
-
-test("original production archive preserves 12 page positions, 64 panels and previous notes", () => {
-  assert.equal(pages.length, 12);
-  assert.deepEqual(pages.map((p) => p.id), Array.from({ length: 12 }, (_, i) => i + 1));
-  assert.equal(pages.reduce((n, p) => n + p.panels.length, 0), 64);
-  assert.equal(pages.filter((p) => p.image).length, 11);
-  assert.equal(pages[9].image, null);
-  assert.equal(pages[9].status, "missing");
-  assert.equal(pages[9].panels.length, 5);
-  assert.match(pages[1].image, /page-02-v2\.png$/);
-  for (const p of [pages[6], pages[11]]) assert.equal(p.status, "revision");
-});
-
-test("every illustrated page has its own valid full-resolution PNG in public assets", async () => {
-  const images = pages.filter((p) => p.image).map((p) => p.image);
-  assert.equal(new Set(images).size, 11);
-  for (const image of images) {
-    assert.match(image, /^\/comics\/episode-01-v1\/page-\d{2}(-v2)?\.png$/);
-    const bytes = await readFile(new URL("../public" + image, import.meta.url));
-    assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
-    assert.equal(bytes.readUInt32BE(16), 1024);
-    assert.equal(bytes.readUInt32BE(20), 1536);
   }
 });
 
@@ -133,69 +85,6 @@ test("chapter entry introduces new cast without repeating introductions for esta
   assert.equal(comicChapterEntry({ id: "episode-03", number: 3, newCharacterIds: [] }), "/comic/read?chapter=episode-03&page=1");
   assert.equal(comicChapterEntry({ id: "episode-04", number: 4, newCharacterIds: [] }), "/comic/read?chapter=episode-04&page=1");
   assert.equal(comicChapterEntry({ id: "later", number: 3, newCharacterIds: ["new-person"] }), "/comic/chapter/later");
-});
-
-test("second chapter archive preserves all approved page positions and has twelve distinct full-page assets", async () => {
-  const published = JSON.parse(await readFile(new URL("../app/comic/episode-02-pages.json", import.meta.url), "utf8"));
-  const storyboard = await readFile(new URL("../docs/comic/episode-02-storyboard-review-v1.md", import.meta.url), "utf8");
-  const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
-  assert.equal(panels.length, 12);
-  assert.equal(panels.reduce((n, p) => n + Number(p[2]), 0), 58);
-  assert.equal(published.length, 12);
-  assert.equal(new Set(published.map((p) => p.image)).size, 12);
-  for (const [index, page] of published.entries()) {
-    assert.equal(page.id, index + 1);
-    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
-    assert.equal(page.image, `/comics/episode-02-v1/page-${String(page.id).padStart(2, "0")}.png`);
-    const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
-    assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
-    assert.equal(bytes.readUInt32BE(16), 1024);
-    assert.equal(bytes.readUInt32BE(20), 1536);
-  }
-  const chapter = catalog.chapters.find((item) => item.id === "episode-02");
-  assert.equal(chapter, undefined, "retired chapter remains archived, not published");
-});
-
-test("third chapter archive preserves the approved ten pages and 46 panels without production notes", async () => {
-  const published = JSON.parse(await readFile(new URL("../app/comic/episode-03-pages.json", import.meta.url), "utf8"));
-  const storyboard = await readFile(new URL("../docs/comic/episode-03-storyboard-review-v1.md", import.meta.url), "utf8");
-  const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
-  assert.deepEqual(panels.map((p) => Number(p[2])), [5, 5, 3, 5, 4, 5, 5, 5, 4, 5]);
-  assert.equal(panels.reduce((n, p) => n + Number(p[2]), 0), 46);
-  assert.equal(published.length, 10);
-  assert.equal(new Set(published.map((p) => p.image)).size, 10);
-  for (const [index, page] of published.entries()) {
-    assert.equal(page.id, index + 1);
-    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
-    assert.equal(page.image, `/comics/episode-03-v1/page-${String(page.id).padStart(2, "0")}.png`);
-    const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
-    assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
-    assert.equal(bytes.readUInt32BE(16), 1024);
-    assert.equal(bytes.readUInt32BE(20), 1536);
-  }
-  const chapter = catalog.chapters.find((item) => item.id === "episode-03");
-  assert.equal(chapter, undefined, "retired chapter remains archived, not published");
-});
-
-test("fourth chapter archive preserves the approved ten pages and 46 panels without production notes", async () => {
-  const published = JSON.parse(await readFile(new URL("../app/comic/episode-04-pages.json", import.meta.url), "utf8"));
-  const storyboard = await readFile(new URL("../docs/comic/episode-04-storyboard-review-v1.md", import.meta.url), "utf8");
-  const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
-  assert.deepEqual(panels.map((p) => Number(p[2])), [4, 4, 5, 5, 5, 5, 4, 5, 4, 5]);
-  assert.equal(panels.reduce((n, p) => n + Number(p[2]), 0), 46);
-  assert.equal(published.length, 10);
-  assert.equal(new Set(published.map((p) => p.image)).size, 10);
-  for (const [index, page] of published.entries()) {
-    assert.equal(page.id, index + 1);
-    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
-    assert.equal(page.image, `/comics/episode-04-v1/page-${String(page.id).padStart(2, "0")}.png`);
-    const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
-    assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
-    assert.equal(bytes.readUInt32BE(16), 1024);
-    assert.equal(bytes.readUInt32BE(20), 1536);
-  }
-  const chapter = catalog.chapters.find((item) => item.id === "episode-04");
-  assert.equal(chapter, undefined, "retired chapter remains archived, not published");
 });
 
 test("service worker caches comic navigation separately from the homepage", async () => {
@@ -239,4 +128,19 @@ test("service worker caches comic navigation separately from the homepage", asyn
   assert.equal(await (await navigate("/comic?page=10")).text(), "updated comic");
   assert.equal(await (await navigate("/")).text(), "home");
   assert.equal((await navigate("/unvisited")).status, 503);
+});
+
+test("approved mystery storyboard contains sixteen pages and seventy-eight panels", async () => {
+  const storyboard = await readFile(new URL("../docs/comic/creation-mystery-v4-storyboard.md", import.meta.url), "utf8");
+  const panels = [...storyboard.matchAll(/^## 第 (\d+) 页[^\n]*（(\d+) 格）/gm)];
+  assert.deepEqual(panels.map(p => Number(p[2])), [6,6,6,6,5,5,4,4,5,5,6,4,4,4,4,4]);
+  assert.equal(panels.reduce((sum, p) => sum + Number(p[2]), 0), 78);
+});
+
+test("public comic assets exclude deletable local archives and obsolete editions", async () => {
+  const directories = await readdir(new URL("../public/comics/", import.meta.url));
+  assert.deepEqual(directories.sort(), ["book-v1", "creation-mystery-v4"]);
+  const pages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
+  assert.equal(new Set(pages.map(page => page.image)).size, 16);
+  assert.ok(pages.every(page => !page.image.includes("archive")));
 });

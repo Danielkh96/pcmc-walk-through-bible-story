@@ -1,5 +1,9 @@
 # Student reading flow
 
+> Historical workflow snapshot. The episode-01–04 publication details below are retired.
+> Read root AGENTS.md and docs/comic/current-creative-brief.md for current rules and version state.
+> Do not restore historical chapters or treat old page counts as current publication data.
+
 Home → Contents → Character introduction when needed → Comic reader.
 
 - Keep the colorful illustrated UI, outlines and raised shadows.

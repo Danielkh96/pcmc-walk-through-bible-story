@@ -58,7 +58,7 @@ function PageArtwork({ image, title, id, hidePrintedFolio }: { image: string; ti
           }}>重新载入</button>
         </div>
       )}
-      {/* Preserve all panels. The approved condensed edition masks only the obsolete bottom folio. */}
+      {/* Show new artwork in full; only retained artwork with an old folio opts into the mask. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         ref={imageRef}
@@ -129,7 +129,7 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
       <h1 className={styles.srOnly}>漫画阅读</h1>
       <div className={styles.workspace}>
         <article id="comic-page" className={styles.content} aria-label={"漫画第 " + page.id + " 页"}>
-          {page.image ? <PageArtwork key={chapter.id + ":" + page.id} id={page.id} image={page.image} title={page.title} hidePrintedFolio={chapter.hidePrintedFolio} /> : (
+          {page.image ? <PageArtwork key={chapter.id + ":" + page.id} id={page.id} image={page.image} title={page.title} hidePrintedFolio={("hidePrintedFolio" in page ? Boolean(page.hidePrintedFolio) : chapter.hidePrintedFolio)} /> : (
             <section className={styles.missing}>
               <p className={styles.eyebrow}>第 {page.id} 页</p>
               <h2>这一页正在绘制中</h2>

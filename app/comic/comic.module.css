@@ -54,8 +54,8 @@
 .pageHeading a { flex-shrink: 0; font-size: .875rem; color: var(--comic-accent); text-underline-offset: 4px; }
 .artwork { position: relative; width: 100%; aspect-ratio: 2 / 3; background: var(--comic-surface); }
 .artwork img { position: relative; display: block; width: 100%; height: auto; object-fit: contain; }
-/* Same display window as the approved preview: keep 1500px of 1536px,
-   hiding only the old printed page number, never a comic panel. */
+/* Only retained pages opt in: keep 1500px of 1536px to hide an obsolete
+   printed folio. Newly generated pages stay uncropped. */
 .reindexedArtwork { aspect-ratio: 1024 / 1500; overflow: hidden; }
 .reindexedArtwork img { position: absolute; inset: 0 auto auto 0; }
 .imageMessage { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; margin: 0; text-align: center; line-height: 1.7; color: var(--comic-muted); }
