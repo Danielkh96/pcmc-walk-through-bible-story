@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 export default async function ComicPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   const query = await searchParams;
   // Keep previously shared /comic?page=N links working.
-  return query.page !== undefined ? <ComicReader /> : <BookFrontmatter section="cover" />;
+  return query.page !== undefined ? <ComicReader initialPage={query.page} /> : <BookFrontmatter section="contents" />;
 }

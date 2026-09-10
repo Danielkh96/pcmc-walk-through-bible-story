@@ -26,7 +26,8 @@ test("comic and story surfaces share the same light and dark palette", async () 
 test("home exclusively links to comic reading and retains interface language and theme controls", async () => {
   const [page, manifest] = await Promise.all([read("../app/page.tsx"), read("../public/manifest.webmanifest")]);
   assert.match(page, /comic-app theme-/);
-  assert.match(page, /className="hero-comic-cover" href="\/comic"/);
+  assert.ok(page.includes('className="hero-comic-cover" href="/comic/contents"'));
+  assert.ok(page.includes('className="begin" href="/comic/contents"'));
   assert.match(page, /开始看漫画/);
   assert.match(page, /Read the comic/);
   assert.doesNotMatch(page, /aria-label="Bible story reader"|detailedPages|genesis-creation/);

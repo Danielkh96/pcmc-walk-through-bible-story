@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { comicChapters } from "./comic/book-data";
 import { PwaInstaller } from "./pwa-installer";
 import { useAppearance } from "./use-appearance";
@@ -77,30 +77,11 @@ const books = [
 ];
 
 
-const progressKey = "pcmc-comic-progress";
-function subscribeProgress(callback: () => void) {
-  window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
-}
-function savedProgress() {
-  try { return localStorage.getItem(progressKey) || ""; } catch { return ""; }
-}
-function noProgress() { return ""; }
-
 export default function Home() {
   const [language, setLanguage] = useState<"zh" | "en">("zh");
   const [theme, setTheme] = useAppearance();
   const [isLaunching, setIsLaunching] = useState(true);
   const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
-  const progress = useSyncExternalStore(subscribeProgress, savedProgress, noProgress);
-  let resume: { chapter: string; page: number } | null = null;
-  try {
-    const stored = JSON.parse(progress);
-    const chapter = comicChapters.find((item) => item.id === stored.chapter);
-    if (chapter && Number.isInteger(stored.page) && stored.page >= 1 && stored.page <= chapter.pages.length) resume = stored;
-  } catch { /* A missing or old prose bookmark must not open retired content. */ }
-  const resumeChapter = comicChapters.find((item) => item.id === resume?.chapter);
-  const readHref = resume ? "/comic/read?chapter=" + resume.chapter + "&page=" + resume.page : "/comic";
   const zh = language === "zh";
 
   useEffect(() => {
@@ -137,7 +118,6 @@ export default function Home() {
         </a>
         <div className="header-right desktop-controls">
           <PwaInstaller language={language} />
-          <a className="home-link" href="/comic/contents">{zh ? "漫画目录" : "Contents"}</a>
           <div className="language-switch" role="group" aria-label="Interface language">
             <button className={zh ? "selected" : ""} onClick={() => setLanguage("zh")}>中</button>
             <button className={!zh ? "selected" : ""} onClick={() => setLanguage("en")}>EN</button>
@@ -149,28 +129,15 @@ export default function Home() {
         <button className="mobile-settings-trigger" onClick={() => setMobileSettingsOpen(true)} aria-label={zh ? "打开阅读设置" : "Open reading settings"} aria-expanded={mobileSettingsOpen}>•••</button>
       </header>
 
-      {resume && resumeChapter && <section className="continue-reading app-reveal reveal-2" aria-label={zh ? "继续看漫画" : "Continue the comic"}>
-        <div className="continue-art" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/comics/book-v1/cover-v1.png" alt="" />
-        </div>
-        <div className="continue-copy"><p>{zh ? "上次看到这里" : "YOUR BOOKMARK"}</p>
-          <h2>{resumeChapter.title}</h2><span>{zh ? `第 ${resume.page} 页，共 ${resumeChapter.pages.length} 页` : `Page ${resume.page} of ${resumeChapter.pages.length}`}</span>
-          <div className="progress-track"><i style={{width: resume.page / resumeChapter.pages.length * 100 + "%"}} /></div>
-        </div>
-        <a className="continue-button" href={readHref}>{zh ? "继续看漫画" : "Continue"} →</a>
-      </section>}
-
       <section className="hero app-reveal reveal-3" id="top">
         <div className="hero-intro">
           <p className="eyebrow">PCMC · {zh ? "小昆 & 小君的圣经探索" : "EXPLORE WITH XIAO KUN & XIAO JUN"}</p>
           <h1><span className="hero-title-main">{zh ? "翻开漫画，" : "Turn a page."}</span><span className="hero-title-sub">{zh ? "一起走进圣经！" : "Step into the story!"}</span></h1>
           <p className="hero-copy">{zh ? "跟着小昆和小君，一边看、一边问，发现圣经里的大故事。" : "Join Xiao Kun and Xiao Jun. Look closer, ask questions, and discover the great story of the Bible."}<br />{zh ? "先从《创世记》的第一声「要有光」开始吧。" : "Start in Genesis, with “Let there be light.”"}</p>
-          <a className="begin" href="/comic">{zh ? "开始看漫画" : "Read the comic"} <span>→</span></a>
-          <a className="comic-preview-link" href="#library">{zh ? "逛逛漫画书架" : "Explore the comic shelf"} ↓</a>
-          <p className="hero-edition">{zh ? "第一集 · 故事开始以前 · 中文漫画预览" : "Episode 01 · Before the story begins · Chinese comic preview"}</p>
+          <a className="begin" href="/comic/contents">{zh ? "开始看漫画" : "Read the comic"} <span>→</span></a>
+          <p className="hero-edition">{zh ? "第一集 · 故事开始以前 · 中文漫画" : "Episode 01 · Before the story begins · Chinese comic"}</p>
         </div>
-        <a className="hero-comic-cover" href="/comic" aria-label={zh ? "打开圣经漫画故事封面" : "Open the Bible comic cover"}>
+        <a className="hero-comic-cover" href="/comic/contents" aria-label={zh ? "打开漫画目录" : "Open comic contents"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/comics/book-v1/cover-v1.png" alt={zh ? "小昆、小君与圣经人物的漫画封面" : "Comic cover with Xiao Kun, Xiao Jun and Bible characters"} width={1024} height={1536} fetchPriority="high" />
         </a>
@@ -180,12 +147,12 @@ export default function Home() {
         <div className="library-head"><p className="eyebrow">{zh ? "漫画书架" : "THE COMIC SHELF"}</p>
           <h2>{zh ? "下一段冒险，从这里开始。" : "Your next adventure starts here."}</h2>
         </div>
-        {comicChapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={"/comic/chapter/" + chapter.id}>
+        {comicChapters.map((chapter) => <a key={chapter.id} className="comic-feature" href="/comic/contents">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/comics/book-v1/cover-v1.png" alt="" loading="lazy" width={1024} height={1536} />
-          <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画初稿` : `Episode ${chapter.number} · Chinese comic draft`}</small>
+          <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画` : `Episode ${chapter.number} · Chinese comic`}</small>
             <strong>{chapter.title}</strong>
-            <span>{zh ? `${chapter.illustratedCount} / ${chapter.pages.length} 页已绘制 · ${chapter.reference}` : `${chapter.illustratedCount} of ${chapter.pages.length} pages illustrated · ${chapter.reference}`}</span>
+            <span>{zh ? `${chapter.reference}` : `${chapter.reference}`}</span>
             <b>{zh ? "进入这一集" : "Open episode"} →</b>
           </span>
         </a>)}
@@ -217,7 +184,6 @@ export default function Home() {
       <nav className="mobile-app-nav" aria-label={zh ? "应用导航" : "App navigation"}>
         <a className="active" href="/" aria-current="page"><span aria-hidden="true">⌂</span>{zh ? "首页" : "Home"}</a>
         <a href="/comic/contents"><span aria-hidden="true">▦</span>{zh ? "漫画目录" : "Contents"}</a>
-        <a href={readHref}><span aria-hidden="true">◉</span>{zh ? "看漫画" : "Read"}</a>
       </nav>
       <footer>
         {/* eslint-disable-next-line @next/next/no-img-element */}

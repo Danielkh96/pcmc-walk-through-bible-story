@@ -1,4 +1,4 @@
-const CACHE_NAME = "pcmc-bible-story-v7-native-navigation";
+const CACHE_NAME = "pcmc-bible-story-v8-reader-flow";
 const APP_SHELL = [
   "/",
   "/comic",

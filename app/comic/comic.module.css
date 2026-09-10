@@ -35,7 +35,10 @@
 .pagePicker select { width: 100%; min-height: 44px; padding: 8px 12px; border: 1px solid var(--comic-line); border-radius: 8px; background: var(--comic-surface); color: var(--comic-ink); font: inherit; font-size: .9rem; text-overflow: ellipsis; }
 .progress { position: absolute; bottom: 0; width: 100%; height: 3px; background: var(--comic-line); }
 .progress span { display: block; height: 100%; background: var(--comic-accent); transition: width .2s; }
-.workspace { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: clamp(20px, 3vw, 48px); padding: 24px clamp(16px, 3vw, 48px) max(32px, env(safe-area-inset-bottom)); align-items: start; }
+.workspace { padding: 24px clamp(16px, 3vw, 48px) 120px; }
+.readingDock { position: fixed; bottom: max(14px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); z-index: 20; width: min(420px, calc(100% - 32px)); display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; gap: 12px; align-items: center; padding: 10px 12px 14px; border: 2px solid var(--comic-line); border-radius: 22px; background: var(--comic-surface); box-shadow: 0 5px 0 var(--toon-shadow), 0 12px 24px #102d3820; overflow: hidden; }
+.readingDock .control { background: var(--toon-pop); color: #233b45; font-size: 1.3rem; padding: 4px; }
+.readingDock .pagePicker select { text-align: center; font-weight: 700; border-color: transparent; }
 .sidebar { position: sticky; top: 96px; max-height: calc(100dvh - 110px); overflow-y: auto; scrollbar-width: thin; }
 .sidebar h2 { margin: 0 0 14px; font-size: 1rem; font-weight: 600; }
 .sidebar ol { list-style: none; padding: 0; margin: 0; }
@@ -76,7 +79,7 @@
 .srOnly, .skip:not(:focus) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .skip:focus { display: block; position: relative; z-index: 40; padding: 12px; background: var(--comic-surface); color: var(--comic-ink); }
 @media (max-width: 900px) {
-  .workspace { display: block; padding: 20px 0 32px; }
+  .workspace { padding: 12px 0 120px; }
   .sidebar { display: none; }
   .pageHeading, .reviewNote, .transcript, .bottomNav, .endNote { margin-inline: 16px; }
   .intro { padding-block: 22px; }

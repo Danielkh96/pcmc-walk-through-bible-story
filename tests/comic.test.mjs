@@ -8,6 +8,16 @@ const pages = JSON.parse(await readFile(new URL("../app/comic/comic-data.json", 
 const catalog = JSON.parse(await readFile(new URL("../app/comic/book-catalog.json", import.meta.url), "utf8"));
 const revised = JSON.parse(await readFile(new URL("../app/comic/dialogue-v2.json", import.meta.url), "utf8"));
 
+test("public reader metadata excludes production scripts and stays synchronized with artwork", async () => {
+  const publicPages = JSON.parse(await readFile(new URL("../app/comic/reader-pages.json", import.meta.url), "utf8"));
+  assert.deepEqual(publicPages, pages.map(({ id, title, image }) => ({ id, title, image })));
+  const source = await readFile(new URL("../app/comic/book-data.ts", import.meta.url), "utf8");
+  assert.doesNotMatch(source, /import.*(?:comic-data|dialogue-v2)/);
+  assert.match(source, /item\.number <= chapter\.number/);
+  assert.match(source, /flatMap\(\(item\) => item\.characterIds\)/);
+  assert.match(source, /comicBook\.characters\.filter/);
+});
+
 test("book catalog declares character introductions before any new chapter cast", () => {
   assert.equal(catalog.title, "圣经漫画故事");
   assert.deepEqual(catalog.characters.filter((c) => catalog.mainCharacterIds.includes(c.id)).map((c) => c.name), ["小昆", "小君"]);
