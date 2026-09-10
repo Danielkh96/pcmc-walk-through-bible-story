@@ -1,8 +1,9 @@
 import catalog from "./book-catalog.json";
 import episode01 from "./reader-pages.json";
+import episode02 from "./episode-02-pages.json";
 
 export type ComicPageData = (typeof episode01)[number];
-const episodeData: Record<string, ComicPageData[]> = { "episode-01": episode01 };
+const episodeData: Record<string, ComicPageData[]> = { "episode-01": episode01, "episode-02": episode02 };
 
 export const comicBook = catalog;
 export const comicChapters = catalog.chapters.map((chapter) => {

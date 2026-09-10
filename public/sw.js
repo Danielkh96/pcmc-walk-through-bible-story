@@ -1,4 +1,4 @@
-const CACHE_NAME = "pcmc-bible-story-v9-dialogue-artwork";
+const CACHE_NAME = "pcmc-bible-story-v10-episode-02";
 const APP_SHELL = [
   "/",
   "/comic",
@@ -39,9 +39,13 @@ self.addEventListener("fetch", (event) => {
   )
     return;
   if (event.request.mode === "navigate") {
-    // Keep the comic and home documents separate; a comic visit must never
-    // replace the cached homepage. Page-number queries hydrate on the client.
-    const pageKey = new URL(event.request.url).pathname;
+    // Chapter is server-rendered: never reuse chapter one's shell for chapter two.
+    // Page-number queries still hydrate on the client within the same chapter.
+    const url = new URL(event.request.url);
+    const chapter = url.searchParams.get("chapter") || "episode-01";
+    const pageKey = url.pathname === "/comic/read"
+      ? url.pathname + "?chapter=" + encodeURIComponent(chapter)
+      : url.pathname;
     event.respondWith(
       fetch(event.request)
         .then((response) => {

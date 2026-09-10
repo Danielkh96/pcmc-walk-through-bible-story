@@ -4,3 +4,12 @@ export function getComicPageIndex(value, count) {
   if (!value || !Number.isInteger(page)) return 0;
   return Math.min(Math.max(page - 1, 0), count - 1);
 }
+
+/** Show introductions for the opening chapter and newly encountered characters only.
+ * @param {{ id: string, number: number, newCharacterIds: string[] }} chapter
+ */
+export function comicChapterEntry(chapter) {
+  return chapter.number === 1 || chapter.newCharacterIds.length > 0
+    ? "/comic/chapter/" + chapter.id
+    : "/comic/read?chapter=" + chapter.id + "&page=1";
+}

@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v9-dialogue-artwork/);
+  assert.match(serviceWorker, /pcmc-bible-story-v10-episode-02/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -106,5 +106,22 @@ test("comic journey goes from contents to growing cast to artwork without produc
 test("unknown comic chapters do not masquerade as the first chapter", async () => {
   for (const path of ["/comic/chapter/nonexistent", "/comic/read?chapter=nonexistent"]) {
     assert.equal((await render(path)).status, 404);
+  }
+});
+
+test("second chapter is discoverable and chapter one continues directly to its artwork", async () => {
+  const contents = await (await render("/comic/contents")).text();
+  assert.match(contents, /天空、海洋与陆地/);
+  assert.ok(contents.includes('href="/comic/read?chapter=episode-02&amp;page=1"'));
+  const last = await (await render("/comic/read?chapter=episode-01&page=12")).text();
+  assert.match(last, /aria-label="下一章：天空、海洋与陆地"/);
+  assert.equal((last.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
+  for (const page of [1, 6, 12]) {
+    const response = await render(`/comic/read?chapter=episode-02&page=${page}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes(`/comics/episode-02-v1/page-${String(page).padStart(2, "0")}.png`));
+    assert.doesNotMatch(html, /本页分镜|对白润色|正在绘制中/);
+    if (page === 12) assert.doesNotMatch(html, /aria-label="下一章：/);
   }
 });

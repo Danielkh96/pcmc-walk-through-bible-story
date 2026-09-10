@@ -46,7 +46,20 @@
       ],
       "newCharacterIds": [],
       "introduction": "这一章先认识小昆和小君。神的创造通过《创世记》的经文旁白呈现，不把神画成带领两人穿越的虚构人物。",
-      "status": "draft"
+      "status": "published"
+    },
+    {
+      "id": "episode-02",
+      "number": 2,
+      "title": "天空、海洋与陆地",
+      "book": "创世记",
+      "reference": "创世记 1:6–13",
+      "summary": "水与水之间展开了天空，旱地显露，青草和果树出现。小昆和小君一边发现新的细节，一边等着下一个惊喜。",
+      "dataKey": "episode-02",
+      "characterIds": ["xiao-kun", "xiao-jun"],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君继续探索第二、第三日的创造。本章没有新登场人物，直接进入漫画。",
+      "status": "published"
     }
   ]
 }

@@ -4,7 +4,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { comicChapters, type ComicChapter } from "./book-data";
-import { getComicPageIndex } from "./navigation.mjs";
+import { comicChapterEntry, getComicPageIndex } from "./navigation.mjs";
 import { useAppearance } from "../use-appearance";
 import styles from "./comic.module.css";
 
@@ -79,6 +79,7 @@ function PageArtwork({ image, title, id }: { image: string; title: string; id: n
 
 export default function ComicReader({ chapter = comicChapters[0], initialPage }: { chapter?: ComicChapter; initialPage?: string }) {
   const comicPages = chapter.pages;
+  const nextChapter = comicChapters[comicChapters.findIndex((item) => item.id === chapter.id) + 1];
   const pageIndex = useSyncExternalStore(subscribe, () => currentPage(comicPages.length), () => getComicPageIndex(initialPage ?? null, comicPages.length));
   const [theme, setTheme] = useAppearance();
   const dark = theme === "dark";
@@ -98,12 +99,16 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
       if (event.target instanceof Element && event.target.closest("input, textarea, select, button, a, summary, [contenteditable]")) return;
       if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
         event.preventDefault();
-        navigate(pageIndex + (event.key === "ArrowRight" ? 1 : -1), comicPages.length);
+        if (event.key === "ArrowRight" && pageIndex === comicPages.length - 1 && nextChapter) {
+          window.location.assign(comicChapterEntry(nextChapter));
+        } else {
+          navigate(pageIndex + (event.key === "ArrowRight" ? 1 : -1), comicPages.length);
+        }
       }
     };
     window.addEventListener("keydown", keydown);
     return () => window.removeEventListener("keydown", keydown);
-  }, [pageIndex, comicPages.length]);
+  }, [pageIndex, comicPages.length, nextChapter]);
   return (
     <main className={styles.reader} data-theme={dark ? "dark" : "light"}>
       <a className={styles.skip} href="#comic-page">跳到漫画内容</a>
@@ -123,14 +128,14 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
       <h1 className={styles.srOnly}>漫画阅读</h1>
       <div className={styles.workspace}>
         <article id="comic-page" className={styles.content} aria-label={"漫画第 " + page.id + " 页"}>
-          {page.image ? <PageArtwork key={page.id} id={page.id} image={page.image} title={page.title} /> : (
+          {page.image ? <PageArtwork key={chapter.id + ":" + page.id} id={page.id} image={page.image} title={page.title} /> : (
             <section className={styles.missing}>
               <p className={styles.eyebrow}>第 {page.id} 页</p>
               <h2>这一页正在绘制中</h2>
               <p>画面完成后会更新到这里。你可以先翻到下一页。</p>
             </section>
           )}
-          {pageIndex === comicPages.length - 1 && <p className={styles.endNote}>这一章读完啦！</p>}
+          {pageIndex === comicPages.length - 1 && <p className={styles.endNote}>{nextChapter ? "下一章：" + nextChapter.title + " · 点击右箭头继续" : "这一章读完啦！"}</p>}
         </article>
       </div>
       <nav className={styles.readingDock} aria-label="漫画翻页">
@@ -141,7 +146,11 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
             {comicPages.map((item, index) => <option value={index} key={item.id}>第 {item.id} / {comicPages.length} 页{!item.image ? " · 待更新" : ""}</option>)}
           </select>
         </label>
-        <button className={styles.control} onClick={() => navigate(pageIndex + 1, comicPages.length)} disabled={pageIndex === comicPages.length - 1} aria-label="下一页">→</button>
+        {pageIndex === comicPages.length - 1 && nextChapter ? (
+          <a className={styles.control} href={comicChapterEntry(nextChapter)} aria-label={"下一章：" + nextChapter.title} title={"下一章：" + nextChapter.title}>→</a>
+        ) : (
+          <button className={styles.control} onClick={() => navigate(pageIndex + 1, comicPages.length)} disabled={pageIndex === comicPages.length - 1} aria-label="下一页">→</button>
+        )}
         <div className={styles.progress} role="progressbar" aria-label="漫画阅读进度" aria-valuemin={1} aria-valuemax={comicPages.length} aria-valuenow={page.id}><span style={{ width: (page.id / comicPages.length * 100) + "%" }} /></div>
       </nav>
     </main>

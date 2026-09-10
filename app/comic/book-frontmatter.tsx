@@ -5,6 +5,7 @@
 import { useSyncExternalStore } from "react";
 import { useAppearance } from "../use-appearance";
 import { comicBook, comicChapters, charactersThroughChapter } from "./book-data";
+import { comicChapterEntry } from "./navigation.mjs";
 import reader from "./comic.module.css";
 import styles from "./book.module.css";
 
@@ -46,7 +47,7 @@ export default function BookFrontmatter({ section, chapterId }: { section: "cont
         {section === "contents" ? (
           <ol className={styles.chapterList}>
             {comicChapters.map((item) => <li key={item.id}>
-              <a href={"/comic/chapter/" + item.id}>
+              <a href={comicChapterEntry(item)}>
                 <span className={styles.chapterNumber}>{String(item.number).padStart(2, "0")}</span>
                 <span className={styles.chapterCopy}><small>{item.reference}</small><strong>{item.title}</strong><span>{item.summary}</span></span>
                 <span className={styles.chapterArrow} aria-hidden="true">→</span>
