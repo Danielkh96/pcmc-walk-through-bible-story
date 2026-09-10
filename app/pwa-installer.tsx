@@ -11,7 +11,6 @@ export function PwaInstaller({ language }: { language: "zh" | "en" }) {
   const [deferredPrompt, setDeferredPrompt] = useState<InstallPromptEvent | null>(null);
 
   useEffect(() => {
-    if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => undefined);
     const onBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
       setDeferredPrompt(event as InstallPromptEvent);

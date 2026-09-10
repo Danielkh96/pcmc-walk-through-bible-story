@@ -1,13 +1,13 @@
 {
   "name": "PCMC Walk Through Bible Story",
   "short_name": "Bible Story",
-  "description": "A bilingual digital Bible storybook from PCMC.",
+  "description": "Explore the Bible in comics with Xiao Kun and Xiao Jun. 小昆与小君的圣经漫画故事。",
   "lang": "zh-Hans",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#090909",
-  "theme_color": "#090909",
+  "background_color": "#eaf7fb",
+  "theme_color": "#eaf7fb",
   "orientation": "portrait-primary",
   "icons": [
     { "src": "/pwa-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },

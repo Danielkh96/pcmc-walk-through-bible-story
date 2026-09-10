@@ -1,0 +1,52 @@
+{
+  "title": "圣经漫画故事",
+  "subtitle": "跟着小昆和小君，一起走进圣经的大故事。",
+  "imprint": "PCMC Walk Through Bible Story",
+  "coverImage": "/comics/book-v1/cover-v1.png",
+  "coverStatus": "draft",
+  "characterSheet": "/comics/book-v1/characters-approved.png",
+  "mainCharacterIds": [
+    "xiao-kun",
+    "xiao-jun"
+  ],
+  "characters": [
+    {
+      "id": "xiao-kun",
+      "name": "小昆",
+      "kind": "fictional",
+      "tagline": "想到什么，就想问个明白。",
+      "bio": "好奇心很强，看到没见过的东西，总想凑近一点。想到什么常常就问出来，有时动作比脑袋还快。嘴上开着玩笑，其实也会害怕；遇到不明白的事，他愿意和小君一起找答案。",
+      "quote": "等一下，我有个问题！",
+      "appearance": "蓬松短发 · 橙色上衣 · 深蓝背包",
+      "reference": null
+    },
+    {
+      "id": "xiao-jun",
+      "name": "小君",
+      "kind": "fictional",
+      "tagline": "先看看，再一起找答案。",
+      "bio": "她会先看看周围，注意到别人容易错过的小变化。小昆问得急，她就陪他慢慢找线索。她也有不知道的时候，不会假装自己什么都懂；认真起来很细心，放松时也会吐槽两句。",
+      "quote": "先别急，我们看看。",
+      "appearance": "半扎发 · 湖绿色上衣 · 棕色斜挎包",
+      "reference": null
+    }
+  ],
+  "chapters": [
+    {
+      "id": "episode-01",
+      "number": 1,
+      "title": "故事开始以前",
+      "book": "创世记",
+      "reference": "创世记 1:1–5",
+      "summary": "一次从第一页开始的阅读，把小昆和小君带进陌生的深水与黑暗。他们将看见故事的第一个开始。",
+      "dataKey": "episode-01",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun"
+      ],
+      "newCharacterIds": [],
+      "introduction": "这一章先认识小昆和小君。神的创造通过《创世记》的经文旁白呈现，不把神画成带领两人穿越的虚构人物。",
+      "status": "draft"
+    }
+  ]
+}

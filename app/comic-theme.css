@@ -1,0 +1,150 @@
+/* Shared comic-book palette. Existing artwork and reading behavior stay intact. */
+:root {
+  --toon-paper: #eaf7fb;
+  --toon-surface: #ffffff;
+  --toon-ink: #233b45;
+  --toon-muted: #526b73;
+  --toon-line: #36535c;
+  --toon-accent: #176d70;
+  --toon-pop: #ffd17a;
+  --toon-soft: #d9efeb;
+  --toon-shadow: #bbd7df;
+  --font-comic: ui-rounded, "Hiragino Maru Gothic ProN", "PingFang SC", "Microsoft YaHei", var(--font-geist-sans), sans-serif;
+  --paper: var(--toon-paper);
+  --ink: var(--toon-ink);
+  --gold: var(--toon-accent);
+  --muted: var(--toon-muted);
+}
+.theme-dark, [data-theme="dark"] {
+  --toon-paper: #172d38;
+  --toon-surface: #213e48;
+  --toon-ink: #f4f8f3;
+  --toon-muted: #bed3d7;
+  --toon-line: #789ba4;
+  --toon-accent: #9ae1d5;
+  --toon-pop: #ffd17a;
+  --toon-soft: #294e55;
+  --toon-shadow: #0e2029;
+}
+.comic-app {
+  --font-ui: var(--font-comic);
+  --font-display: var(--font-comic);
+  --font-story: var(--font-comic);
+  --paper: var(--toon-paper);
+  --ink: var(--toon-ink);
+  --gold: var(--toon-accent);
+  --muted: var(--toon-muted);
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-comic);
+}
+.comic-app .grain { display: none; }
+.comic-app .topbar { background: var(--toon-surface); border-bottom: 2px solid var(--toon-line); backdrop-filter: none; }
+.comic-app .brand { color: var(--ink); font-size: .9rem; font-weight: 750; letter-spacing: 0; text-transform: none; }
+.comic-app .brand-mark { box-shadow: none; }
+.comic-app :is(.home-link, .theme-switch, .install-app, .continue-button, .mobile-settings-trigger, .navigation > button) {
+  min-height: 44px; padding: 9px 16px; border: 2px solid var(--toon-line); border-radius: 16px;
+  color: var(--ink); background: var(--toon-surface); box-shadow: 0 3px 0 var(--toon-shadow);
+  font-size: .9rem; letter-spacing: 0; text-transform: none;
+}
+.comic-app .language-switch { border: 2px solid var(--toon-line); border-radius: 16px; background: var(--toon-surface); padding: 3px; }
+.comic-app .language-switch button { font-size: .875rem; border-radius: 11px; color: var(--ink); }
+.comic-app .language-switch button.selected { background: var(--toon-pop); color: #233b45; }
+.comic-app .hero {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 80px);
+  align-items: center; min-height: 0; padding-top: 44px !important; padding-bottom: 56px !important;
+  background: var(--toon-paper); border-bottom: 2px solid var(--toon-line);
+}
+.comic-app .hero-intro { min-width: 0; }
+.comic-app .hero .eyebrow { display: inline-block; background: var(--toon-soft); padding: 10px 15px; border-radius: 12px; color: var(--gold); font-size: .875rem; letter-spacing: .025em; }
+.comic-app .hero h1 { margin: 24px 0; font-size: clamp(2.35rem, 4.2vw, 4.5rem); font-family: var(--font-comic); line-height: 1.25; letter-spacing: -.02em; font-weight: 850; color: var(--ink); }
+.comic-app .hero-title-sub { color: var(--gold); }
+.comic-app .hero-copy { max-width: 620px; color: var(--muted); font-family: var(--font-comic); font-size: 1.0625rem; line-height: 1.9; margin-bottom: 26px; }
+.comic-app .begin { display: inline-flex; align-items: center; gap: 18px; padding: 15px 25px; margin: 0; min-height: 52px; border: 2px solid var(--toon-line); border-radius: 18px; background: var(--toon-pop); color: #233b45; box-shadow: 0 5px 0 var(--toon-line); font-size: 1rem; font-weight: 750; text-decoration: none; letter-spacing: 0; }
+.comic-app .comic-preview-link { margin: 18px 0 0 22px; color: var(--gold); font-size: 1rem; }
+.hero-edition { margin: 24px 0 0; font-size: .875rem; color: var(--muted); line-height: 1.7; }
+.hero-comic-cover { display: block; width: min(100%, 350px); justify-self: center; border: 3px solid var(--toon-line); border-radius: 22px; overflow: hidden; box-shadow: 8px 8px 0 var(--toon-shadow); transform: rotate(2deg); transition: transform .25s; }
+.hero-comic-cover img { display: block; width: 100%; height: auto; }
+.hero-comic-cover:hover { transform: rotate(0); }
+.comic-app .library { background: var(--toon-paper); padding-top: 48px !important; padding-bottom: 72px !important; }
+.comic-app .library-head { margin-bottom: 28px; }
+.comic-app .library-head h2 { font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: 1.4; font-weight: 800; letter-spacing: -.02em; }
+.comic-app .eyebrow { font-size: .875rem; letter-spacing: .025em; }
+.comic-app :is(.featured-book, .comic-feature) { border: 2px solid var(--toon-line); border-radius: 24px; background: var(--toon-surface); color: var(--ink); box-shadow: 5px 5px 0 var(--toon-shadow); }
+.comic-app .featured-book { min-height: 240px; grid-template-columns: minmax(160px, .65fr) minmax(0, 1.35fr); }
+.comic-app .featured-book-art { min-height: 240px; max-height: 300px; }
+.comic-app .featured-book-copy { padding: 28px; background: none; }
+.comic-app .featured-book-copy strong { font-size: clamp(1.5rem, 2.5vw, 2.2rem); line-height: 1.4; font-weight: 750; letter-spacing: 0; }
+.comic-app .featured-book-copy :is(small, b), .comic-app .comic-feature :is(small,b) { color: var(--gold); font-size: .9rem; letter-spacing: 0; }
+.comic-app .featured-book-copy span { font-size: 1rem; color: var(--muted); line-height: 1.7; }
+.comic-app .comic-feature { padding: 24px; grid-template-columns: 130px minmax(0,1fr); }
+.comic-app .comic-feature img { border: 2px solid var(--toon-line); border-radius: 12px; height: auto; }
+.comic-app .comic-feature strong { font-size: 1.6rem; }
+.comic-app .comic-feature span span { font-size: 1rem; color: var(--muted); }
+.comic-app .complete-library { padding: 0 24px; border: 2px solid var(--toon-line); border-radius: 22px; background: var(--toon-surface); margin-top: 32px; }
+.comic-app .complete-library summary > span { font-size: 1.25rem; font-weight: 700; }
+.comic-app .complete-library summary small { font-size: .875rem; }
+.comic-app .testament { color: var(--gold); font-size: 1rem; letter-spacing: 0; }
+.comic-app .book-card { border: 1px solid var(--toon-line); border-radius: 15px; background: var(--toon-paper); color: var(--ink); }
+.comic-app .book-card b { font-family: var(--font-comic); font-size: 1rem; }
+.comic-app a.book-card { text-decoration: none; }
+.comic-app a.home-link, .comic-app a.continue-button { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+.comic-app .book-card small { font-size: .875rem; color: var(--muted); }
+.comic-app .book-card.coming { opacity: .75; }
+.comic-app .book-card.available { background: var(--toon-pop); color: #233b45; box-shadow: 0 3px 0 var(--toon-line); }
+.comic-app .book-card.available small { color: #345058; }
+.comic-app .continue-reading { background: var(--toon-surface); border: 2px solid var(--toon-line); border-radius: 20px; box-shadow: 0 4px 0 var(--toon-shadow); }
+.comic-app .continue-copy h2 { font-size: 1.3rem; font-weight: 750; }
+.comic-app .continue-copy :is(p,span) { font-size: .875rem; letter-spacing: 0; }
+.comic-app .continue-button { background: var(--toon-pop); color: #233b45; }
+.comic-app .progress-track { background: var(--toon-soft); }
+.comic-app .progress-track i { background: var(--gold); }
+.comic-app .book-area { background: var(--toon-paper); }
+.comic-app :is(.reader-label,.back-to-library) { color: var(--ink); font-family: var(--font-comic); font-size: .95rem; letter-spacing: 0; }
+.comic-app .page-content :is(h2,.story,.reference,.chapter) { font-family: var(--font-comic); }
+.comic-app .page-content h2 { font-weight: 750; letter-spacing: 0; }
+.comic-app .page-content .story { line-height: 1.9 !important; }
+.comic-app .cinematic-reader .page.has-cinematic-image .page-content { background: rgba(17,35,43,.78); border-right: 2px solid rgba(255,255,255,.4); }
+.comic-app .navigation { background: var(--toon-paper); }
+.comic-app .navigation .dots button { background: var(--toon-soft); border: 1px solid var(--toon-line); }
+.comic-app .navigation .dots button.active { background: var(--toon-pop); }
+.comic-app footer { background: var(--toon-surface); border-top: 2px solid var(--toon-line); color: var(--muted); font-family: var(--font-comic); font-size: .875rem; }
+.comic-app .launch-screen { background: var(--toon-paper); color: var(--ink); }
+.comic-app .launch-halo { display: none; }
+.comic-app .launch-mark { border: 3px solid var(--toon-line); box-shadow: 6px 6px 0 var(--toon-shadow); background: white; }
+.comic-app .launch-screen :is(p,h1,span) { color: var(--ink); font-family: var(--font-comic); letter-spacing: .025em; }
+.comic-app .launch-screen h1 { font-weight: 800; }
+.comic-app .launch-screen :is(p,span) { font-size: .9rem; }
+.comic-app :is(button,a,summary):focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+.comic-app :is(.begin,.comic-feature,.featured-book,.continue-button):active { transform: translateY(3px); box-shadow: 0 1px 0 var(--toon-line); }
+.comic-app .mobile-settings-sheet { border: 2px solid var(--toon-line); background: var(--toon-surface); }
+.comic-app .sheet-heading :is(h2,small) { font-family: var(--font-comic); }
+.comic-app .sheet-heading small { font-size: .875rem; letter-spacing: .03em; }
+@media (max-width: 900px) {
+  .comic-app .hero { gap: 28px; grid-template-columns: minmax(0,1fr) minmax(0,.72fr); }
+  .comic-app .hero h1 { font-size: 2.35rem; }
+  .comic-app .hero .comic-preview-link { display: flex; margin-left: 0; }
+}
+@media (max-width: 720px) {
+  .comic-app .hero { grid-template-columns: minmax(0,1fr); padding-top: 28px !important; padding-bottom: 36px !important; gap: 32px; }
+  .comic-app .hero h1 { max-width: none; font-size: clamp(2.15rem, 7.8vw, 3rem); margin-block: 18px; }
+  .comic-app .hero-copy { max-width: none; font-size: 1rem; }
+  .hero-comic-cover { width: min(74vw, 300px); transform: none; }
+  .comic-app .brand-short { white-space: normal; font-size: .875rem; }
+  .comic-app .featured-book { grid-template-columns: 1fr; }
+  .comic-app .featured-book-art { min-height: 160px; max-height: 200px; }
+  .comic-app .comic-feature { grid-template-columns: 88px minmax(0,1fr); gap: 16px; padding: 18px; }
+  .comic-app .comic-feature strong { font-size: 1.3rem; }
+  .comic-app .complete-library { padding-inline: 16px; }
+  .comic-app .library { padding-bottom: 100px !important; }
+  .comic-app .mobile-app-nav { border: 2px solid var(--toon-line); background: var(--toon-surface); box-shadow: 0 4px 0 var(--toon-shadow); backdrop-filter: none; }
+  .comic-app .mobile-app-nav :is(button,a) { color: var(--muted); font-size: .875rem; }
+  .comic-app .mobile-app-nav a { min-height: 50px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; }
+  .comic-app .mobile-app-nav :is(button,a) span { color: var(--gold); font-size: 18px; }
+  .comic-app .mobile-app-nav :is(button,a).active { background: var(--toon-pop); color: #233b45; }
+  .comic-app .mobile-app-nav :is(button,a).active span { color: #233b45; }
+  .comic-app .cinematic-reader .page.has-cinematic-image .page-content { border-right: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-comic-cover, .comic-app :is(button,a) { transition: none; }
+}

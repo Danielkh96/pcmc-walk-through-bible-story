@@ -38,3 +38,6 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+# Promotional artwork stays local; the app uses its existing derived icons.
+/public/pcmc-walk-through-bible-story-whatsapp-poster.png
