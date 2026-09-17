@@ -6,8 +6,8 @@
 
 | 层级 | 状态 |
 | --- | --- |
-| App 已发布版本 | 第三章《试探与选择》`temptation-choice-v1`已发布：14页62格，提交`304c7eb`，Vercel部署成功，14张图片SHA-256及所有阅读路由核对通过，详见`temptation-choice-v1-release.md`。第二章《伊甸园》`eden-v1`已发布：10页43格，提交`a1c41e6`，Vercel部署成功，全部10页图片SHA-256与阅读路由核对通过；详见`eden-v1-release.md`。第一章保留：创造天地 `creation-mystery-v4`，16页、78格。GitHub提交 `4b9d9d5` 已由已连接的Vercel项目部署为Production Ready，正式域名16页图片SHA-256及路由全部核对通过。运行数据在 `app/comic/creation-pages.json`。 |
-| 当前制作任务 | 第四章《园外的两兄弟》brothers-v1：创4:1–16，12页50格。用户回复「ok 帮我执行」，确认全稿、新造型、图像制作、接入与发布。12页已生成、逐格校对并接入本地；25项测试与Vercel正式构建通过，准备发布及线上验证。见 brothers-v1-qa.md 与 brothers-v1-release.md。 |
+| App 已发布版本 | 第四章《园外的两兄弟》brothers-v1已发布：12页50格，提交2ef4c8e，Vercel部署成功，12张图片SHA-256及阅读路由、跨章导航已验证；详见brothers-v1-release.md。第三章《试探与选择》`temptation-choice-v1`已发布：14页62格，提交`304c7eb`，Vercel部署成功，14张图片SHA-256及所有阅读路由核对通过，详见`temptation-choice-v1-release.md`。第二章《伊甸园》`eden-v1`已发布：10页43格，提交`a1c41e6`，Vercel部署成功，全部10页图片SHA-256与阅读路由核对通过；详见`eden-v1-release.md`。第一章保留：创造天地 `creation-mystery-v4`，16页、78格。GitHub提交 `4b9d9d5` 已由已连接的Vercel项目部署为Production Ready，正式域名16页图片SHA-256及路由全部核对通过。运行数据在 `app/comic/creation-pages.json`。 |
+| 当前制作任务 | 第四章《园外的两兄弟》brothers-v1已完成：创4:1–16，12页50格。用户回复「ok 帮我执行」，确认全稿、新造型、生成、接入与发布。全部图片已校对、接入并上线；25项测试与Vercel正式构建通过，12页线上图片及路由和浏览器翻页已验证。见brothers-v1-qa.md与brothers-v1-release.md。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
 | 最近完整审核稿 | 第四章 docs/comic/brothers-storyboard-review-v1.md：12页50格，用户已确认并授权本章生成、接入与发布。第一章 creation-mystery-v4-storyboard.md（16页78格）及第二、三章已批准成稿保留为历史交付记录。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |

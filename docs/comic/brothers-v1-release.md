@@ -26,5 +26,15 @@
 
 ## 发布状态
 
-本地生成、校对、接入与测试已完成。GitHub推送、Vercel正式部署及线上验证待完成；不以本地构建代替上线结果。
+已发布并验证。12页50格已生成、校对、接入并上线；25项测试及Vercel正式构建通过。
 正式阅读入口：https://pcmc-walk-through-bible-story.vercel.app/comic/read?chapter=brothers&page=1
+
+## 正式部署与线上验证
+
+- 内容发布提交：`2ef4c8e8222a3c551ee6241eb667b6e681ee18e7`。
+- Vercel：https://vercel.com/daniels-projects-ce806524/pcmc-walk-through-bible-story/DFJTGcLZDTzb15wMBciTmxCHrdTe ，状态success。
+- 线上验证时间：2026-09-17T17:02:20.150Z（UTC；马来西亚日期2026-09-18）。
+- 12张正式PNG的SHA-256与本地终稿全部相同；12个阅读路由、目录、人物页、页码边界及v18缓存全部通过。
+- 原前三章入口、第一章→第二章、第二章→第三章及第三章→第四章均核对；该隐与亚伯未提前出现在前章人物页。
+- 浏览器实际操作：第三章第14页进入第四章人物页，开始阅读，下一页至第2页，页码选择至第12页，再返回第1页。末页全页截图可见底部文字，未裁切；末页下一页按钮禁用。预览留在第四章第1页。
+- 线上报告：创作工作区 output/comic/brothers-v1/online-verification.json。正式发布后仅补充文档记录，不改变已验证的漫画或运行代码。
