@@ -6,8 +6,8 @@
 
 | 层级 | 状态 |
 | --- | --- |
-| App 已发布版本 | 第二章《伊甸园》`eden-v1`已发布：10页43格，提交`a1c41e6`，Vercel部署成功，全部10页图片SHA-256与阅读路由核对通过；详见`eden-v1-release.md`。第一章保留：创造天地 `creation-mystery-v4`，16页、78格。GitHub提交 `4b9d9d5` 已由已连接的Vercel项目部署为Production Ready，正式域名16页图片SHA-256及路由全部核对通过。运行数据在 `app/comic/creation-pages.json`。 |
-| 当前制作任务 | 用户要求继续下一章制作。第三章《试探与选择》逐页逐格审核稿v1已完成：创3:1–24，14页62格，详见 `temptation-choice-storyboard-review-v1.md`。经文与第二章成图已核对；用户回复“帮我执行”，已授权本章分镜、新美术方案、图像制作、接入与发布；14页62格漫画已生成、逐格校对并接入本地；23项测试与Vercel正式构建已通过，发布与线上验证待完成，见temptation-choice-v1-qa.md及temptation-choice-v1-release.md。 |
+| App 已发布版本 | 第三章《试探与选择》`temptation-choice-v1`已发布：14页62格，提交`304c7eb`，Vercel部署成功，14张图片SHA-256及所有阅读路由核对通过，详见`temptation-choice-v1-release.md`。第二章《伊甸园》`eden-v1`已发布：10页43格，提交`a1c41e6`，Vercel部署成功，全部10页图片SHA-256与阅读路由核对通过；详见`eden-v1-release.md`。第一章保留：创造天地 `creation-mystery-v4`，16页、78格。GitHub提交 `4b9d9d5` 已由已连接的Vercel项目部署为Production Ready，正式域名16页图片SHA-256及路由全部核对通过。运行数据在 `app/comic/creation-pages.json`。 |
+| 当前制作任务 | 用户要求继续下一章制作。第三章《试探与选择》逐页逐格审核稿v1已完成：创3:1–24，14页62格，详见 `temptation-choice-storyboard-review-v1.md`。经文与第二章成图已核对；用户回复“帮我执行”，已授权本章分镜、新美术方案、图像制作、接入与发布；14页62格漫画已生成、逐格校对并接入本地；23项测试与Vercel正式构建通过；已发布并完成全部14页线上验证，见temptation-choice-v1-qa.md及temptation-choice-v1-release.md。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
 | 最近完整审核稿 | `docs/comic/creation-mystery-v4-storyboard.md`：16 页、78 格，包含 5 页神秘开场和 11 页创造故事。2026-09-11 用户已确认并明确授权漫画生成。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |
