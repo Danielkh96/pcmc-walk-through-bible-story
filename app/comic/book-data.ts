@@ -2,12 +2,14 @@ import catalog from "./book-catalog.json";
 import creation from "./creation-pages.json";
 import eden from "./eden-pages.json";
 import temptation from "./temptation-pages.json";
+import brothers from "./brothers-pages.json";
 
 export type ComicPageData = (typeof creation)[number];
 const episodeData: Record<string, ComicPageData[]> = {
   creation,
   eden,
   temptation,
+  brothers,
 };
 
 export const comicBook = catalog;

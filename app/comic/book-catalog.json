@@ -59,6 +59,26 @@
       "quote": "",
       "appearance": "橄榄褐色鳞片 · 浅色腹部",
       "reference": "创世记 3:1"
+    },
+    {
+      "id": "cain",
+      "name": "该隐",
+      "kind": "biblical",
+      "tagline": "在园外耕种土地的哥哥。",
+      "bio": "他是亚当与夏娃的儿子，也是亚伯的哥哥。他种地，照料地里的出产。",
+      "quote": "",
+      "appearance": "成人 · 深棕短发 · 赤陶色衣服",
+      "reference": "创世记 4:1–3"
+    },
+    {
+      "id": "abel",
+      "name": "亚伯",
+      "kind": "biblical",
+      "tagline": "照看羊群的弟弟。",
+      "bio": "他是该隐的弟弟，在园外牧羊。两兄弟各自生活与劳作，故事从这里继续。",
+      "quote": "",
+      "appearance": "成人 · 波浪棕发 · 灰橄榄色衣服",
+      "reference": "创世记 4:2–4"
     }
   ],
   "chapters": [
@@ -123,6 +143,31 @@
         "serpent"
       ],
       "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》3:1–24呈现。",
+      "hidePrintedFolio": false,
+      "status": "published"
+    },
+    {
+      "id": "brothers",
+      "edition": "brothers-v1",
+      "number": 4,
+      "title": "园外的两兄弟",
+      "book": "创世记",
+      "reference": "创世记 4:1–16",
+      "summary": "园外的日子继续，该隐与亚伯长大了。两兄弟献上供物后，一阵怒气带来新的选择；小昆和小君静静看着接下来发生的事。",
+      "dataKey": "brothers",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "adam",
+        "woman",
+        "cain",
+        "abel"
+      ],
+      "newCharacterIds": [
+        "cain",
+        "abel"
+      ],
+      "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》4:1–16呈现。",
       "hidePrintedFolio": false,
       "status": "published"
     }
