@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v16-eden/);
+  assert.match(serviceWorker, /pcmc-bible-story-v17-temptation/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -165,6 +165,32 @@ test("Eden introduces its cast and renders all ten full pages without draft cont
     assert.doesNotMatch(html, /reindexedArtwork|正在绘制中|本页分镜|对白润色|上画文字|待用户审核/);
     assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
     if (page >= 10) {
+      assert.match(html, /aria-label="下一章：试探与选择"/);
+      assert.ok(html.includes('href="/comic/chapter/temptation"'));
+    }
+  }
+});
+
+test("Temptation introduces the serpent without spoilers and renders all fourteen full pages", async () => {
+  const contents = await (await render("/comic/contents")).text();
+  assert.ok(contents.includes('href="/comic/chapter/temptation"'));
+  assert.match(contents, /试探与选择/);
+  const previousCast = await (await render("/comic/chapter/eden")).text();
+  assert.doesNotMatch(previousCast, /<h2>蛇<\/h2>/);
+  const cast = await (await render("/comic/chapter/temptation")).text();
+  assert.match(cast, /<h2>蛇<\/h2>/);
+  assert.match(cast, /<h2>女人<\/h2>/);
+  assert.doesNotMatch(cast, /<h2>夏娃<\/h2>|基路伯|园外的两兄弟/);
+  assert.ok(cast.includes("/comic/read?chapter=temptation"));
+  for (const page of [...Array.from({length:14}, (_,i) => i+1), 99]) {
+    const response = await render(`/comic/read?chapter=temptation&page=${page}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes(`/comics/temptation-choice-v1/page-${String(Math.min(page,14)).padStart(2,"0")}.png`));
+    assert.match(html, /aria-valuemax="14"/);
+    assert.doesNotMatch(html, /reindexedArtwork|正在绘制中|本页分镜|对白润色|上画文字|待用户审核/);
+    assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
+    if (page >=14) {
       assert.match(html, /这一章读完啦/);
       assert.doesNotMatch(html, /aria-label="下一章：/);
     }

@@ -35,7 +35,7 @@
       "name": "亚当",
       "kind": "biblical",
       "tagline": "神所造的人，住在伊甸园中。",
-      "bio": "神把他安置在伊甸园，让他修理、看守。本章将细看他的受造与园中的生活。",
+      "bio": "他由尘土受造，被安置在伊甸园，承担修理、看守的责任。",
       "quote": "",
       "appearance": "成人 · 深棕短发",
       "reference": "创世记 2:7–15"
@@ -49,6 +49,16 @@
       "quote": "",
       "appearance": "成人 · 深棕长发",
       "reference": "创世记 2:22–25"
+    },
+    {
+      "id": "serpent",
+      "name": "蛇",
+      "kind": "biblical",
+      "tagline": "园子里，另一种声音出现了。",
+      "bio": "创世记记载，蛇比田野一切的活物更狡猾。它在园中向女人提出一个问题。",
+      "quote": "",
+      "appearance": "橄榄褐色鳞片 · 浅色腹部",
+      "reference": "创世记 3:1"
     }
   ],
   "chapters": [
@@ -90,6 +100,29 @@
         "woman"
       ],
       "introduction": "小昆和小君的穿越是虚构框架；伊甸园的故事依据《创世记》2:4–25呈现。",
+      "hidePrintedFolio": false,
+      "status": "published"
+    },
+    {
+      "id": "temptation",
+      "edition": "temptation-choice-v1",
+      "number": 3,
+      "title": "试探与选择",
+      "book": "创世记",
+      "reference": "创世记 3:1–24",
+      "summary": "园子里出现了另一种声音。一句看似平常的提问，引出一个选择；小昆和小君继续看着，这两个人的生活会怎样改变？",
+      "dataKey": "temptation",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "adam",
+        "woman",
+        "serpent"
+      ],
+      "newCharacterIds": [
+        "serpent"
+      ],
+      "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》3:1–24呈现。",
       "hidePrintedFolio": false,
       "status": "published"
     }
