@@ -21,7 +21,7 @@ test("published reader uses sixteen mystery edition pages with no runtime archiv
   const publicPages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(publicPages.length, 16);
   assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 16 }, (_, i) => i + 1));
-  assert.deepEqual(catalog.chapters.map(c => c.id), ["creation"]);
+  assert.deepEqual(catalog.chapters.map(c => c.id), ["creation", "eden"]);
   assert.equal(catalog.chapters[0].reference, "创世记 1:1–2:3");
   assert.equal(catalog.chapters[0].hidePrintedFolio, false);
   for (const page of publicPages) {
@@ -139,8 +139,36 @@ test("approved mystery storyboard contains sixteen pages and seventy-eight panel
 
 test("public comic assets exclude deletable local archives and obsolete editions", async () => {
   const directories = await readdir(new URL("../public/comics/", import.meta.url));
-  assert.deepEqual(directories.sort(), ["book-v1", "creation-mystery-v4"]);
+  assert.deepEqual(directories.sort(), ["book-v1", "creation-mystery-v4", "eden-v1"]);
   const pages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(new Set(pages.map(page => page.image)).size, 16);
   assert.ok(pages.every(page => !page.image.includes("archive")));
+});
+
+test("Eden has ten complete pages and a separate reading edition", async () => {
+  const chapter = catalog.chapters.find(c => c.id === "eden");
+  assert.ok(chapter);
+  assert.equal(chapter.title, "伊甸园");
+  assert.equal(chapter.edition, "eden-v1");
+  assert.equal(chapter.number, 2);
+  assert.equal(chapter.reference, "创世记 2:4–25");
+  assert.deepEqual(chapter.newCharacterIds, ["adam", "woman"]);
+  const pages = JSON.parse(await readFile(new URL("../app/comic/eden-pages.json", import.meta.url), "utf8"));
+  assert.equal(pages.length, 10);
+  assert.deepEqual(pages.map(p => p.id), Array.from({ length: 10 }, (_, i) => i + 1));
+  for (const page of pages) {
+    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
+    assert.equal(page.image, `/comics/eden-v1/page-${String(page.id).padStart(2, "0")}.png`);
+    const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
+    assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+    assert.equal(bytes.readUInt32BE(16), 1024);
+    assert.equal(bytes.readUInt32BE(20), 1536);
+  }
+  const storyboard = await readFile(new URL("../docs/comic/eden-storyboard-review-v1.md", import.meta.url), "utf8");
+  const panels = [...storyboard.matchAll(/^## 第(\d+)页[^\n]*（(\d+)格）/gm)];
+  assert.deepEqual(panels.map(p => Number(p[2])), [4,4,5,4,4,4,5,5,4,4]);
+  assert.equal(panels.reduce((sum,p) => sum + Number(p[2]), 0), 43);
+  const edition = { id: chapter.id, edition: chapter.edition, pages };
+  assert.equal(savedComicPage(JSON.stringify({ chapter: "creation", edition: "creation-mystery-v4", page: 7 }), edition), 1);
+  assert.equal(savedComicPage(JSON.stringify({ chapter: "eden", edition: "eden-v1", page: 7 }), edition), 7);
 });

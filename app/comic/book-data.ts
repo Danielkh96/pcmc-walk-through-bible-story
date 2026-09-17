@@ -1,9 +1,11 @@
 import catalog from "./book-catalog.json";
 import creation from "./creation-pages.json";
+import eden from "./eden-pages.json";
 
 export type ComicPageData = (typeof creation)[number];
 const episodeData: Record<string, ComicPageData[]> = {
   creation,
+  eden,
 };
 
 export const comicBook = catalog;

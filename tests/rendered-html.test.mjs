@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v15-creation-mystery/);
+  assert.match(serviceWorker, /pcmc-bible-story-v16-eden/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -109,7 +109,7 @@ test("unknown comic chapters do not masquerade as the first chapter", async () =
   }
 });
 
-test("mystery creation is the only published chapter and all sixteen pages render", async () => {
+test("mystery creation retains all sixteen pages and links to Eden", async () => {
   const contents = await (await render("/comic/contents")).text();
   assert.match(contents, /创造天地/);
   assert.ok(contents.includes('href="/comic/chapter/creation"'));
@@ -127,8 +127,8 @@ test("mystery creation is the only published chapter and all sixteen pages rende
     if (id === 16) assert.match(html, /reindexedArtwork/);
     else assert.doesNotMatch(html, /reindexedArtwork/);
     if (page >= 16) {
-      assert.doesNotMatch(html, /aria-label="下一章：/);
-      assert.match(html, /这一章读完啦/);
+      assert.match(html, /aria-label="下一章：伊甸园"/);
+      assert.ok(html.includes('href="/comic/chapter/eden"'));
     }
   }
 });
@@ -142,6 +142,31 @@ test("old chapter bookmarks redirect to the new edition without reusing old page
       const response = await render(path);
       assert.equal(response.status, 307, path);
       assert.equal(response.headers.get("location"), destination);
+    }
+  }
+});
+
+test("Eden introduces its cast and renders all ten full pages without draft content", async () => {
+  const contents = await (await render("/comic/contents")).text();
+  assert.ok(contents.includes('href="/comic/chapter/eden"'));
+  assert.match(contents, /伊甸园/);
+  const firstCast = await (await render("/comic/chapter/creation")).text();
+  assert.doesNotMatch(firstCast, /<h2>亚当<\/h2>|<h2>女人<\/h2>/);
+  const edenCast = await (await render("/comic/chapter/eden")).text();
+  assert.match(edenCast, /<h2>亚当<\/h2>/);
+  assert.match(edenCast, /<h2>女人<\/h2>/);
+  assert.ok(edenCast.includes("/comic/read?chapter=eden"));
+  for (const page of [...Array.from({ length: 10 }, (_, i) => i + 1), 99]) {
+    const response = await render(`/comic/read?chapter=eden&page=${page}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes(`/comics/eden-v1/page-${String(Math.min(page, 10)).padStart(2, "0")}.png`));
+    assert.match(html, /aria-valuemax="10"/);
+    assert.doesNotMatch(html, /reindexedArtwork|正在绘制中|本页分镜|对白润色|上画文字|待用户审核/);
+    assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
+    if (page >= 10) {
+      assert.match(html, /这一章读完啦/);
+      assert.doesNotMatch(html, /aria-label="下一章：/);
     }
   }
 });

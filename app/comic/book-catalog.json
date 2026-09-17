@@ -29,6 +29,26 @@
       "quote": "先别急，我们看看。",
       "appearance": "半扎发 · 湖绿色上衣 · 棕色斜挎包",
       "reference": null
+    },
+    {
+      "id": "adam",
+      "name": "亚当",
+      "kind": "biblical",
+      "tagline": "神所造的人，住在伊甸园中。",
+      "bio": "神把他安置在伊甸园，让他修理、看守。本章将细看他的受造与园中的生活。",
+      "quote": "",
+      "appearance": "成人 · 深棕短发",
+      "reference": "创世记 2:7–15"
+    },
+    {
+      "id": "woman",
+      "name": "女人",
+      "kind": "biblical",
+      "tagline": "与亚当相配的伴侣。",
+      "bio": "她在伊甸园的故事中登场。让我们一起看看，她怎样来到亚当身边。",
+      "quote": "",
+      "appearance": "成人 · 深棕长发",
+      "reference": "创世记 2:22–25"
     }
   ],
   "chapters": [
@@ -47,6 +67,29 @@
       ],
       "newCharacterIds": [],
       "introduction": "小昆和小君的穿越是虚构框架；创造的故事依据《创世记》1:1–2:3呈现。",
+      "hidePrintedFolio": false,
+      "status": "published"
+    },
+    {
+      "id": "eden",
+      "edition": "eden-v1",
+      "number": 2,
+      "title": "伊甸园",
+      "book": "创世记",
+      "reference": "创世记 2:4–25",
+      "summary": "小昆和小君把目光转向伊甸园：人从哪里来？丰盛的园子里，又为什么需要一位相配的同伴？",
+      "dataKey": "eden",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "adam",
+        "woman"
+      ],
+      "newCharacterIds": [
+        "adam",
+        "woman"
+      ],
+      "introduction": "小昆和小君的穿越是虚构框架；伊甸园的故事依据《创世记》2:4–25呈现。",
       "hidePrintedFolio": false,
       "status": "published"
     }
