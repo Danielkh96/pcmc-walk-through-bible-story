@@ -5,7 +5,7 @@
 import { useSyncExternalStore } from "react";
 import { useAppearance } from "../use-appearance";
 import { useLanguage } from "../use-language";
-import { comicBook, comicChapters, charactersThroughChapter } from "./book-data";
+import { comicBook, comicChapters, comicChaptersForLanguage, charactersThroughChapter } from "./book-data";
 import { comicChapterEntry, savedComicPage } from "./navigation.mjs";
 import reader from "./comic.module.css";
 import styles from "./book.module.css";
@@ -23,6 +23,7 @@ export default function BookFrontmatter({ section, chapterId }: { section: "cont
   const [theme, setTheme] = useAppearance();
   const [language, setLanguage] = useLanguage();
   const zh = language === "zh";
+  const availableChapters = comicChaptersForLanguage(language);
   const chapter = comicChapters.find((item) => item.id === chapterId) ?? comicChapters[0];
   const characters = charactersThroughChapter(chapter);
   const progress = useSyncExternalStore(subscribeProgress, savedProgress, noProgress);
@@ -48,7 +49,7 @@ export default function BookFrontmatter({ section, chapterId }: { section: "cont
         </div>
         {section === "contents" ? (
           <ol className={styles.chapterList}>
-            {comicChapters.map((item) => <li key={item.id}>
+            {availableChapters.map((item) => <li key={item.id}>
               <a href={comicChapterEntry(item)}>
                 <span className={styles.chapterNumber}>{String(item.number).padStart(2, "0")}</span>
                 <span className={styles.chapterCopy}><small>{zh ? item.reference : item.referenceEn}</small><strong>{zh ? item.title : item.titleEn}</strong><span>{zh ? item.summary : item.summaryEn}</span></span>

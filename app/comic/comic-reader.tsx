@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { comicChapters, type ComicChapter } from "./book-data";
+import { comicChapters, comicChaptersForLanguage, type ComicChapter } from "./book-data";
 import { comicChapterEntry, getComicPageIndex } from "./navigation.mjs";
 import { useAppearance } from "../use-appearance";
 import { useLanguage, type Language } from "../use-language";
@@ -80,11 +80,13 @@ function PageArtwork({ image, title, id, hidePrintedFolio, language }: { image: 
 
 export default function ComicReader({ chapter = comicChapters[0], initialPage }: { chapter?: ComicChapter; initialPage?: string }) {
   const comicPages = chapter.pages;
-  const nextChapter = comicChapters[comicChapters.findIndex((item) => item.id === chapter.id) + 1];
   const pageIndex = useSyncExternalStore(subscribe, () => currentPage(comicPages.length), () => getComicPageIndex(initialPage ?? null, comicPages.length));
   const [theme, setTheme] = useAppearance();
   const [language, setLanguage] = useLanguage();
   const zh = language === "zh";
+  const languageChapters = comicChaptersForLanguage(language);
+  const chapterIndex = languageChapters.findIndex((item) => item.id === chapter.id);
+  const nextChapter = chapterIndex >= 0 ? languageChapters[chapterIndex + 1] : undefined;
   const dark = theme === "dark";
   const setDark = (value: boolean) => setTheme(value ? "dark" : "light");
   const page = comicPages[pageIndex];

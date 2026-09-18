@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
 
 import { useEffect, useState } from "react";
-import { comicBook, comicChapters } from "./comic/book-data";
+import { comicBook, comicChaptersForLanguage } from "./comic/book-data";
 import { comicChapterEntry } from "./comic/navigation.mjs";
 import { PwaInstaller } from "./pwa-installer";
 import { useAppearance } from "./use-appearance";
@@ -85,6 +85,7 @@ export default function Home() {
   const [isLaunching, setIsLaunching] = useState(true);
   const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
   const zh = language === "zh";
+  const chapters = comicChaptersForLanguage(language);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -137,7 +138,7 @@ export default function Home() {
           <h1><span className="hero-title-main">{zh ? "翻开漫画，" : "Turn a page."}</span><span className="hero-title-sub">{zh ? "一起走进圣经！" : "Step into the story!"}</span></h1>
           <p className="hero-copy">{zh ? "跟着小昆和小君，一边看、一边问，发现圣经里的大故事。" : "Join Xiao Kun and Xiao Jun. Look closer, ask questions, and discover the great story of the Bible."}<br />{zh ? "先从《创世记》的第一声「要有光」开始吧。" : "Start in Genesis, with “Let there be light.”"}</p>
           <a className="begin" href="/comic/contents">{zh ? "开始看漫画" : "Read the comic"} <span>→</span></a>
-          <p className="hero-edition">{zh ? `已更新 ${comicChapters.length} 章 · 中文漫画` : `${comicChapters.length} chapters available · English comic`}</p>
+          <p className="hero-edition">{zh ? `已更新 ${chapters.length} 章 · 中文漫画` : `${chapters.length} chapters available · English comic`}</p>
         </div>
         <a className="hero-comic-cover" href="/comic/contents" aria-label={zh ? "打开漫画目录" : "Open comic contents"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -149,7 +150,7 @@ export default function Home() {
         <div className="library-head"><p className="eyebrow">{zh ? "漫画书架" : "THE COMIC SHELF"}</p>
           <h2>{zh ? "下一段冒险，从这里开始。" : "Your next adventure starts here."}</h2>
         </div>
-        {comicChapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={comicChapterEntry(chapter)}>
+        {chapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={comicChapterEntry(chapter)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={chapter.number === 1 ? (zh ? comicBook.coverImage : comicBook.coverImageEn) : (zh ? chapter.pages[0].image : chapter.pages[0].imageEn)} alt="" loading="lazy" width={1024} height={1536} />
           <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画` : `Episode ${chapter.number} · ${chapter.bookEn} · English comic`}</small>

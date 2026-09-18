@@ -3,6 +3,7 @@ import creation from "./creation-pages.json";
 import eden from "./eden-pages.json";
 import temptation from "./temptation-pages.json";
 import brothers from "./brothers-pages.json";
+import generations from "./generations-pages.json";
 
 export type ComicPageData = (typeof creation)[number];
 const episodeData: Record<string, ComicPageData[]> = {
@@ -10,6 +11,7 @@ const episodeData: Record<string, ComicPageData[]> = {
   eden,
   temptation,
   brothers,
+  generations,
 };
 
 export const comicBook = catalog;
@@ -29,6 +31,10 @@ export const comicChapters = catalog.chapters.map((chapter) => {
   };
 });
 export type ComicChapter = (typeof comicChapters)[number];
+
+export function comicChaptersForLanguage(language: "zh" | "en") {
+  return comicChapters.filter((chapter) => chapter.availableLanguages.includes(language));
+}
 
 // Introduce only people encountered by this chapter, without future spoilers.
 export function charactersThroughChapter(chapter: ComicChapter) {
