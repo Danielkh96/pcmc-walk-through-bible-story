@@ -6,10 +6,10 @@
 
 | 层级 | 状态 |
 | --- | --- |
-| App 已发布版本 | 第四章《园外的两兄弟》brothers-v1已发布：12页50格，提交2ef4c8e，Vercel部署成功，12张图片SHA-256及阅读路由、跨章导航已验证；详见brothers-v1-release.md。第三章《试探与选择》`temptation-choice-v1`已发布：14页62格，提交`304c7eb`，Vercel部署成功，14张图片SHA-256及所有阅读路由核对通过，详见`temptation-choice-v1-release.md`。第二章《伊甸园》`eden-v1`已发布：10页43格，提交`a1c41e6`，Vercel部署成功，全部10页图片SHA-256与阅读路由核对通过；详见`eden-v1-release.md`。第一章保留：创造天地 `creation-mystery-v4`，16页、78格。GitHub提交 `4b9d9d5` 已由已连接的Vercel项目部署为Production Ready，正式域名16页图片SHA-256及路由全部核对通过。运行数据在 `app/comic/creation-pages.json`。 |
-| 当前制作任务 | 第四章《园外的两兄弟》brothers-v1已完成：创4:1–16，12页50格。用户回复「ok 帮我执行」，确认全稿、新造型、生成、接入与发布。全部图片已校对、接入并上线；25项测试与Vercel正式构建通过，12页线上图片及路由和浏览器翻页已验证。见brothers-v1-qa.md与brothers-v1-release.md。 |
+| App 已发布版本 | 第五章《一代又一代》`generations-v1`已发布：创4:17–26，9页39格，提交`4f6a069`，Vercel部署成功；首页、目录、章节、首末阅读页和9张线上图片均验证通过，线上图片SHA-256与源文件一致。中文界面显示5章，英文界面继续显示已有4章。第一至四章及中英文既有版本继续保留。 |
+| 当前制作任务 | 第五章中文版本已完成生成、校对、App接入与正式发布。新增拉麦一家及塞特等人物资料；英文第5章对白与图片尚未开始，因此本章只在中文界面显示。完整创作文件、提示词和QA记录保存在工作区`output/comic/generations-v1/`。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
-| 最近完整审核稿 | 第四章 docs/comic/brothers-storyboard-review-v1.md：12页50格，用户已确认并授权本章生成、接入与发布。第一章 creation-mystery-v4-storyboard.md（16页78格）及第二、三章已批准成稿保留为历史交付记录。 |
+| 最近完整审核稿 | 第五章工作区`output/comic/generations-v1/generations-storyboard-review-v1.md`：9页39格，已用于正式成图并发布。第四章`docs/comic/brothers-storyboard-review-v1.md`及第一至三章批准稿保留为历史交付记录。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |
 | 第二章《伊甸园》 | 2026-09-17 新拟审核稿：10页、43格，创2:4–25；见 `eden-storyboard-review-v1.md`。已核对第一章末页与人物参考，明确回看人的受造；用户随后明确要求生成并直接发布到现有App；10页43格已生成、校对并接入本地，见 eden-v1-qa.md 与 eden-v1-release.md。21项测试与Vercel正式构建已通过；GitHub发布、Vercel正式部署与全部10页线上验证已完成。旧8页38格仅为历史提案。 |
 
