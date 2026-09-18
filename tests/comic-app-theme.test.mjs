@@ -34,9 +34,25 @@ test("home exclusively links to comic reading and retains interface language and
   assert.doesNotMatch(page, /aria-label="Bible story reader"|detailedPages|genesis-creation/);
   assert.match(page, /setLanguage\("zh"\)/);
   assert.match(page, /setLanguage\("en"\)/);
+  assert.match(page, /useLanguage\(\)/);
   assert.match(page, /setTheme\(theme === "light"/);
   assert.equal(JSON.parse(manifest).theme_color, "#eaf7fb");
   assert.equal(JSON.parse(manifest).display, "standalone");
+});
+
+test("the saved interface language selects the matching comic artwork", async () => {
+  const [language, reader, frontmatter, creation] = await Promise.all([
+    read("../app/use-language.ts"), read("../app/comic/comic-reader.tsx"),
+    read("../app/comic/book-frontmatter.tsx"), read("../app/comic/creation-pages.json"),
+  ]);
+  assert.match(language, /pcmc-language/);
+  assert.match(language, /localStorage\.setItem\(key, value\)/);
+  assert.match(reader, /page\.imageEn/);
+  assert.match(reader, /page\.titleEn/);
+  assert.match(frontmatter, /item\.titleEn/);
+  const pages = JSON.parse(creation);
+  assert.equal(pages.length, 16);
+  assert.ok(pages.every((page) => page.imageEn.includes("creation-mystery-v4-en")));
 });
 
 test("cross-page reading links do not depend on broken client-side RSC navigation", async () => {

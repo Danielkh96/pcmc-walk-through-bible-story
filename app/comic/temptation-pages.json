@@ -2,71 +2,99 @@
   {
     "id": 1,
     "title": "树枝间，谁在说话？",
-    "image": "/comics/temptation-choice-v1/page-01.png"
+    "image": "/comics/temptation-choice-v1/page-01.png",
+    "titleEn": "Who’s Talking in the Branches?",
+    "imageEn": "/comics/temptation-choice-v1-en/page-01.png"
   },
   {
     "id": 2,
     "title": "真的是这样说的吗？",
-    "image": "/comics/temptation-choice-v1/page-02.png"
+    "image": "/comics/temptation-choice-v1/page-02.png",
+    "titleEn": "Is That Really What God Said?",
+    "imageEn": "/comics/temptation-choice-v1-en/page-02.png"
   },
   {
     "id": 3,
     "title": "另一种说法",
-    "image": "/comics/temptation-choice-v1/page-03.png"
+    "image": "/comics/temptation-choice-v1/page-03.png",
+    "titleEn": "A Different Story",
+    "imageEn": "/comics/temptation-choice-v1-en/page-03.png"
   },
   {
     "id": 4,
     "title": "她伸出了手",
-    "image": "/comics/temptation-choice-v1/page-04.png"
+    "image": "/comics/temptation-choice-v1/page-04.png",
+    "titleEn": "She Reached Out",
+    "imageEn": "/comics/temptation-choice-v1-en/page-04.png"
   },
   {
     "id": 5,
     "title": "他也吃了",
-    "image": "/comics/temptation-choice-v1/page-05.png"
+    "image": "/comics/temptation-choice-v1/page-05.png",
+    "titleEn": "He Ate It Too",
+    "imageEn": "/comics/temptation-choice-v1-en/page-05.png"
   },
   {
     "id": 6,
     "title": "第一次，想把自己藏起来",
-    "image": "/comics/temptation-choice-v1/page-06.png"
+    "image": "/comics/temptation-choice-v1/page-06.png",
+    "titleEn": "For the First Time, They Wanted to Hide",
+    "imageEn": "/comics/temptation-choice-v1-en/page-06.png"
   },
   {
     "id": 7,
     "title": "他们躲了起来",
-    "image": "/comics/temptation-choice-v1/page-07.png"
+    "image": "/comics/temptation-choice-v1/page-07.png",
+    "titleEn": "They Hid",
+    "imageEn": "/comics/temptation-choice-v1-en/page-07.png"
   },
   {
     "id": 8,
     "title": "谁的责任？",
-    "image": "/comics/temptation-choice-v1/page-08.png"
+    "image": "/comics/temptation-choice-v1/page-08.png",
+    "titleEn": "Whose Fault Is It?",
+    "imageEn": "/comics/temptation-choice-v1-en/page-08.png"
   },
   {
     "id": 9,
     "title": "蛇听见的宣告",
-    "image": "/comics/temptation-choice-v1/page-09.png"
+    "image": "/comics/temptation-choice-v1/page-09.png",
+    "titleEn": "The Judgment the Serpent Heard",
+    "imageEn": "/comics/temptation-choice-v1-en/page-09.png"
   },
   {
     "id": 10,
     "title": "不再一样的生活",
-    "image": "/comics/temptation-choice-v1/page-10.png"
+    "image": "/comics/temptation-choice-v1/page-10.png",
+    "titleEn": "Life Would Never Be the Same",
+    "imageEn": "/comics/temptation-choice-v1-en/page-10.png"
   },
   {
     "id": 11,
     "title": "你本是尘土",
-    "image": "/comics/temptation-choice-v1/page-11.png"
+    "image": "/comics/temptation-choice-v1/page-11.png",
+    "titleEn": "You Are Dust",
+    "imageEn": "/comics/temptation-choice-v1-en/page-11.png"
   },
   {
     "id": 12,
     "title": "他们有了衣服",
-    "image": "/comics/temptation-choice-v1/page-12.png"
+    "image": "/comics/temptation-choice-v1/page-12.png",
+    "titleEn": "They Had Clothes",
+    "imageEn": "/comics/temptation-choice-v1-en/page-12.png"
   },
   {
     "id": 13,
     "title": "为什么不能留下？",
-    "image": "/comics/temptation-choice-v1/page-13.png"
+    "image": "/comics/temptation-choice-v1/page-13.png",
+    "titleEn": "Why Couldn’t They Stay?",
+    "imageEn": "/comics/temptation-choice-v1-en/page-13.png"
   },
   {
     "id": 14,
     "title": "园子，在身后了",
-    "image": "/comics/temptation-choice-v1/page-14.png"
+    "image": "/comics/temptation-choice-v1/page-14.png",
+    "titleEn": "The Garden Was Behind Them",
+    "imageEn": "/comics/temptation-choice-v1-en/page-14.png"
   }
 ]

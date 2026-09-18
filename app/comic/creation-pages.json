@@ -2,82 +2,114 @@
   {
     "id": 1,
     "title": "今天，不说下次了",
-    "image": "/comics/creation-mystery-v4/page-01.png"
+    "image": "/comics/creation-mystery-v4/page-01.png",
+    "titleEn": "No More “Next Time”",
+    "imageEn": "/comics/creation-mystery-v4-en/page-01.png"
   },
   {
     "id": 2,
     "title": "怎么一个人都没有？",
-    "image": "/comics/creation-mystery-v4/page-02.png"
+    "image": "/comics/creation-mystery-v4/page-02.png",
+    "titleEn": "Where Is Everyone?",
+    "imageEn": "/comics/creation-mystery-v4-en/page-02.png"
   },
   {
     "id": 3,
     "title": "这本书，藏了多久？",
-    "image": "/comics/creation-mystery-v4/page-03.png"
+    "image": "/comics/creation-mystery-v4/page-03.png",
+    "titleEn": "How Long Has This Book Been Here?",
+    "imageEn": "/comics/creation-mystery-v4-en/page-03.png"
   },
   {
     "id": 4,
     "title": "这不是阳光",
-    "image": "/comics/creation-mystery-v4/page-04.png"
+    "image": "/comics/creation-mystery-v4/page-04.png",
+    "titleEn": "This Isn’t Sunlight",
+    "imageEn": "/comics/creation-mystery-v4-en/page-04.png"
   },
   {
     "id": 5,
     "title": "图书馆呢？",
-    "image": "/comics/creation-mystery-v4/page-05.png"
+    "image": "/comics/creation-mystery-v4/page-05.png",
+    "titleEn": "Where Did the Library Go?",
+    "imageEn": "/comics/creation-mystery-v4-en/page-05.png"
   },
   {
     "id": 6,
     "title": "黑暗中，有了光",
-    "image": "/comics/creation-mystery-v4/page-06.png"
+    "image": "/comics/creation-mystery-v4/page-06.png",
+    "titleEn": "Light in the Darkness",
+    "imageEn": "/comics/creation-mystery-v4-en/page-06.png"
   },
   {
     "id": 7,
     "title": "天空展开了",
-    "image": "/comics/creation-mystery-v4/page-07.png"
+    "image": "/comics/creation-mystery-v4/page-07.png",
+    "titleEn": "The Sky Opens Up",
+    "imageEn": "/comics/creation-mystery-v4-en/page-07.png"
   },
   {
     "id": 8,
     "title": "海，终于有了岸",
-    "image": "/comics/creation-mystery-v4/page-08.png"
+    "image": "/comics/creation-mystery-v4/page-08.png",
+    "titleEn": "At Last, a Shore",
+    "imageEn": "/comics/creation-mystery-v4-en/page-08.png"
   },
   {
     "id": 9,
     "title": "大地变绿了",
-    "image": "/comics/creation-mystery-v4/page-09.png"
+    "image": "/comics/creation-mystery-v4/page-09.png",
+    "titleEn": "The Earth Turns Green",
+    "imageEn": "/comics/creation-mystery-v4-en/page-09.png"
   },
   {
     "id": 10,
     "title": "太阳，现在才出现？",
-    "image": "/comics/creation-mystery-v4/page-10.png"
+    "image": "/comics/creation-mystery-v4/page-10.png",
+    "titleEn": "The Sun Is Only Appearing Now?",
+    "imageEn": "/comics/creation-mystery-v4-en/page-10.png"
   },
   {
     "id": 11,
     "title": "等一下，我看不过来了",
-    "image": "/comics/creation-mystery-v4/page-11.png"
+    "image": "/comics/creation-mystery-v4/page-11.png",
+    "titleEn": "Wait, I Can’t Look at Everything!",
+    "imageEn": "/comics/creation-mystery-v4-en/page-11.png"
   },
   {
     "id": 12,
     "title": "还有脚边那一只",
-    "image": "/comics/creation-mystery-v4/page-12.png"
+    "image": "/comics/creation-mystery-v4/page-12.png",
+    "titleEn": "And the Tiny One by Your Feet",
+    "imageEn": "/comics/creation-mystery-v4-en/page-12.png"
   },
   {
     "id": 13,
     "title": "这一次，是人",
-    "image": "/comics/creation-mystery-v4/page-13.png"
+    "image": "/comics/creation-mystery-v4/page-13.png",
+    "titleEn": "This Time, It’s People",
+    "imageEn": "/comics/creation-mystery-v4-en/page-13.png"
   },
   {
     "id": 14,
     "title": "交托给他们的世界",
-    "image": "/comics/creation-mystery-v4/page-14.png"
+    "image": "/comics/creation-mystery-v4/page-14.png",
+    "titleEn": "A World Entrusted to Them",
+    "imageEn": "/comics/creation-mystery-v4-en/page-14.png"
   },
   {
     "id": 15,
     "title": "一切，都甚好",
-    "image": "/comics/creation-mystery-v4/page-15.png"
+    "image": "/comics/creation-mystery-v4/page-15.png",
+    "titleEn": "Everything Was Very Good",
+    "imageEn": "/comics/creation-mystery-v4-en/page-15.png"
   },
   {
     "id": 16,
     "title": "再看一点嘛",
     "image": "/comics/creation-mystery-v4/page-16.png",
-    "hidePrintedFolio": true
+    "hidePrintedFolio": true,
+    "titleEn": "Just a Little More",
+    "imageEn": "/comics/creation-mystery-v4-en/page-16.png"
   }
 ]

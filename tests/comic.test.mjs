@@ -25,13 +25,19 @@ test("published reader uses sixteen mystery edition pages with no runtime archiv
   assert.equal(catalog.chapters[0].reference, "创世记 1:1–2:3");
   assert.equal(catalog.chapters[0].hidePrintedFolio, false);
   for (const page of publicPages) {
-    assert.deepEqual(Object.keys(page), page.id === 16 ? ["id", "title", "image", "hidePrintedFolio"] : ["id", "title", "image"]);
+    assert.deepEqual(Object.keys(page), page.id === 16 ? ["id", "title", "image", "hidePrintedFolio", "titleEn", "imageEn"] : ["id", "title", "image", "titleEn", "imageEn"]);
     assert.equal(page.image, `/comics/creation-mystery-v4/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.equal(page.imageEn, `/comics/creation-mystery-v4-en/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.ok(page.titleEn);
     assert.equal(page.hidePrintedFolio ?? false, page.id === 16);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
     assert.ok(bytes.readUInt32BE(16) >= 1024);
     assert.equal(bytes.readUInt32BE(16) / bytes.readUInt32BE(20), 2 / 3);
+    const englishBytes = await readFile(new URL("../public" + page.imageEn, import.meta.url));
+    assert.equal(englishBytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+    assert.equal(englishBytes.readUInt32BE(16), 1024);
+    assert.equal(englishBytes.readUInt32BE(20), 1536);
   }
   const source = await readFile(new URL("../app/comic/book-data.ts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /import.*(?:comic-data|dialogue-v2)/);
@@ -139,7 +145,7 @@ test("approved mystery storyboard contains sixteen pages and seventy-eight panel
 
 test("public comic assets exclude deletable local archives and obsolete editions", async () => {
   const directories = await readdir(new URL("../public/comics/", import.meta.url));
-  assert.deepEqual(directories.sort(), ["book-v1", "brothers-v1", "creation-mystery-v4", "eden-v1", "temptation-choice-v1"]);
+  assert.deepEqual(directories.sort(), ["book-v1", "brothers-v1", "brothers-v1-en", "creation-mystery-v4", "creation-mystery-v4-en", "eden-v1", "eden-v1-en", "temptation-choice-v1", "temptation-choice-v1-en"]);
   const pages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(new Set(pages.map(page => page.image)).size, 16);
   assert.ok(pages.every(page => !page.image.includes("archive")));
@@ -157,12 +163,16 @@ test("Eden has ten complete pages and a separate reading edition", async () => {
   assert.equal(pages.length, 10);
   assert.deepEqual(pages.map(p => p.id), Array.from({ length: 10 }, (_, i) => i + 1));
   for (const page of pages) {
-    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
+    assert.deepEqual(Object.keys(page), ["id", "title", "image", "titleEn", "imageEn"]);
     assert.equal(page.image, `/comics/eden-v1/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.equal(page.imageEn, `/comics/eden-v1-en/page-${String(page.id).padStart(2, "0")}.png`);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
     assert.equal(bytes.readUInt32BE(16), 1024);
     assert.equal(bytes.readUInt32BE(20), 1536);
+    const englishBytes = await readFile(new URL("../public" + page.imageEn, import.meta.url));
+    assert.equal(englishBytes.readUInt32BE(16), 1024);
+    assert.equal(englishBytes.readUInt32BE(20), 1536);
   }
   const storyboard = await readFile(new URL("../docs/comic/eden-storyboard-review-v1.md", import.meta.url), "utf8");
   const panels = [...storyboard.matchAll(/^## 第(\d+)页[^\n]*（(\d+)格）/gm)];
@@ -184,12 +194,16 @@ test("Temptation has fourteen finished pages, sixty-two panels and isolated read
   assert.equal(pages.length, 14);
   assert.deepEqual(pages.map(p => p.id), Array.from({length: 14}, (_,i) => i+1));
   for (const page of pages) {
-    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
+    assert.deepEqual(Object.keys(page), ["id", "title", "image", "titleEn", "imageEn"]);
     assert.equal(page.image, `/comics/temptation-choice-v1/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.equal(page.imageEn, `/comics/temptation-choice-v1-en/page-${String(page.id).padStart(2, "0")}.png`);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
     assert.equal(bytes.readUInt32BE(16), 1024);
     assert.equal(bytes.readUInt32BE(20), 1536);
+    const englishBytes = await readFile(new URL("../public" + page.imageEn, import.meta.url));
+    assert.equal(englishBytes.readUInt32BE(16), 1024);
+    assert.equal(englishBytes.readUInt32BE(20), 1536);
   }
   const storyboard = await readFile(new URL("../docs/comic/temptation-choice-storyboard-review-v1.md", import.meta.url), "utf8");
   const panels = [...storyboard.matchAll(/^### 第(\d+)页[^\n]*（(\d+)格）/gm)];
@@ -212,12 +226,16 @@ test("Brothers has twelve finished full pages and its own reading progress", asy
   const pages = JSON.parse(await readFile(new URL("../app/comic/brothers-pages.json", import.meta.url), "utf8"));
   assert.deepEqual(pages.map(p => p.id), Array.from({ length: 12 }, (_, i) => i + 1));
   for (const page of pages) {
-    assert.deepEqual(Object.keys(page), ["id", "title", "image"]);
+    assert.deepEqual(Object.keys(page), ["id", "title", "image", "titleEn", "imageEn"]);
     assert.equal(page.image, `/comics/brothers-v1/page-${String(page.id).padStart(2, "0")}.png`);
+    assert.equal(page.imageEn, `/comics/brothers-v1-en/page-${String(page.id).padStart(2, "0")}.png`);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
     assert.equal(bytes.readUInt32BE(16), 1024);
     assert.equal(bytes.readUInt32BE(20), 1536);
+    const englishBytes = await readFile(new URL("../public" + page.imageEn, import.meta.url));
+    assert.equal(englishBytes.readUInt32BE(16), 1024);
+    assert.equal(englishBytes.readUInt32BE(20), 1536);
   }
   const edition = { id: chapter.id, edition: chapter.edition, pages };
   assert.equal(savedComicPage(JSON.stringify({ chapter: "temptation", edition: "temptation-choice-v1", page: 12 }), edition), 1);

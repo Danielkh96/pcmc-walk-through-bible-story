@@ -7,6 +7,7 @@ import { comicChapters } from "./comic/book-data";
 import { comicChapterEntry } from "./comic/navigation.mjs";
 import { PwaInstaller } from "./pwa-installer";
 import { useAppearance } from "./use-appearance";
+import { useLanguage } from "./use-language";
 
 const books = [
   ["创世记", "Genesis"],
@@ -79,7 +80,7 @@ const books = [
 
 
 export default function Home() {
-  const [language, setLanguage] = useState<"zh" | "en">("zh");
+  const [language, setLanguage] = useLanguage();
   const [theme, setTheme] = useAppearance();
   const [isLaunching, setIsLaunching] = useState(true);
   const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
@@ -136,7 +137,7 @@ export default function Home() {
           <h1><span className="hero-title-main">{zh ? "翻开漫画，" : "Turn a page."}</span><span className="hero-title-sub">{zh ? "一起走进圣经！" : "Step into the story!"}</span></h1>
           <p className="hero-copy">{zh ? "跟着小昆和小君，一边看、一边问，发现圣经里的大故事。" : "Join Xiao Kun and Xiao Jun. Look closer, ask questions, and discover the great story of the Bible."}<br />{zh ? "先从《创世记》的第一声「要有光」开始吧。" : "Start in Genesis, with “Let there be light.”"}</p>
           <a className="begin" href="/comic/contents">{zh ? "开始看漫画" : "Read the comic"} <span>→</span></a>
-          <p className="hero-edition">{zh ? `已更新 ${comicChapters.length} 章 · 中文漫画` : `${comicChapters.length} chapters available · Chinese comic`}</p>
+          <p className="hero-edition">{zh ? `已更新 ${comicChapters.length} 章 · 中文漫画` : `${comicChapters.length} chapters available · English comic`}</p>
         </div>
         <a className="hero-comic-cover" href="/comic/contents" aria-label={zh ? "打开漫画目录" : "Open comic contents"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -150,10 +151,10 @@ export default function Home() {
         </div>
         {comicChapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={comicChapterEntry(chapter)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={chapter.number === 1 ? "/comics/book-v1/cover-v1.png" : chapter.pages[0].image} alt="" loading="lazy" width={1024} height={1536} />
-          <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画` : `Episode ${chapter.number} · Chinese comic`}</small>
-            <strong>{chapter.title}</strong>
-            <span>{zh ? `${chapter.reference}` : `${chapter.reference}`}</span>
+          <img src={chapter.number === 1 ? "/comics/book-v1/cover-v1.png" : (zh ? chapter.pages[0].image : chapter.pages[0].imageEn)} alt="" loading="lazy" width={1024} height={1536} />
+          <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画` : `Episode ${chapter.number} · ${chapter.bookEn} · English comic`}</small>
+            <strong>{zh ? chapter.title : chapter.titleEn}</strong>
+            <span>{zh ? chapter.reference : chapter.referenceEn}</span>
             <b>{zh ? "进入这一集" : "Open episode"} →</b>
           </span>
         </a>)}
@@ -177,7 +178,7 @@ export default function Home() {
           <div className="setting-row"><span>{zh ? "界面语言" : "Interface language"}</span><div className="language-switch" role="group" aria-label="Interface language">
             <button className={zh ? "selected" : ""} onClick={() => setLanguage("zh")}>中文</button><button className={!zh ? "selected" : ""} onClick={() => setLanguage("en")}>English</button>
           </div></div>
-          <p>{zh ? "漫画目前为中文版。" : "Comic pages are currently in Chinese."}</p>
+          <p>{zh ? "漫画会依照界面语言切换。" : "Comic pages follow your selected language."}</p>
           <button className="setting-row setting-action" onClick={() => setTheme(theme === "light" ? "dark" : "light")}><span>{zh ? "外观" : "Appearance"}</span><b>{theme === "light" ? "☾ Dark" : "☀ Light"}</b></button>
           <PwaInstaller language={language} />
         </section>

@@ -2,61 +2,85 @@
   {
     "id": 1,
     "title": "园外，日子继续",
-    "image": "/comics/brothers-v1/page-01.png"
+    "image": "/comics/brothers-v1/page-01.png",
+    "titleEn": "Life Continued Outside the Garden",
+    "imageEn": "/comics/brothers-v1-en/page-01.png"
   },
   {
     "id": 2,
     "title": "两兄弟长大了",
-    "image": "/comics/brothers-v1/page-02.png"
+    "image": "/comics/brothers-v1/page-02.png",
+    "titleEn": "The Brothers Grew Up",
+    "imageEn": "/comics/brothers-v1-en/page-02.png"
   },
   {
     "id": 3,
     "title": "各自献上供物",
-    "image": "/comics/brothers-v1/page-03.png"
+    "image": "/comics/brothers-v1/page-03.png",
+    "titleEn": "Each Brought an Offering",
+    "imageEn": "/comics/brothers-v1-en/page-03.png"
   },
   {
     "id": 4,
     "title": "变了脸色",
-    "image": "/comics/brothers-v1/page-04.png"
+    "image": "/comics/brothers-v1/page-04.png",
+    "titleEn": "His Face Fell",
+    "imageEn": "/comics/brothers-v1-en/page-04.png"
   },
   {
     "id": 5,
     "title": "还来得及停下",
-    "image": "/comics/brothers-v1/page-05.png"
+    "image": "/comics/brothers-v1/page-05.png",
+    "titleEn": "There Was Still Time to Stop",
+    "imageEn": "/comics/brothers-v1-en/page-05.png"
   },
   {
     "id": 6,
     "title": "他们在田间",
-    "image": "/comics/brothers-v1/page-06.png"
+    "image": "/comics/brothers-v1/page-06.png",
+    "titleEn": "They Were in the Field",
+    "imageEn": "/comics/brothers-v1-en/page-06.png"
   },
   {
     "id": 7,
     "title": "没有停下的怒气",
-    "image": "/comics/brothers-v1/page-07.png"
+    "image": "/comics/brothers-v1/page-07.png",
+    "titleEn": "The Anger Didn’t Stop",
+    "imageEn": "/comics/brothers-v1-en/page-07.png"
   },
   {
     "id": 8,
     "title": "你兄弟在哪里",
-    "image": "/comics/brothers-v1/page-08.png"
+    "image": "/comics/brothers-v1/page-08.png",
+    "titleEn": "Where Is Your Brother?",
+    "imageEn": "/comics/brothers-v1-en/page-08.png"
   },
   {
     "id": 9,
     "title": "土地记得发生的事",
-    "image": "/comics/brothers-v1/page-09.png"
+    "image": "/comics/brothers-v1/page-09.png",
+    "titleEn": "The Ground Remembers",
+    "imageEn": "/comics/brothers-v1-en/page-09.png"
   },
   {
     "id": 10,
     "title": "该隐的惧怕",
-    "image": "/comics/brothers-v1/page-10.png"
+    "image": "/comics/brothers-v1/page-10.png",
+    "titleEn": "Cain Was Afraid",
+    "imageEn": "/comics/brothers-v1-en/page-10.png"
   },
   {
     "id": 11,
     "title": "刑罚中仍有保护",
-    "image": "/comics/brothers-v1/page-11.png"
+    "image": "/comics/brothers-v1/page-11.png",
+    "titleEn": "Protection Within the Punishment",
+    "imageEn": "/comics/brothers-v1-en/page-11.png"
   },
   {
     "id": 12,
     "title": "走向园东",
-    "image": "/comics/brothers-v1/page-12.png"
+    "image": "/comics/brothers-v1/page-12.png",
+    "titleEn": "Toward the East of Eden",
+    "imageEn": "/comics/brothers-v1-en/page-12.png"
   }
 ]

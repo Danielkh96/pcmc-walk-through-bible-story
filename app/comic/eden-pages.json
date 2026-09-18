@@ -2,51 +2,71 @@
   {
     "id": 1,
     "title": "这次，想看得更清楚",
-    "image": "/comics/eden-v1/page-01.png"
+    "image": "/comics/eden-v1/page-01.png",
+    "titleEn": "This Time, Let’s Look More Closely",
+    "imageEn": "/comics/eden-v1-en/page-01.png"
   },
   {
     "id": 2,
     "title": "他睁开眼睛了",
-    "image": "/comics/eden-v1/page-02.png"
+    "image": "/comics/eden-v1/page-02.png",
+    "titleEn": "He Opened His Eyes",
+    "imageEn": "/comics/eden-v1-en/page-02.png"
   },
   {
     "id": 3,
     "title": "他住的地方",
-    "image": "/comics/eden-v1/page-03.png"
+    "image": "/comics/eden-v1/page-03.png",
+    "titleEn": "The Place He Called Home",
+    "imageEn": "/comics/eden-v1-en/page-03.png"
   },
   {
     "id": 4,
     "title": "这里，也需要照顾",
-    "image": "/comics/eden-v1/page-04.png"
+    "image": "/comics/eden-v1/page-04.png",
+    "titleEn": "This Place Needs Care Too",
+    "imageEn": "/comics/eden-v1-en/page-04.png"
   },
   {
     "id": 5,
     "title": "有一个清楚的吩咐",
-    "image": "/comics/eden-v1/page-05.png"
+    "image": "/comics/eden-v1/page-05.png",
+    "titleEn": "One Clear Command",
+    "imageEn": "/comics/eden-v1-en/page-05.png"
   },
   {
     "id": 6,
     "title": "园子很热闹，可是……",
-    "image": "/comics/eden-v1/page-06.png"
+    "image": "/comics/eden-v1/page-06.png",
+    "titleEn": "The Garden Is Full of Life, But…",
+    "imageEn": "/comics/eden-v1-en/page-06.png"
   },
   {
     "id": 7,
     "title": "动物一个接一个",
-    "image": "/comics/eden-v1/page-07.png"
+    "image": "/comics/eden-v1/page-07.png",
+    "titleEn": "One Animal After Another",
+    "imageEn": "/comics/eden-v1-en/page-07.png"
   },
   {
     "id": 8,
     "title": "在他沉睡的时候",
-    "image": "/comics/eden-v1/page-08.png"
+    "image": "/comics/eden-v1/page-08.png",
+    "titleEn": "While He Slept",
+    "imageEn": "/comics/eden-v1-en/page-08.png"
   },
   {
     "id": 9,
     "title": "这一次，是与他相配的人",
-    "image": "/comics/eden-v1/page-09.png"
+    "image": "/comics/eden-v1/page-09.png",
+    "titleEn": "Someone Who Was Right for Him",
+    "imageEn": "/comics/eden-v1-en/page-09.png"
   },
   {
     "id": 10,
     "title": "接下来，他们会怎样？",
-    "image": "/comics/eden-v1/page-10.png"
+    "image": "/comics/eden-v1/page-10.png",
+    "titleEn": "What Will Happen to Them Next?",
+    "imageEn": "/comics/eden-v1-en/page-10.png"
   }
 ]

@@ -18,7 +18,13 @@
       "bio": "好奇心很强，看到没见过的东西，总想凑近一点。想到什么常常就问出来，有时动作比脑袋还快。嘴上开着玩笑，其实也会害怕；遇到不明白的事，他愿意和小君一起找答案。",
       "quote": "等一下，我有个问题！",
       "appearance": "蓬松短发 · 橙色上衣 · 深蓝背包",
-      "reference": null
+      "reference": null,
+      "nameEn": "Xiao Kun",
+      "taglineEn": "If something catches his eye, he has to ask about it.",
+      "bioEn": "Curious and quick to investigate, Xiao Kun always wants a closer look at anything new. He often asks questions as soon as they pop into his head, and sometimes his feet move faster than his thoughts. He jokes around, but he gets scared too—and when he does not understand something, he is willing to look for answers with Xiao Jun.",
+      "quoteEn": "Wait—I have a question!",
+      "appearanceEn": "Fluffy short hair · orange shirt · navy backpack",
+      "referenceEn": null
     },
     {
       "id": "xiao-jun",
@@ -28,7 +34,13 @@
       "bio": "她会先看看周围，注意到别人容易错过的小变化。小昆问得急，她就陪他慢慢找线索。她也有不知道的时候，不会假装自己什么都懂；认真起来很细心，放松时也会吐槽两句。",
       "quote": "先别急，我们看看。",
       "appearance": "半扎发 · 湖绿色上衣 · 棕色斜挎包",
-      "reference": null
+      "reference": null,
+      "nameEn": "Xiao Jun",
+      "taglineEn": "Look first, then find the answer together.",
+      "bioEn": "Xiao Jun takes a moment to observe and often notices small changes others miss. When Xiao Kun rushes into a question, she helps him slow down and follow the clues. She does not pretend to know everything; she is careful when things get serious and still knows how to tease him when they can relax.",
+      "quoteEn": "Hang on. Let's take a look.",
+      "appearanceEn": "Half-up hair · teal shirt · tan crossbody bag",
+      "referenceEn": null
     },
     {
       "id": "adam",
@@ -38,7 +50,13 @@
       "bio": "他由尘土受造，被安置在伊甸园，承担修理、看守的责任。",
       "quote": "",
       "appearance": "成人 · 深棕短发",
-      "reference": "创世记 2:7–15"
+      "reference": "创世记 2:7–15",
+      "nameEn": "Adam",
+      "taglineEn": "The man God formed and placed in the garden of Eden.",
+      "bioEn": "God formed him from the dust and placed him in the garden of Eden to cultivate and keep it.",
+      "quoteEn": "",
+      "appearanceEn": "Adult · short dark-brown hair",
+      "referenceEn": "Genesis 2:7–15"
     },
     {
       "id": "woman",
@@ -48,7 +66,13 @@
       "bio": "她在伊甸园的故事中登场。让我们一起看看，她怎样来到亚当身边。",
       "quote": "",
       "appearance": "成人 · 深棕长发",
-      "reference": "创世记 2:22–25"
+      "reference": "创世记 2:22–25",
+      "nameEn": "The woman",
+      "taglineEn": "The companion who corresponds to Adam.",
+      "bioEn": "She enters the story in the garden of Eden. Let us see how she comes to stand beside Adam.",
+      "quoteEn": "",
+      "appearanceEn": "Adult · long dark-brown hair",
+      "referenceEn": "Genesis 2:22–25"
     },
     {
       "id": "serpent",
@@ -58,7 +82,13 @@
       "bio": "创世记记载，蛇比田野一切的活物更狡猾。它在园中向女人提出一个问题。",
       "quote": "",
       "appearance": "橄榄褐色鳞片 · 浅色腹部",
-      "reference": "创世记 3:1"
+      "reference": "创世记 3:1",
+      "nameEn": "The serpent",
+      "taglineEn": "Another voice appears in the garden.",
+      "bioEn": "Genesis says the serpent was more subtle than any animal of the field. In the garden, it asks the woman a question.",
+      "quoteEn": "",
+      "appearanceEn": "Olive-brown scales · pale underside",
+      "referenceEn": "Genesis 3:1"
     },
     {
       "id": "cain",
@@ -68,7 +98,13 @@
       "bio": "他是亚当与夏娃的儿子，也是亚伯的哥哥。他种地，照料地里的出产。",
       "quote": "",
       "appearance": "成人 · 深棕短发 · 赤陶色衣服",
-      "reference": "创世记 4:1–3"
+      "reference": "创世记 4:1–3",
+      "nameEn": "Cain",
+      "taglineEn": "The older brother who works the ground outside the garden.",
+      "bioEn": "He is the son of Adam and Eve and the older brother of Abel. He cultivates the ground and tends its produce.",
+      "quoteEn": "",
+      "appearanceEn": "Adult · short dark-brown hair · terracotta clothing",
+      "referenceEn": "Genesis 4:1–3"
     },
     {
       "id": "abel",
@@ -78,7 +114,13 @@
       "bio": "他是该隐的弟弟，在园外牧羊。两兄弟各自生活与劳作，故事从这里继续。",
       "quote": "",
       "appearance": "成人 · 波浪棕发 · 灰橄榄色衣服",
-      "reference": "创世记 4:2–4"
+      "reference": "创世记 4:2–4",
+      "nameEn": "Abel",
+      "taglineEn": "The younger brother who tends the flock.",
+      "bioEn": "He is Cain’s younger brother and a keeper of sheep outside the garden. The brothers grow up with different work, and their story continues from here.",
+      "quoteEn": "",
+      "appearanceEn": "Adult · wavy brown hair · gray-olive clothing",
+      "referenceEn": "Genesis 4:2–4"
     }
   ],
   "chapters": [
@@ -98,7 +140,12 @@
       "newCharacterIds": [],
       "introduction": "小昆和小君的穿越是虚构框架；创造的故事依据《创世记》1:1–2:3呈现。",
       "hidePrintedFolio": false,
-      "status": "published"
+      "status": "published",
+      "titleEn": "Creation",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 1:1–2:3",
+      "summaryEn": "After putting off their Bible-reading plan again and again, Xiao Kun and Xiao Jun finally begin. They forgot their Bibles, so they search a quiet library, find a dusty copy in an old book room, and follow a strange light from its pages into the story of creation.",
+      "introductionEn": "Xiao Kun and Xiao Jun’s journey is a fictional frame; the creation account follows Genesis 1:1–2:3."
     },
     {
       "id": "eden",
@@ -121,7 +168,12 @@
       ],
       "introduction": "小昆和小君的穿越是虚构框架；伊甸园的故事依据《创世记》2:4–25呈现。",
       "hidePrintedFolio": false,
-      "status": "published"
+      "status": "published",
+      "titleEn": "The Garden of Eden",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 2:4–25",
+      "summaryEn": "Xiao Kun and Xiao Jun turn their attention to Eden. Where did the man come from, what was the garden like, and why did he need a companion who corresponded to him?",
+      "introductionEn": "Xiao Kun and Xiao Jun’s journey is a fictional frame; the garden of Eden account follows Genesis 2:4–25."
     },
     {
       "id": "temptation",
@@ -144,7 +196,12 @@
       ],
       "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》3:1–24呈现。",
       "hidePrintedFolio": false,
-      "status": "published"
+      "status": "published",
+      "titleEn": "Temptation and Choice",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 3:1–24",
+      "summaryEn": "Another voice appears in the garden. One ordinary-sounding question leads to a choice, and Xiao Kun and Xiao Jun watch how life changes afterward.",
+      "introductionEn": "Xiao Kun and Xiao Jun’s journey is a fictional frame; this chapter follows Genesis 3:1–24."
     },
     {
       "id": "brothers",
@@ -169,7 +226,14 @@
       ],
       "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》4:1–16呈现。",
       "hidePrintedFolio": false,
-      "status": "published"
+      "status": "published",
+      "titleEn": "The Brothers Outside Eden",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 4:1–16",
+      "summaryEn": "Life continues outside the garden, and Cain and Abel grow up. After the brothers bring their offerings, rising anger leads to another choice.",
+      "introductionEn": "Xiao Kun and Xiao Jun’s journey is a fictional frame; this chapter follows Genesis 4:1–16."
     }
-  ]
+  ],
+  "titleEn": "Bible Comic Stories",
+  "subtitleEn": "Join Xiao Kun and Xiao Jun as they step into the great story of the Bible."
 }
