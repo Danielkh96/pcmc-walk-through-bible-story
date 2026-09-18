@@ -146,7 +146,7 @@ test("approved mystery storyboard contains sixteen pages and seventy-eight panel
 
 test("public comic assets exclude deletable local archives and obsolete editions", async () => {
   const directories = await readdir(new URL("../public/comics/", import.meta.url));
-  assert.deepEqual(directories.sort(), ["book-v1", "brothers-v1", "brothers-v1-en", "creation-mystery-v4", "creation-mystery-v4-en", "eden-v1", "eden-v1-en", "generations-v1", "temptation-choice-v1", "temptation-choice-v1-en"]);
+  assert.deepEqual(directories.sort(), ["book-v1", "brothers-v1", "brothers-v1-en", "creation-mystery-v4", "creation-mystery-v4-en", "eden-v1", "eden-v1-en", "generations-v1", "generations-v1-en", "temptation-choice-v1", "temptation-choice-v1-en"]);
   const pages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(new Set(pages.map(page => page.image)).size, 16);
   assert.ok(pages.every(page => !page.image.includes("archive")));
@@ -244,24 +244,28 @@ test("Brothers has twelve finished full pages and its own reading progress", asy
   assert.equal(savedComicPage(JSON.stringify({ chapter: chapter.id, edition: "brothers-v0", page: 8 }), edition), 1);
 });
 
-test("Generations publishes nine Chinese pages while its English edition remains unavailable", async () => {
+test("Generations publishes nine localized pages in Chinese and English", async () => {
   const chapter = catalog.chapters.find(c => c.id === "generations");
   assert.equal(chapter.title, "一代又一代");
   assert.equal(chapter.number, 5);
   assert.equal(chapter.edition, "generations-v1");
   assert.equal(chapter.reference, "创世记 4:17–26");
-  assert.deepEqual(chapter.availableLanguages, ["zh"]);
+  assert.deepEqual(chapter.availableLanguages, ["zh", "en"]);
   assert.deepEqual(chapter.newCharacterIds, ["lamech", "adah", "zillah", "jabal", "jubal", "tubal-cain", "naamah", "seth"]);
   const pages = JSON.parse(await readFile(new URL("../app/comic/generations-pages.json", import.meta.url), "utf8"));
   assert.deepEqual(pages.map(p => p.id), Array.from({ length: 9 }, (_, i) => i + 1));
   for (const page of pages) {
     assert.deepEqual(Object.keys(page), ["id", "title", "image", "titleEn", "imageEn"]);
     assert.equal(page.image, `/comics/generations-v1/page-${String(page.id).padStart(2, "0")}.png`);
-    assert.equal(page.imageEn, "");
+    assert.equal(page.imageEn, `/comics/generations-v1-en/page-${String(page.id).padStart(2, "0")}.png`);
     const bytes = await readFile(new URL("../public" + page.image, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
     assert.equal(bytes.readUInt32BE(16), 1024);
     assert.equal(bytes.readUInt32BE(20), 1536);
+    const englishBytes = await readFile(new URL("../public" + page.imageEn, import.meta.url));
+    assert.equal(englishBytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+    assert.equal(englishBytes.readUInt32BE(16), 1024);
+    assert.equal(englishBytes.readUInt32BE(20), 1536);
   }
   const edition = { id: chapter.id, edition: chapter.edition, pages };
   assert.equal(savedComicPage(JSON.stringify({ chapter: chapter.id, edition: chapter.edition, page: 9 }), edition), 9);
