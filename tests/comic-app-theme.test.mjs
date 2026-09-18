@@ -35,6 +35,7 @@ test("home exclusively links to comic reading and retains interface language and
   assert.match(page, /setLanguage\("zh"\)/);
   assert.match(page, /setLanguage\("en"\)/);
   assert.match(page, /useLanguage\(\)/);
+  assert.match(page, /comicBook\.coverImageEn/);
   assert.match(page, /setTheme\(theme === "light"/);
   assert.equal(JSON.parse(manifest).theme_color, "#eaf7fb");
   assert.equal(JSON.parse(manifest).display, "standalone");

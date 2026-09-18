@@ -151,10 +151,10 @@ test("Eden introduces its cast and renders all ten full pages without draft cont
   assert.ok(contents.includes('href="/comic/chapter/eden"'));
   assert.match(contents, /伊甸园/);
   const firstCast = await (await render("/comic/chapter/creation")).text();
-  assert.doesNotMatch(firstCast, /<h2>亚当<\/h2>|<h2>女人<\/h2>/);
+  assert.doesNotMatch(firstCast, /<h2>亚当<\/h2>|<h2>夏娃<\/h2>/);
   const edenCast = await (await render("/comic/chapter/eden")).text();
   assert.match(edenCast, /<h2>亚当<\/h2>/);
-  assert.match(edenCast, /<h2>女人<\/h2>/);
+  assert.match(edenCast, /<h2>夏娃<\/h2>/);
   assert.ok(edenCast.includes("/comic/read?chapter=eden"));
   for (const page of [...Array.from({ length: 10 }, (_, i) => i + 1), 99]) {
     const response = await render(`/comic/read?chapter=eden&page=${page}`);
@@ -179,8 +179,8 @@ test("Temptation introduces the serpent without spoilers and renders all fourtee
   assert.doesNotMatch(previousCast, /<h2>蛇<\/h2>/);
   const cast = await (await render("/comic/chapter/temptation")).text();
   assert.match(cast, /<h2>蛇<\/h2>/);
-  assert.match(cast, /<h2>女人<\/h2>/);
-  assert.doesNotMatch(cast, /<h2>夏娃<\/h2>|基路伯|园外的两兄弟/);
+  assert.match(cast, /<h2>夏娃<\/h2>/);
+  assert.doesNotMatch(cast, /基路伯|园外的两兄弟/);
   assert.ok(cast.includes("/comic/read?chapter=temptation"));
   for (const page of [...Array.from({length:14}, (_,i) => i+1), 99]) {
     const response = await render(`/comic/read?chapter=temptation&page=${page}`);

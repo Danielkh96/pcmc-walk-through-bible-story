@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- Native navigation avoids the verified Vinext RSC prefetch crash in production. */
 
 import { useEffect, useState } from "react";
-import { comicChapters } from "./comic/book-data";
+import { comicBook, comicChapters } from "./comic/book-data";
 import { comicChapterEntry } from "./comic/navigation.mjs";
 import { PwaInstaller } from "./pwa-installer";
 import { useAppearance } from "./use-appearance";
@@ -141,7 +141,7 @@ export default function Home() {
         </div>
         <a className="hero-comic-cover" href="/comic/contents" aria-label={zh ? "打开漫画目录" : "Open comic contents"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/comics/book-v1/cover-v1.png" alt={zh ? "小昆、小君与圣经人物的漫画封面" : "Comic cover with Xiao Kun, Xiao Jun and Bible characters"} width={1024} height={1536} fetchPriority="high" />
+          <img src={zh ? comicBook.coverImage : comicBook.coverImageEn} alt={zh ? "小昆、小君与圣经人物的漫画封面" : "English comic cover with Xiao Kun, Xiao Jun and Bible characters"} width={1024} height={1536} fetchPriority="high" />
         </a>
       </section>
 
@@ -151,7 +151,7 @@ export default function Home() {
         </div>
         {comicChapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={comicChapterEntry(chapter)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={chapter.number === 1 ? "/comics/book-v1/cover-v1.png" : (zh ? chapter.pages[0].image : chapter.pages[0].imageEn)} alt="" loading="lazy" width={1024} height={1536} />
+          <img src={chapter.number === 1 ? (zh ? comicBook.coverImage : comicBook.coverImageEn) : (zh ? chapter.pages[0].image : chapter.pages[0].imageEn)} alt="" loading="lazy" width={1024} height={1536} />
           <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画` : `Episode ${chapter.number} · ${chapter.bookEn} · English comic`}</small>
             <strong>{zh ? chapter.title : chapter.titleEn}</strong>
             <span>{zh ? chapter.reference : chapter.referenceEn}</span>

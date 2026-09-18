@@ -49,6 +49,7 @@ test("published reader uses sixteen mystery edition pages with no runtime archiv
 test("book catalog declares character introductions before any new chapter cast", () => {
   assert.equal(catalog.title, "圣经漫画故事");
   assert.deepEqual(catalog.characters.filter((c) => catalog.mainCharacterIds.includes(c.id)).map((c) => c.name), ["小昆", "小君"]);
+  assert.deepEqual(catalog.characters.filter((c) => c.id === "woman").map((c) => [c.name, c.nameEn]), [["夏娃", "Eve"]]);
   const seen = new Set(catalog.mainCharacterIds);
   for (const chapter of catalog.chapters) {
     for (const id of chapter.characterIds) {
@@ -65,8 +66,8 @@ test("book catalog declares character introductions before any new chapter cast"
   }
 });
 
-test("cover and approved character sheet are real local PNG assets", async () => {
-  for (const path of [catalog.coverImage, catalog.characterSheet]) {
+test("both localized covers and the approved character sheet are real local PNG assets", async () => {
+  for (const path of [catalog.coverImage, catalog.coverImageEn, catalog.characterSheet]) {
     assert.ok(path?.startsWith("/comics/book-v1/"));
     const bytes = await readFile(new URL("../public" + path, import.meta.url));
     assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
