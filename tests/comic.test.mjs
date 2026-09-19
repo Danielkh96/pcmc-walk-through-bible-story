@@ -21,7 +21,7 @@ test("published reader uses sixteen mystery edition pages with no runtime archiv
   const publicPages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(publicPages.length, 16);
   assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 16 }, (_, i) => i + 1));
-  assert.deepEqual(catalog.chapters.map(c => c.id), ["creation", "eden", "temptation", "brothers", "generations", "noahs-time"]);
+  assert.deepEqual(catalog.chapters.map(c => c.id), ["creation", "eden", "temptation", "brothers", "generations", "adam-to-noah", "noahs-time"]);
   assert.equal(catalog.chapters[0].reference, "创世记 1:1–2:3");
   assert.equal(catalog.chapters[0].hidePrintedFolio, false);
   for (const page of publicPages) {
@@ -146,7 +146,7 @@ test("approved mystery storyboard contains sixteen pages and seventy-eight panel
 
 test("public comic assets exclude deletable local archives and obsolete editions", async () => {
   const directories = await readdir(new URL("../public/comics/", import.meta.url));
-  assert.deepEqual(directories.sort(), ["book-v1", "brothers-v1", "brothers-v1-en", "creation-mystery-v4", "creation-mystery-v4-en", "eden-v1", "eden-v1-en", "generations-v1", "generations-v1-en", "noahs-time-v1", "temptation-choice-v1", "temptation-choice-v1-en"]);
+  assert.deepEqual(directories.sort(), ["adam-to-noah-v1", "book-v1", "brothers-v1", "brothers-v1-en", "creation-mystery-v4", "creation-mystery-v4-en", "eden-v1", "eden-v1-en", "generations-v1", "generations-v1-en", "noahs-time-v1", "temptation-choice-v1", "temptation-choice-v1-en"]);
   const pages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(new Set(pages.map(page => page.image)).size, 16);
   assert.ok(pages.every(page => !page.image.includes("archive")));

@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v21-noahs-time-zh/);
+  assert.match(serviceWorker, /pcmc-bible-story-v22-adam-to-noah-zh/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -245,8 +245,8 @@ test("Generations introduces its new cast and renders nine finished Chinese page
     assert.doesNotMatch(html, /reindexedArtwork|正在绘制中|本页分镜|对白润色|待用户审核|造型提案/);
     assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
     if (page >= 9) {
-      assert.ok(html.includes('href="/comic/chapter/noahs-time"'));
-      assert.match(html, /aria-label="下一章：挪亚的时代/);
+      assert.ok(html.includes('href="/comic/chapter/adam-to-noah"'));
+      assert.match(html, /aria-label="下一章：从亚当到挪亚/);
     }
   }
 });
@@ -267,4 +267,18 @@ test("Noah's Time exposes introductions and all ten complete pages", async () =>
     assert.doesNotMatch(html,/reindexedArtwork|本页分镜|对白润色|正在绘制中/);
     if(page===10)assert.match(html,/这一章读完啦/);
   }
+});
+
+test("Chapter six renders ten pages and connects to chapter seven", async () => {
+ const cast=await (await render("/comic/chapter/adam-to-noah")).text();
+ assert.match(cast, /拉麦（挪亚之父）/);
+ assert.doesNotMatch(cast, /<h2>挪亚的妻子<\/h2>/);
+ for(let p=1;p<=10;p++){
+  const response=await render("/comic/read?chapter=adam-to-noah&page="+p);
+  assert.equal(response.status,200);
+  const html=await response.text();
+  assert.ok(html.includes("/comics/adam-to-noah-v1/page-"+String(p).padStart(2,"0")+".png"));
+  assert.match(html,/aria-valuemax="10"/);
+  if(p===10)assert.ok(html.includes('href="/comic/chapter/noahs-time"'));
+ }
 });
