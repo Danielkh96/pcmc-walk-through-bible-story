@@ -677,7 +677,8 @@
       "hidePrintedFolio": false,
       "status": "published",
       "availableLanguages": [
-        "zh"
+        "zh",
+        "en"
       ],
       "titleEn": "From Adam to Noah",
       "bookEn": "Genesis",
