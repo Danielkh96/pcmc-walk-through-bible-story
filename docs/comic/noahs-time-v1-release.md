@@ -19,5 +19,13 @@
 
 ## 上线状态
 
-本记录随代码提交，提交时尚待GitHub推送及Vercel部署。正式URL与线上验证另记后续发布完成记录，不能从本条推定已上线。
+已完成 GitHub 主分支推送及 Vercel Git 自动部署。
 
+- 内容提交：418cc04fa6dfc4bd15ce5bdcea948d83e6a1f7d7。
+- Vercel：dpl_DoY7SEG3qAMC3aF8hKAsUMr5QVm2，Production，Ready，构建45秒。
+- 正式章节：https://pcmc-walk-through-bible-story.vercel.app/comic/chapter/noahs-time
+- 直接阅读：https://pcmc-walk-through-bible-story.vercel.app/comic/read?chapter=noahs-time&page=1
+- 正式浏览器验证：目录→人物介绍→10页正文全部通过，手机无横向溢出，页面运行错误为空。
+- 10张线上图片全部HTTP200，SHA-256与批准图一致；线上sw.js已为v21。
+- 本次部署错误级日志查询：未找到错误日志；未配置额外监控或日志转存，不等同于持续监控。
+- 第六章仍未发布，未擅自改变章号或添加未经确认的发布内容。
