@@ -32,5 +32,5 @@ test('Chapter six fills the gap with ten complete Chinese and English pages',asy
   assert.ok(c.newCharacterIds.includes(id));assert.ok(!chapters[6].newCharacterIds.includes(id));
  }
  assert.ok(ids.has('lamech')&&ids.has('lamech-noah'));
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,6);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,7);
 });

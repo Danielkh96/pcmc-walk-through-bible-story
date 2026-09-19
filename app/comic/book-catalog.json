@@ -453,7 +453,7 @@
       "appearance": "三位成人 · 蓝灰、赤陶粉与土绿长衣",
       "reference": "创世记 6:18",
       "nameEn": "Noah’s three daughters-in-law",
-      "taglineEn": "A member of Noah’s household.",
+      "taglineEn": "Members of Noah’s household.",
       "bioEn": "They are the wives of Noah’s three sons, also instructed to enter the ark. This passage does not record their individual names.",
       "quoteEn": "",
       "appearanceEn": "Ancient clothing · artistic depiction",
@@ -713,7 +713,8 @@
       "hidePrintedFolio": false,
       "status": "published",
       "availableLanguages": [
-        "zh"
+        "zh",
+        "en"
       ],
       "titleEn": "Noah’s Time",
       "bookEn": "Genesis",
