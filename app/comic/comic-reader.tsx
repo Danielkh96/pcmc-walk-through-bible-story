@@ -82,7 +82,9 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
   const comicPages = chapter.pages;
   const pageIndex = useSyncExternalStore(subscribe, () => currentPage(comicPages.length), () => getComicPageIndex(initialPage ?? null, comicPages.length));
   const [theme, setTheme] = useAppearance();
-  const [language, setLanguage] = useLanguage();
+  const [preferredLanguage, setLanguage] = useLanguage();
+  // Shared links remain readable before this chapter has an English edition.
+  const language = chapter.availableLanguages.includes(preferredLanguage) ? preferredLanguage : "zh";
   const zh = language === "zh";
   const languageChapters = comicChaptersForLanguage(language);
   const chapterIndex = languageChapters.findIndex((item) => item.id === chapter.id);
@@ -130,7 +132,7 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
         </a>
         <div className={styles.headerActions}>
           <a href="/comic/contents" className={styles.control}>{zh ? "总目录" : "Contents"}</a>
-          <button className={styles.control} onClick={() => setLanguage(zh ? "en" : "zh")} aria-label={zh ? "切换至英文漫画" : "Switch to Chinese comic"}>{zh ? "EN" : "中文"}</button>
+          <button className={styles.control} disabled={!chapter.availableLanguages.includes(zh ? "en" : "zh")} title={!chapter.availableLanguages.includes("en") ? "本章目前提供中文版" : undefined} onClick={() => setLanguage(zh ? "en" : "zh")} aria-label={zh ? "切换至英文漫画" : "Switch to Chinese comic"}>{zh ? "EN" : "中文"}</button>
           <button className={styles.control} aria-pressed={dark} onClick={() => setDark(!dark)}>
             {dark ? (zh ? "浅色" : "Light") : (zh ? "深色" : "Dark")}
           </button>

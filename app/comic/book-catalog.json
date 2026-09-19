@@ -250,6 +250,102 @@
       "quoteEn": "",
       "appearanceEn": "Adult · dark-brown hair · soft earth-green clothing",
       "referenceEn": "Genesis 4:25–26"
+    },
+    {
+      "id": "noah",
+      "name": "挪亚",
+      "kind": "biblical",
+      "tagline": "在耶和华眼前蒙恩的人。",
+      "bio": "他是拉麦的儿子，也是闪、含、雅弗的父亲。他在耶和华眼前蒙恩，与神同行。",
+      "quote": "",
+      "appearance": "灰色长发与胡须 · 米白长衣 · 深蓝披衣",
+      "reference": "创世记 5:28–32；6:8–9",
+      "nameEn": "Noah",
+      "taglineEn": "A man who found favor in the Lord’s eyes.",
+      "bioEn": "He is Lamech’s son and the father of Shem, Ham, and Japheth. He found favor in the Lord’s eyes and walked with God.",
+      "quoteEn": "",
+      "appearanceEn": "Ancient clothing · artistic depiction",
+      "referenceEn": "Genesis 5:28–32; 6:8–9"
+    },
+    {
+      "id": "shem",
+      "name": "闪",
+      "kind": "biblical",
+      "tagline": "挪亚家中的一员。",
+      "bio": "他是挪亚的儿子。经文在挪亚的家庭中记下他的名字。",
+      "quote": "",
+      "appearance": "成人 · 古代长衣",
+      "reference": "创世记 5:32；6:10",
+      "nameEn": "Shem",
+      "taglineEn": "A member of Noah’s household.",
+      "bioEn": "He is one of Noah’s sons, named in the account of Noah’s household.",
+      "quoteEn": "",
+      "appearanceEn": "Ancient clothing · artistic depiction",
+      "referenceEn": "Genesis 5:32; 6:10"
+    },
+    {
+      "id": "ham",
+      "name": "含",
+      "kind": "biblical",
+      "tagline": "挪亚家中的一员。",
+      "bio": "他是挪亚的儿子。经文在挪亚的家庭中记下他的名字。",
+      "quote": "",
+      "appearance": "成人 · 古代长衣",
+      "reference": "创世记 5:32；6:10",
+      "nameEn": "Ham",
+      "taglineEn": "A member of Noah’s household.",
+      "bioEn": "He is one of Noah’s sons, named in the account of Noah’s household.",
+      "quoteEn": "",
+      "appearanceEn": "Ancient clothing · artistic depiction",
+      "referenceEn": "Genesis 5:32; 6:10"
+    },
+    {
+      "id": "japheth",
+      "name": "雅弗",
+      "kind": "biblical",
+      "tagline": "挪亚家中的一员。",
+      "bio": "他是挪亚的儿子。经文在挪亚的家庭中记下他的名字。",
+      "quote": "",
+      "appearance": "成人 · 古代长衣",
+      "reference": "创世记 5:32；6:10",
+      "nameEn": "Japheth",
+      "taglineEn": "A member of Noah’s household.",
+      "bioEn": "He is one of Noah’s sons, named in the account of Noah’s household.",
+      "quoteEn": "",
+      "appearanceEn": "Ancient clothing · artistic depiction",
+      "referenceEn": "Genesis 5:32; 6:10"
+    },
+    {
+      "id": "noahs-wife",
+      "name": "挪亚的妻子",
+      "kind": "biblical",
+      "tagline": "挪亚家中的一员。",
+      "bio": "她是挪亚的妻子。神吩咐她与挪亚一家进入方舟；这段经文没有记下她的名字。",
+      "quote": "",
+      "appearance": "灰棕发 · 暖赭披衣",
+      "reference": "创世记 6:18",
+      "nameEn": "Noah’s wife",
+      "taglineEn": "A member of Noah’s household.",
+      "bioEn": "She is Noah’s wife. God instructed her to enter the ark with the family; this passage does not record her name.",
+      "quoteEn": "",
+      "appearanceEn": "Ancient clothing · artistic depiction",
+      "referenceEn": "Genesis 6:18"
+    },
+    {
+      "id": "noahs-daughters-in-law",
+      "name": "挪亚的三个儿妇",
+      "kind": "biblical",
+      "tagline": "挪亚家中的一员。",
+      "bio": "她们是挪亚三个儿子的妻子，同被吩咐进入方舟。这段经文没有记下她们各自的名字。",
+      "quote": "",
+      "appearance": "三位成人 · 蓝灰、赤陶粉与土绿长衣",
+      "reference": "创世记 6:18",
+      "nameEn": "Noah’s three daughters-in-law",
+      "taglineEn": "A member of Noah’s household.",
+      "bioEn": "They are the wives of Noah’s three sons, also instructed to enter the ark. This passage does not record their individual names.",
+      "quoteEn": "",
+      "appearanceEn": "Ancient clothing · artistic depiction",
+      "referenceEn": "Genesis 6:18"
     }
   ],
   "chapters": [
@@ -270,7 +366,10 @@
       "introduction": "小昆和小君的穿越是虚构框架；创造的故事依据《创世记》1:1–2:3呈现。",
       "hidePrintedFolio": false,
       "status": "published",
-      "availableLanguages": ["zh", "en"],
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
       "titleEn": "Creation",
       "bookEn": "Genesis",
       "referenceEn": "Genesis 1:1–2:3",
@@ -299,7 +398,10 @@
       "introduction": "小昆和小君的穿越是虚构框架；伊甸园的故事依据《创世记》2:4–25呈现。",
       "hidePrintedFolio": false,
       "status": "published",
-      "availableLanguages": ["zh", "en"],
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
       "titleEn": "The Garden of Eden",
       "bookEn": "Genesis",
       "referenceEn": "Genesis 2:4–25",
@@ -328,7 +430,10 @@
       "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》3:1–24呈现。",
       "hidePrintedFolio": false,
       "status": "published",
-      "availableLanguages": ["zh", "en"],
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
       "titleEn": "Temptation and Choice",
       "bookEn": "Genesis",
       "referenceEn": "Genesis 3:1–24",
@@ -359,7 +464,10 @@
       "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》4:1–16呈现。",
       "hidePrintedFolio": false,
       "status": "published",
-      "availableLanguages": ["zh", "en"],
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
       "titleEn": "The Brothers Outside Eden",
       "bookEn": "Genesis",
       "referenceEn": "Genesis 4:1–16",
@@ -403,12 +511,54 @@
       "introduction": "小昆和小君的穿越是虚构框架；本章依据《创世记》4:17–26呈现。",
       "hidePrintedFolio": false,
       "status": "published",
-      "availableLanguages": ["zh", "en"],
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
       "titleEn": "Generation After Generation",
       "bookEn": "Genesis",
       "referenceEn": "Genesis 4:17–26",
       "summaryEn": "Cain builds a household and a city in the land of Nod, and generations pass. New ways of life and new skills appear, while Lamech turns violence into a boast. Scripture then returns to Adam and Eve and closes with people beginning to call on the name of the Lord.",
       "introductionEn": "Xiao Kun and Xiao Jun’s journey is a fictional frame; this chapter follows Genesis 4:17–26."
+    },
+    {
+      "id": "noahs-time",
+      "edition": "noahs-time-v1",
+      "number": 7,
+      "title": "挪亚的时代",
+      "book": "创世记",
+      "reference": "创世记 6:1–22",
+      "summary": "地上的人口渐渐增多，强暴与败坏也蔓延开来。挪亚却在神眼前蒙恩；一项建造方舟的吩咐，让小昆与小君看见审判中的保全与预备。",
+      "dataKey": "noahsTime",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "noah",
+        "shem",
+        "ham",
+        "japheth",
+        "noahs-wife",
+        "noahs-daughters-in-law"
+      ],
+      "newCharacterIds": [
+        "noah",
+        "shem",
+        "ham",
+        "japheth",
+        "noahs-wife",
+        "noahs-daughters-in-law"
+      ],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》6:1–22呈现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh"
+      ],
+      "titleEn": "Noah’s Time",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 6:1–22",
+      "summaryEn": "As humanity spreads, violence and corruption grow. Noah finds favor in God’s eyes and receives instructions to build an ark.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 6:1–22."
     }
   ],
   "titleEn": "Bible Comic Stories",
