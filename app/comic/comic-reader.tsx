@@ -8,6 +8,7 @@ import { comicChapterEntry, getComicPageIndex } from "./navigation.mjs";
 import { useAppearance } from "../use-appearance";
 import { useLanguage, type Language } from "../use-language";
 import styles from "./comic.module.css";
+import ReflectionPage, { reflectionForChapter } from "./reflection-page";
 
 const navigationEvent = "pcmc-comic-navigation";
 function subscribe(callback: () => void) {
@@ -80,7 +81,11 @@ function PageArtwork({ image, title, id, hidePrintedFolio, language }: { image: 
 
 export default function ComicReader({ chapter = comicChapters[0], initialPage }: { chapter?: ComicChapter; initialPage?: string }) {
   const comicPages = chapter.pages;
-  const pageIndex = useSyncExternalStore(subscribe, () => currentPage(comicPages.length), () => getComicPageIndex(initialPage ?? null, comicPages.length));
+  const hasReflection = Boolean(reflectionForChapter(chapter.id));
+  const readingCount = comicPages.length + Number(hasReflection);
+  const pageIndex = useSyncExternalStore(subscribe, () => currentPage(readingCount), () => getComicPageIndex(initialPage ?? null, readingCount));
+  const isReflection = hasReflection && pageIndex === comicPages.length;
+  const isLast = pageIndex === readingCount - 1;
   const [theme, setTheme] = useAppearance();
   const [preferredLanguage, setLanguage] = useLanguage();
   // Shared links remain readable before this chapter has an English edition.
@@ -91,7 +96,7 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
   const nextChapter = chapterIndex >= 0 ? languageChapters[chapterIndex + 1] : undefined;
   const dark = theme === "dark";
   const setDark = (value: boolean) => setTheme(value ? "dark" : "light");
-  const page = comicPages[pageIndex];
+  const page = comicPages[Math.min(pageIndex, comicPages.length - 1)];
   const artwork = zh ? page.image : page.imageEn;
   const pageTitle = zh ? page.title : page.titleEn;
   const nextChapterTitle = nextChapter ? (zh ? nextChapter.title : nextChapter.titleEn) : "";
@@ -101,26 +106,27 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
         chapter: chapter.id,
         edition: chapter.edition,
         language,
-        page: currentPage(comicPages.length) + 1,
+        // Reflection is not an extra artwork page in saved reading progress.
+        page: Math.min(currentPage(readingCount) + 1, comicPages.length),
       }));
     } catch { /* Storage is optional; URL navigation remains available. */ }
-  }, [chapter.id, chapter.edition, comicPages.length, pageIndex, language]);
+  }, [chapter.id, chapter.edition, comicPages.length, readingCount, pageIndex, language]);
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
       if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
       if (event.target instanceof Element && event.target.closest("input, textarea, select, button, a, summary, [contenteditable]")) return;
       if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
         event.preventDefault();
-        if (event.key === "ArrowRight" && pageIndex === comicPages.length - 1 && nextChapter) {
+        if (event.key === "ArrowRight" && isLast && nextChapter) {
           window.location.assign(comicChapterEntry(nextChapter));
         } else {
-          navigate(pageIndex + (event.key === "ArrowRight" ? 1 : -1), comicPages.length);
+          navigate(pageIndex + (event.key === "ArrowRight" ? 1 : -1), readingCount);
         }
       }
     };
     window.addEventListener("keydown", keydown);
     return () => window.removeEventListener("keydown", keydown);
-  }, [pageIndex, comicPages.length, nextChapter]);
+  }, [pageIndex, readingCount, isLast, nextChapter]);
   return (
     <main className={styles.reader} data-theme={dark ? "dark" : "light"}>
       <a className={styles.skip} href="#comic-page">{zh ? "跳到漫画内容" : "Skip to comic"}</a>
@@ -140,29 +146,31 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
       </header>
       <h1 className={styles.srOnly}>{zh ? "漫画阅读" : "Comic reader"}</h1>
       <div className={styles.workspace}>
-        <article id="comic-page" className={styles.content} aria-label={zh ? `漫画第 ${page.id} 页` : `Comic page ${page.id}`}>
-          {artwork ? <PageArtwork key={chapter.id + ":" + language + ":" + page.id} id={page.id} image={artwork} title={pageTitle} language={language} hidePrintedFolio={("hidePrintedFolio" in page ? Boolean(page.hidePrintedFolio) : chapter.hidePrintedFolio)} /> : (
+        <article id="comic-page" className={styles.content + (isReflection ? " " + styles.reflectionContent : "")} aria-label={isReflection ? (zh ? "读后反思" : "Reflection") : (zh ? `漫画第 ${page.id} 页` : `Comic page ${page.id}`)}>
+          {isReflection ? <ReflectionPage chapterId={chapter.id} language={language} /> : artwork ? <PageArtwork key={chapter.id + ":" + language + ":" + page.id} id={page.id} image={artwork} title={pageTitle} language={language} hidePrintedFolio={("hidePrintedFolio" in page ? Boolean(page.hidePrintedFolio) : chapter.hidePrintedFolio)} /> : (
             <section className={styles.missing}>
               <p className={styles.eyebrow}>{zh ? `第 ${page.id} 页` : `Page ${page.id}`}</p>
               <h2>{zh ? "这一页正在绘制中" : "This page is being illustrated"}</h2>
               <p>{zh ? "画面完成后会更新到这里。你可以先翻到下一页。" : "It will appear here when it is ready. You can continue to the next page."}</p>
             </section>
           )}
-          {pageIndex === comicPages.length - 1 && <p className={styles.endNote}>{nextChapter ? (zh ? `下一章：${nextChapterTitle} · 点击右箭头继续` : `Next chapter: ${nextChapterTitle} · Use the right arrow to continue`) : (zh ? "这一章读完啦！" : "You finished this chapter!")}</p>}
+          {!isReflection && pageIndex === comicPages.length - 1 && hasReflection && <p className={styles.endNote}>{zh ? "这一章读完啦！下一页，一起讨论反思。" : "You finished this chapter! Turn the page to reflect together."}<a href={`?chapter=${chapter.id}&page=${readingCount}`}>{zh ? "进入讨论反思 →" : "Discuss & reflect →"}</a></p>}
+          {isLast && <p className={styles.endNote}>{nextChapter ? (zh ? `下一章：${nextChapterTitle} · 点击右箭头继续` : `Next chapter: ${nextChapterTitle} · Use the right arrow to continue`) : (zh ? "这一章读完啦！" : "You finished this chapter!")}{isReflection && !nextChapter && <a href="/comic/contents">{zh ? "返回目录" : "Back to contents"}</a>}</p>}
         </article>
       </div>
       <nav className={styles.readingDock} aria-label={zh ? "漫画翻页" : "Comic navigation"}>
-        <button className={styles.control} onClick={() => navigate(pageIndex - 1, comicPages.length)} disabled={pageIndex === 0} aria-label={zh ? "上一页" : "Previous page"}>←</button>
+        <button className={styles.control} onClick={() => navigate(pageIndex - 1, readingCount)} disabled={pageIndex === 0} aria-label={zh ? "上一页" : "Previous page"}>←</button>
         <label className={styles.pagePicker}>
           <span className={styles.srOnly}>{zh ? "选择漫画页码" : "Choose a comic page"}</span>
-          <select value={pageIndex} onChange={(event) => navigate(Number(event.target.value), comicPages.length)}>
+          <select value={pageIndex} onChange={(event) => navigate(Number(event.target.value), readingCount)}>
             {comicPages.map((item, index) => <option value={index} key={item.id}>{zh ? `第 ${item.id} / ${comicPages.length} 页` : `Page ${item.id} / ${comicPages.length}`}{!(zh ? item.image : item.imageEn) ? (zh ? " · 待更新" : " · Coming soon") : ""}</option>)}
+            {hasReflection && <option value={comicPages.length}>{zh ? "读后反思 · 一起聊聊" : "Reflection · Let's talk"}</option>}
           </select>
         </label>
-        {pageIndex === comicPages.length - 1 && nextChapter ? (
+        {isLast && nextChapter ? (
           <a className={styles.control} href={comicChapterEntry(nextChapter)} aria-label={(zh ? "下一章：" : "Next chapter: ") + nextChapterTitle} title={(zh ? "下一章：" : "Next chapter: ") + nextChapterTitle}>→</a>
         ) : (
-          <button className={styles.control} onClick={() => navigate(pageIndex + 1, comicPages.length)} disabled={pageIndex === comicPages.length - 1} aria-label={zh ? "下一页" : "Next page"}>→</button>
+          <button className={styles.control} onClick={() => navigate(pageIndex + 1, readingCount)} disabled={isLast} aria-label={!isReflection && hasReflection && pageIndex === comicPages.length - 1 ? (zh ? "进入讨论反思" : "Discuss and reflect") : (zh ? "下一页" : "Next page")}>→</button>
         )}
         <div className={styles.progress} role="progressbar" aria-label={zh ? "漫画阅读进度" : "Comic reading progress"} aria-valuemin={1} aria-valuemax={comicPages.length} aria-valuenow={page.id}><span style={{ width: (page.id / comicPages.length * 100) + "%" }} /></div>
       </nav>

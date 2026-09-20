@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v24-noahs-time-bilingual/);
+  assert.match(serviceWorker, /pcmc-bible-story-v25-church-reflections/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -210,7 +210,7 @@ test("Brothers introduces its new cast at chapter four and renders every page wi
   assert.match(cast, /<h2>亚伯<\/h2>/);
   assert.doesNotMatch(cast, /把亚伯杀了|记号是什么|供物器具|造型提案/);
   assert.ok(cast.includes("/comic/read?chapter=brothers"));
-  for (const page of [...Array.from({ length: 12 }, (_, i) => i + 1), 99]) {
+  for (const page of Array.from({ length: 12 }, (_, i) => i + 1)) {
     const response = await render(`/comic/read?chapter=brothers&page=${page}`);
     assert.equal(response.status, 200);
     const html = await response.text();
@@ -218,9 +218,9 @@ test("Brothers introduces its new cast at chapter four and renders every page wi
     assert.match(html, /aria-valuemax="12"/);
     assert.doesNotMatch(html, /reindexedArtwork|正在绘制中|本页分镜|对白润色|待用户审核|造型提案/);
     assert.equal((html.match(/aria-label="漫画翻页"/g) ?? []).length, 1);
-    if (page >= 12) {
-      assert.match(html, /aria-label="下一章：一代又一代"/);
-      assert.ok(html.includes('href="/comic/chapter/generations"'));
+    if (page === 12) {
+      assert.match(html, /aria-label="进入讨论反思"/);
+      assert.doesNotMatch(html, /aria-label="下一章：一代又一代"/);
     }
   }
 });
@@ -281,4 +281,34 @@ test("Chapter six renders ten pages and connects to chapter seven", async () => 
   assert.match(html,/aria-valuemax="10"/);
   if(p===10)assert.ok(html.includes('href="/comic/chapter/noahs-time"'));
  }
+});
+
+test("reflection follows the comic in chapters four and seven without changing artwork counts", async () => {
+  for (const [id, count, title] of [
+    ["brothers", 12, "我们是在服事神，还是也很需要别人看见我们？"],
+    ["noahs-time", 10, "如果说出问题，会让我们在团契里变得不受欢迎呢？"],
+  ]) {
+    const finalArt = await (await render("/comic/read?chapter=" + id + "&page=" + count)).text();
+    assert.match(finalArt, /aria-label="进入讨论反思"/);
+    for (const page of [count + 1, 99]) {
+      const response = await render("/comic/read?chapter=" + id + "&page=" + page);
+      assert.equal(response.status, 200);
+      const html = await response.text();
+      assert.ok(html.includes(title));
+      assert.doesNotMatch(html, /不点名、不影射真实的人|12–15 分钟|选一个最接近真实的反应|现在，一起试一试/);
+      assert.match(html, /id="scenario-heading"/);
+      assert.match(html, /反思问题/);
+      assert.match(html, /本章经文/);
+      assert.doesNotMatch(html, /延伸阅读|Further reading|哥林多前书 12:14–26|雅各书 2:1–9/);
+      assert.match(html, /如果是你，你会怎么做？/);
+      assert.match(html, /留意上下文/);
+      assert.match(html, id === "brothers" ? /创世记 4:3–7/ : /创世记 5:21–24；6:9–22/);
+      assert.doesNotMatch(html, /id="questions-heading"/);
+      assert.doesNotMatch(html, /id="action-heading"|id="choices-heading"/);
+      assert.doesNotMatch(html, /alt="漫画第|正在绘制中/);
+      assert.match(html, new RegExp('aria-valuemax="' + count + '"'));
+      if (id === "brothers") assert.match(html, /aria-label="下一章：一代又一代"/);
+      else assert.match(html, /返回目录/);
+    }
+  }
 });

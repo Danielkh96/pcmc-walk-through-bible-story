@@ -1,0 +1,76 @@
+{
+  "brothers": {
+    "zh": {
+      "title": "我们是在服事神，还是也很需要别人看见我们？",
+      "scenarioTitle": "明明一起服事，被看见的却只有他",
+      "scenario": [
+        "团契准备举办迎新活动，我们和一位好朋友一起负责。",
+        "连续两个星期，我们放学后赶海报、安排游戏、联络新朋友，还帮他修改主持稿。活动当天，他在台上主持，我们在后面处理音乐、投影片和临时状况。",
+        "活动很成功。结束时，导师当众说：“特别谢谢他！这次活动办得这么好，他真的很有带领恩赐。”",
+        "大家鼓掌，也纷纷找他拍照。我们站在旁边，没有人提到我们的付出。后来，团契发了活动贴文，照片几乎都是他。有人留言：“下次让他做团契主席！”",
+        "他私下跟我们说：“谢谢你们啊，没有你们我真的做不到。下次也一起服事吧！”",
+        "我们知道他不一定是故意抢功劳，但心里还是很不舒服。我们找另一位朋友倾诉，对方却说：“我们是服事神，又不是服事人，不要那么计较啦。”"
+      ],
+      "references": [
+        {
+          "label": "本章经文",
+          "passage": "创世记 4:3–7"
+        }
+      ]
+    },
+    "en": {
+      "title": "Are we serving God—or also hoping to be noticed?",
+      "scenarioTitle": "We served together. Only our friend got noticed.",
+      "scenario": [
+        "We are organising a welcome event for our youth fellowship with a close friend.",
+        "For two weeks, we spend our afternoons making posters, planning games, contacting newcomers and helping with our friend's hosting script. At the event, he hosts on stage while we manage the music, slides and last-minute problems behind the scenes.",
+        "The event goes well. Afterwards, our youth leader says publicly, ‘A special thank-you to him! He made this event such a success. He really has a gift for leadership.’",
+        "Everyone claps and takes photos with him. We stand nearby, but nobody mentions our contribution. Later, almost every photo in the fellowship's post features him. Someone comments, ‘He should be our next fellowship president!’",
+        "Privately, he tells us, ‘Thank you all! I couldn't have done this without you. Let's serve together again!’",
+        "We know he may not be trying to take the credit, but it still hurts. We share this with another friend, who says, ‘We're serving God, not people. Don't be so bothered about it.’"
+      ],
+      "references": [
+        {
+          "label": "Chapter passage",
+          "passage": "Genesis 4:3–7"
+        }
+      ]
+    }
+  },
+  "noahs-time": {
+    "zh": {
+      "title": "如果说出问题，会让我们在团契里变得不受欢迎呢？",
+      "scenarioTitle": "有团契，却有人一直进不来",
+      "scenario": [
+        "我们在团契里有一群很熟的朋友。大家一起服事，聚会后也经常去吃宵夜，我们很珍惜这种归属感。",
+        "最近来了一位新朋友。他说话比较直接，有时分享很长，也不太会看大家的反应。渐渐地，我们的朋友开始在私下群聊里模仿他说话，替他取绰号。有人说：“不是不欢迎他，只是跟他相处真的很累。”",
+        "这次团契结束后，大家又约去吃宵夜，却特地交代：“等他走了才讨论，不然他又跟来。”",
+        "这位新朋友刚好走到我们旁边，问：“你们等下有去哪里吗？我可以一起吗？”",
+        "我们知道他一直很想融入，也知道如果我们邀请他，朋友可能会觉得我们不顾大家的感受。群里这时又跳出一则讯息：“你们不要又当好人哦，等下全晚你们陪他。”"
+      ],
+      "references": [
+        {
+          "label": "本章经文",
+          "passage": "创世记 5:21–24；6:9–22"
+        }
+      ]
+    },
+    "en": {
+      "title": "What if speaking up costs us our place in the group?",
+      "scenarioTitle": "A fellowship where someone still feels left out",
+      "scenario": [
+        "We have a close circle of friends in our youth fellowship. We serve together and often go out for supper after meetings. We really value that sense of belonging.",
+        "A newcomer has recently joined. He can be very direct, shares at length and sometimes misses social cues. Our friends begin imitating him and giving him nicknames in a private group chat. Someone says, ‘It's not that he isn't welcome. It's just exhausting to hang out with him.’",
+        "After this week's meeting, our friends plan supper again, but add, ‘Wait until he leaves before we talk about it, or he'll tag along.’",
+        "Just then, the newcomer approaches us: ‘Are you going anywhere afterwards? Could I come too?’",
+        "We know he wants to belong. We also know our friends may feel we are ignoring their feelings if we invite him. Another message appears: ‘Don't play the nice ones again. If you do, you're looking after him all night.’"
+      ],
+      "references": [
+        {
+          "label": "Chapter passages",
+          "passage": "Genesis 5:21–24; 6:9–22"
+        }
+      ]
+    }
+  }
+}
