@@ -28,7 +28,7 @@ const notoSerif = Noto_Serif_SC({
 export const metadata: Metadata = {
   title: "PCMC | Walk Through Bible Story",
   description: "Explore the Bible in comics with Xiao Kun and Xiao Jun. 小昆与小君的圣经漫画故事。",
-  manifest: "/manifest.webmanifest?v=26",
+  manifest: "/manifest.webmanifest",
   themeColor: "#eaf7fb",
   appleWebApp: {
     capable: true,

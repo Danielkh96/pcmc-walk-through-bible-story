@@ -14,6 +14,7 @@ test('manifest separates full-bleed and safe-area icons, all cached with the cur
   const manifest=JSON.parse(await read('public/manifest.webmanifest'));
   const sw=(await read('public/sw.js')).toString();
   assert.equal(manifest.start_url,'/');
+  assert.ok((await read('app/layout.tsx')).toString().includes('manifest: "/manifest.webmanifest"'));
   assert.deepEqual(manifest.icons.map(i=>i.purpose),['any','any','maskable']);
   for(const icon of manifest.icons){
     assert.ok(icon.src.endsWith('?v=26'));
