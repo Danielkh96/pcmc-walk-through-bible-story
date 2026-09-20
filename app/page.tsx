@@ -108,14 +108,14 @@ export default function Home() {
     <main className={`comic-app theme-${theme} ${isLaunching ? "is-launching" : ""}`}>
       {isLaunching && <div className="launch-screen" role="status" aria-label="PCMC Walk Through Bible Story">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="launch-mark" src="/pcmc-logo.png" alt="PCMC church logo" />
+        <img className="launch-mark" src="/pcmc-logo.png?v=26" alt="PCMC Walk Through Bible Story" />
         <p>PCMC</p><h1>Walk Through Bible Story</h1>
         <span>{zh ? "一起翻开新的冒险！" : "A new adventure awaits!"}</span>
       </div>}
       <header className="topbar app-reveal reveal-1">
         <a className="brand" href="/" aria-label="PCMC Walk Through Bible Story home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="brand-mark" src="/pcmc-logo.png" alt="" />
+          <img className="brand-mark" src="/pcmc-logo.png?v=26" alt="" />
           <span className="brand-full">PCMC Walk Through Bible Story</span>
           <span className="brand-short">PCMC Bible Story</span>
         </a>
@@ -190,7 +190,7 @@ export default function Home() {
       </nav>
       <footer>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="footer-logo" src="/pcmc-logo.png" alt="" />
+        <img className="footer-logo" src="/pcmc-logo.png?v=26" alt="" />
         PCMC · Walk Through Bible Story · {zh ? "跟着小昆和小君，一起读漫画、认识圣经。" : "Explore the Bible in comics with Xiao Kun and Xiao Jun."}
       </footer>
     </main>

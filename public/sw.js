@@ -1,13 +1,17 @@
-const CACHE_NAME = "pcmc-bible-story-v25-church-reflections";
+const CACHE_NAME = "pcmc-bible-story-v26-comic-brand-icons";
 const APP_SHELL = [
   "/",
   "/comic",
   "/comic/contents",
-  "/manifest.webmanifest",
-  "/pcmc-logo.png",
-  "/pwa-icon-192.png",
-  "/pwa-icon-512.png",
-  "/apple-touch-icon.png",
+  "/manifest.webmanifest?v=26",
+  "/pcmc-logo.png?v=26",
+  "/pwa-icon-192.png?v=26",
+  "/pwa-icon-512.png?v=26",
+  "/apple-touch-icon.png?v=26",
+  "/pwa-icon-maskable-512.png?v=26",
+  "/favicon.ico?v=26",
+  "/favicon-32.png?v=26",
+  "/favicon-16.png?v=26",
 ];
 
 self.addEventListener("install", (event) => {

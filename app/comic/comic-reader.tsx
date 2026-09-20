@@ -133,7 +133,7 @@ export default function ComicReader({ chapter = comicChapters[0], initialPage }:
       <header className={styles.header}>
         <a className={styles.brand} href="/" aria-label={zh ? "PCMC Walk Through Bible Story 首页" : "PCMC Walk Through Bible Story home"}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/pcmc-logo.png" alt="" width={36} height={36} />
+          <img src="/pcmc-logo.png?v=26" alt="" width={36} height={36} />
           <span>PCMC Walk Through Bible Story</span>
         </a>
         <div className={styles.headerActions}>

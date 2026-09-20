@@ -28,7 +28,7 @@ const notoSerif = Noto_Serif_SC({
 export const metadata: Metadata = {
   title: "PCMC | Walk Through Bible Story",
   description: "Explore the Bible in comics with Xiao Kun and Xiao Jun. 小昆与小君的圣经漫画故事。",
-  manifest: "/manifest.webmanifest",
+  manifest: "/manifest.webmanifest?v=26",
   themeColor: "#eaf7fb",
   appleWebApp: {
     capable: true,
@@ -37,11 +37,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/pwa-icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/pwa-icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico?v=26", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
+      { url: "/favicon-32.png?v=26", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png?v=26", sizes: "16x16", type: "image/png" },
+      { url: "/pwa-icon-192.png?v=26", sizes: "192x192", type: "image/png" },
+      { url: "/pwa-icon-512.png?v=26", sizes: "512x512", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.png",
-    shortcut: "/pwa-icon-192.png",
+    apple: "/apple-touch-icon.png?v=26",
+    shortcut: "/favicon.ico?v=26",
   },
 };
 

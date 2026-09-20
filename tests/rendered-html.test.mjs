@@ -32,7 +32,7 @@ test("server-renders the PCMC Bible Story app", async () => {
   assert.match(html, /<title>PCMC \| Walk Through Bible Story<\/title>/i);
   assert.match(html, /PCMC Walk Through Bible Story/);
   assert.match(html, /class="launch-screen"/);
-  assert.match(html, /src="\/pcmc-logo\.png"/);
+  assert.match(html, /src="\/pcmc-logo\.png\?v=26"/);
   assert.match(html, /下一段冒险，从这里开始。/);
   assert.match(html, /class="comic-feature"/);
   assert.match(html, /浏览六十六卷书/);
@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v25-church-reflections/);
+  assert.match(serviceWorker, /pcmc-bible-story-v26-comic-brand-icons/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
