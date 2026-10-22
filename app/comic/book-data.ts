@@ -9,6 +9,8 @@ import noahsTime from "./noahs-time-pages.json";
 
 import enterTheArk from "./enter-the-ark-pages.json";
 
+import godRemembersNoah from "./god-remembers-noah-pages.json";
+
 export type ComicPageData = Omit<(typeof creation)[number], "titleEn" | "imageEn"> & { titleEn?: string; imageEn?: string };
 const episodeData: Record<string, ComicPageData[]> = {
   creation,
@@ -19,6 +21,7 @@ const episodeData: Record<string, ComicPageData[]> = {
   adamToNoah,
   noahsTime,
   enterTheArk,
+  godRemembersNoah,
 };
 
 export const comicBook = catalog;

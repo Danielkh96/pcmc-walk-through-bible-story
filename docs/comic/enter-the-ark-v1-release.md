@@ -1,10 +1,13 @@
-# 第八章《进入方舟》中文发布
+# 第八章发布完成
 
-2026-10-22 用户授权接入现有App并同步GitHub、Vercel供浏览。
+2026-10-22：中文10页接入现有App并发布。
 
-- 创世记7:1–24，10页中文成图；英文尚未生成。
-- 目录新增第8章，第7章反思后连接第8章；没有新人物，直接进入正文。
-- 10张图保持1024×1536完整显示；原稿、提示词及WhatsApp海报不进入公开资源。
-- PWA缓存更新为v27-enter-the-ark；品牌图标保持v26。
-- 发布前执行正式构建、已有测试及第8章逐页渲染和章节衔接测试。
-- GitHub推送、Vercel部署与线上哈希验证结果另存本地发布记录，只有验证成功后才标上线。
+- 提交：496a26301f80afaed94bff059c371b6f05bf0e08
+- GitHub Vercel状态：success
+- 部署：https://vercel.com/daniels-projects-ce806524/pcmc-walk-through-bible-story/CgPyonUTjrh719D48s777jmaZUUd
+- 正式阅读：https://pcmc-walk-through-bible-story.vercel.app/comic/read?chapter=enter-the-ark&page=1
+- 39项测试通过；普通和Vercel目标构建通过。
+- 十张线上图片SHA-256匹配；目录、首末阅读页与第七章反思页HTTP 200；PWA缓存v27。
+- 浏览器确认中文阅读界面与下一页操作可用。
+- 原App仓库已快进同步；原未提交创作记录备份至pre-release-local-backup，其他未跟踪文件保留。
+- 英文尚未生成。

@@ -753,6 +753,38 @@
       "referenceEn": "Genesis 7:1–24",
       "summaryEn": "Noah, his household, and the animals enter the ark as God commands. After the door closes, the flood comes and lifts the ark.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 7:1–24."
+    },
+    {
+      "id": "god-remembers-noah",
+      "edition": "god-remembers-noah-v1",
+      "number": 9,
+      "title": "神记念挪亚",
+      "book": "创世记",
+      "reference": "创世记 8:1–19",
+      "summary": "神记念挪亚，水势渐渐消退。方舟停山后，挪亚放鸟察看，继续等待，直到神吩咐全家和活物走出方舟。",
+      "dataKey": "godRemembersNoah",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "noah",
+        "shem",
+        "ham",
+        "japheth",
+        "noahs-wife",
+        "noahs-daughters-in-law"
+      ],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》8:1–19呈现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh"
+      ],
+      "titleEn": "God Remembers Noah",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 8:1–19",
+      "summaryEn": "God remembers Noah and the waters recede. Noah sends out birds and waits until God tells his household and the animals to leave the ark.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 8:1–19."
     }
   ],
   "titleEn": "Bible Comic Stories",
