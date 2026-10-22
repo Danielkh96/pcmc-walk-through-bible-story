@@ -7,7 +7,7 @@
 | 层级 | 状态 |
 | --- | --- |
 | App 已发布版本 | 第1–7章均已发布中英文版，共81页故事、162张中英文故事图片；含双语封面、夏娃／Eve人物介绍、第4和第7章双语反思页及v26品牌图标。2026-10-22核对全部178个漫画、封面、人物参考、图标及PWA资源，线上SHA-256与本地一致；25个页面入口均HTTP 200。内容基线提交`755731b293fd3f1be1db07ab062d7d2337867f22`，GitHub Vercel状态success。 |
-| 当前制作任务 | 2026-10-22已将Documents App仓库快进同步到GitHub最新内容，并完成正式构建与38项测试。原素材位于`/Users/tankhoonhean/Desktop/PCMC/Walk Through Bible Story`；最新正式素材和目录数据备份至其`output/comic/published-sync/`。旧Projects入口通过本地链接恢复。第六、七章各10页，中英文已生成并发布；下一章尚无已完成记录。详情见`sync-2026-10-22.md`。 |
+| 当前制作任务 | 第八章中文10页已获用户明确授权接入、GitHub同步及Vercel发布；本轮发布验证见`enter-the-ark-v1-release.md`。此前状态： 2026-10-22已将Documents App仓库快进同步到GitHub最新内容，并完成正式构建与38项测试。原素材位于`/Users/tankhoonhean/Desktop/PCMC/Walk Through Bible Story`；最新正式素材和目录数据备份至其`output/comic/published-sync/`。旧Projects入口通过本地链接恢复。第六、七章各10页，中英文已生成并发布；下一章尚无已完成记录。详情见`sync-2026-10-22.md`。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
 | 最近可定位的完整审核稿 | 第六章素材目录`output/comic/adam-to-noah-v1/adam-to-noah-storyboard-review-v1.md`：10页42格，已生成并发布。第五章9页39格审核稿及第一至四章历史批准稿保留。第七章双语10页44格正式成图和页面数据已恢复，未将缺失的原始提示词冒称为已同步。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |

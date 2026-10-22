@@ -721,6 +721,38 @@
       "referenceEn": "Genesis 6:1–22",
       "summaryEn": "As humanity spreads, violence and corruption grow. Noah finds favor in God’s eyes and receives instructions to build an ark.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 6:1–22."
+    },
+    {
+      "id": "enter-the-ark",
+      "edition": "enter-the-ark-v1",
+      "number": 8,
+      "title": "进入方舟",
+      "book": "创世记",
+      "reference": "创世记 7:1–24",
+      "summary": "挪亚照着神的吩咐，带着全家和动物进入方舟。舟门关闭后，洪水来到，方舟随着水势漂起。",
+      "dataKey": "enterTheArk",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "noah",
+        "shem",
+        "ham",
+        "japheth",
+        "noahs-wife",
+        "noahs-daughters-in-law"
+      ],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》7:1–24呈现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh"
+      ],
+      "titleEn": "Entering the Ark",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 7:1–24",
+      "summaryEn": "Noah, his household, and the animals enter the ark as God commands. After the door closes, the flood comes and lifts the ark.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 7:1–24."
     }
   ],
   "titleEn": "Bible Comic Stories",

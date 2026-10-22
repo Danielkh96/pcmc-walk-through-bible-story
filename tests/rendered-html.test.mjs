@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v26-comic-brand-icons/);
+  assert.match(serviceWorker, /pcmc-bible-story-v27-enter-the-ark/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -308,7 +308,22 @@ test("reflection follows the comic in chapters four and seven without changing a
       assert.doesNotMatch(html, /alt="漫画第|正在绘制中/);
       assert.match(html, new RegExp('aria-valuemax="' + count + '"'));
       if (id === "brothers") assert.match(html, /aria-label="下一章：一代又一代"/);
-      else assert.match(html, /返回目录/);
+      else assert.match(html, /aria-label="下一章：进入方舟"/);
     }
+  }
+});
+
+test("chapter eight renders all Chinese pages and follows chapter seven reflection", async () => {
+  const contents = await (await render('/comic/contents')).text();
+  assert.ok(contents.includes('/comic/read?chapter=enter-the-ark'));
+  const reflection = await (await render('/comic/read?chapter=noahs-time&page=11')).text();
+  assert.ok(reflection.includes('/comic/read?chapter=enter-the-ark'));
+  for (let page=1; page<=10; page++) {
+    const response=await render('/comic/read?chapter=enter-the-ark&page='+page);
+    assert.equal(response.status,200);
+    const html=await response.text();
+    assert.ok(html.includes('/comics/enter-the-ark-v1/page-'+String(page).padStart(2,'0')+'.png'));
+    assert.ok(html.includes('本章目前提供中文版'));
+    assert.ok(!html.includes('/comics/enter-the-ark-v1-en/'));
   }
 });
