@@ -86,6 +86,7 @@ export default function Home() {
   const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
   const zh = language === "zh";
   const chapters = comicChaptersForLanguage(language);
+  const latestChapters = [...chapters].sort((a, b) => b.number - a.number).slice(0, 3);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -148,9 +149,10 @@ export default function Home() {
 
       <section className="library app-reveal reveal-4 is-visible" id="library">
         <div className="library-head"><p className="eyebrow">{zh ? "漫画书架" : "THE COMIC SHELF"}</p>
-          <h2>{zh ? "下一段冒险，从这里开始。" : "Your next adventure starts here."}</h2>
+          <h2>{zh ? "最近更新漫画" : "Recently updated comics"}</h2>
+          <p className="library-description">{zh ? "这里展示最近更新的 3 章，全部故事请查看漫画目录。" : "Explore the three latest chapters here. Visit the comic contents for all stories."}</p>
         </div>
-        {chapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={comicChapterEntry(chapter)}>
+        {latestChapters.map((chapter) => <a key={chapter.id} className="comic-feature" href={comicChapterEntry(chapter)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={chapter.number === 1 ? (zh ? comicBook.coverImage : comicBook.coverImageEn) : (zh ? chapter.pages[0].image : chapter.pages[0].imageEn)} alt="" loading="lazy" width={1024} height={1536} />
           <span><small>{zh ? `第 ${chapter.number} 集 · ${chapter.book} · 中文漫画` : `Episode ${chapter.number} · ${chapter.bookEn} · English comic`}</small>
@@ -159,6 +161,7 @@ export default function Home() {
             <b>{zh ? "进入这一集" : "Open episode"} →</b>
           </span>
         </a>)}
+        <a className="library-contents-link" href="/comic/contents">{zh ? "查看全部章节" : "View all chapters"} →</a>
         <details className="complete-library">
           <summary><span>{zh ? "浏览六十六卷书" : "Explore all 66 books"}<small>{zh ? "漫画章节会陆续添加 · 旧约 39 卷 · 新约 27 卷" : "Comic chapters added over time · 39 Old Testament · 27 New Testament"}</small></span><b aria-hidden="true">＋</b></summary>
           {[{name: zh ? "旧约" : "OLD TESTAMENT", list: books.slice(0,39)}, {name: zh ? "新约" : "NEW TESTAMENT", list: books.slice(39)}].map((group) => <div key={group.name}>

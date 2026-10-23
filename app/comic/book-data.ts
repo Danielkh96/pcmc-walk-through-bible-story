@@ -15,6 +15,8 @@ import noahsOffering from "./noahs-offering-pages.json";
 
 import noahAndHisSons from "./noah-and-his-sons-pages.json";
 
+import nationsAfterTheFlood from "./nations-after-the-flood-pages.json";
+
 export type ComicPageData = Omit<(typeof creation)[number], "titleEn" | "imageEn"> & { titleEn?: string; imageEn?: string };
 const episodeData: Record<string, ComicPageData[]> = {
   creation,
@@ -28,6 +30,7 @@ const episodeData: Record<string, ComicPageData[]> = {
   godRemembersNoah,
   noahsOffering,
   noahAndHisSons,
+  nationsAfterTheFlood,
 };
 
 export const comicBook = catalog;
@@ -52,10 +55,14 @@ export function comicChaptersForLanguage(language: "zh" | "en") {
   return comicChapters.filter((chapter) => chapter.availableLanguages.includes(language));
 }
 
-// Introduce only people encountered by this chapter, without future spoilers.
-export function charactersThroughChapter(chapter: ComicChapter) {
-  const ids = new Set(comicChapters
-    .filter((item) => item.number <= chapter.number)
-    .flatMap((item) => item.characterIds));
-  return comicBook.characters.filter((person) => ids.has(person.id));
+// Each chapter introduces its new cast once; the opening introduces the companions.
+export function charactersIntroducedInChapter(chapter: ComicChapter) {
+  const ids = chapter.number === 1
+    ? [...comicBook.mainCharacterIds, ...chapter.newCharacterIds]
+    : chapter.newCharacterIds;
+  return ids.map((id) => {
+    const person = comicBook.characters.find((item) => item.id === id);
+    if (!person) throw new Error("Missing character introduction: " + id);
+    return person;
+  });
 }

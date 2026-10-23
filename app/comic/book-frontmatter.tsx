@@ -5,7 +5,7 @@
 import { useSyncExternalStore } from "react";
 import { useAppearance } from "../use-appearance";
 import { useLanguage } from "../use-language";
-import { comicBook, comicChapters, comicChaptersForLanguage, charactersThroughChapter } from "./book-data";
+import { comicBook, comicChapters, comicChaptersForLanguage, charactersIntroducedInChapter } from "./book-data";
 import { comicChapterEntry, savedComicPage } from "./navigation.mjs";
 import reader from "./comic.module.css";
 import styles from "./book.module.css";
@@ -25,7 +25,8 @@ export default function BookFrontmatter({ section, chapterId }: { section: "cont
   const zh = language === "zh";
   const availableChapters = comicChaptersForLanguage(language);
   const chapter = comicChapters.find((item) => item.id === chapterId) ?? comicChapters[0];
-  const characters = charactersThroughChapter(chapter);
+  const characters = charactersIntroducedInChapter(chapter);
+  const showCompanionArt = characters.some((person) => comicBook.mainCharacterIds.includes(person.id));
   const progress = useSyncExternalStore(subscribeProgress, savedProgress, noProgress);
   const page = savedComicPage(progress, chapter);
   return (
@@ -44,7 +45,7 @@ export default function BookFrontmatter({ section, chapterId }: { section: "cont
       <div className={styles.body}>
         <div className={styles.heading}>
           <p className={reader.eyebrow}>{section === "contents" ? (zh ? comicBook.title : comicBook.titleEn) : (zh ? `第 ${chapter.number} 章 · ${chapter.book}` : `Chapter ${chapter.number} · ${chapter.bookEn}`)}</p>
-          <h1>{section === "contents" ? (zh ? "漫画目录" : "Comic contents") : (zh ? "认识故事里的伙伴" : "Meet the characters")}</h1>
+          <h1>{section === "contents" ? (zh ? "漫画目录" : "Comic contents") : chapter.number === 1 ? (zh ? "认识故事里的伙伴" : "Meet the characters") : (zh ? "认识本章的新人物" : "Meet this chapter’s new characters")}</h1>
           <p>{section === "contents" ? (zh ? "选一章，开始这段冒险。" : "Choose a chapter and begin the adventure.") : (zh ? "先认识他们，再一起走进故事。" : "Meet them first, then step into the story together.")}</p>
         </div>
         {section === "contents" ? (
@@ -59,10 +60,10 @@ export default function BookFrontmatter({ section, chapterId }: { section: "cont
           </ol>
         ) : (
           <>
-            <div className={styles.characterArt}>
+            {showCompanionArt && <div className={styles.characterArt}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={comicBook.characterSheet} alt={zh ? "小昆穿橙色上衣，小君穿湖绿色上衣，两位一起探索圣经故事的伙伴。" : "Xiao Kun in orange and Xiao Jun in teal, two friends exploring Bible stories together."} width={1536} height={1024} />
-            </div>
+            </div>}
             <div className={styles.characterGrid}>{characters.map((person) => <section key={person.id} className={styles.characterCard}>
               <small>{chapter.newCharacterIds.includes(person.id) ? (zh ? "新登场 · " : "New · ") : ""}{person.kind === "fictional" ? (zh ? "现代学生 · 故事中的虚构旅伴" : "Modern students · fictional companions") : (zh ? "圣经人物" : "Biblical character")}</small>
               <h2>{zh ? person.name : person.nameEn}</h2><h3>{zh ? person.tagline : person.taglineEn}</h3>

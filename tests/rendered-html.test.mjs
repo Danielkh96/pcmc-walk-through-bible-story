@@ -33,7 +33,7 @@ test("server-renders the PCMC Bible Story app", async () => {
   assert.match(html, /PCMC Walk Through Bible Story/);
   assert.match(html, /class="launch-screen"/);
   assert.match(html, /src="\/pcmc-logo\.png\?v=26"/);
-  assert.match(html, /下一段冒险，从这里开始。/);
+  assert.match(html, /最近更新漫画/);
   assert.match(html, /class="comic-feature"/);
   assert.match(html, /浏览六十六卷书/);
   assert.doesNotMatch(html, /Bible story reader|featured-book|genesis-creation\.png|4 个故事/);
@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v30-noah-and-his-sons/);
+  assert.match(serviceWorker, /pcmc-bible-story-v32-nations-after-the-flood/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -179,7 +179,7 @@ test("Temptation introduces the serpent without spoilers and renders all fourtee
   assert.doesNotMatch(previousCast, /<h2>蛇<\/h2>/);
   const cast = await (await render("/comic/chapter/temptation")).text();
   assert.match(cast, /<h2>蛇<\/h2>/);
-  assert.match(cast, /<h2>夏娃<\/h2>/);
+  assert.doesNotMatch(cast, /<h2>夏娃<\/h2>/);
   assert.doesNotMatch(cast, /基路伯|园外的两兄弟/);
   assert.ok(cast.includes("/comic/read?chapter=temptation"));
   for (const page of [...Array.from({length:14}, (_,i) => i+1), 99]) {
@@ -256,7 +256,7 @@ test("Noah's Time exposes introductions and all ten complete pages", async () =>
   const contents=await (await render("/comic/contents")).text();
   assert.ok(contents.includes('href="/comic/chapter/noahs-time"'));
   const cast=await (await render("/comic/chapter/noahs-time")).text();
-  assert.match(cast, /<h2>挪亚<\/h2>/);
+  assert.doesNotMatch(cast, /<h2>挪亚<\/h2>/);
   assert.match(cast, /<h2>挪亚的妻子<\/h2>/);
   for(let page=1;page<=10;page++){
     const response=await render("/comic/read?chapter=noahs-time&page="+page);
@@ -335,7 +335,7 @@ test("chapter nine follows chapter eight and renders ten complete Chinese pages"
  const chapter=catalog.chapters.find(c=>c.id==='god-remembers-noah');
  assert.deepEqual(chapter.availableLanguages,['zh','en']);
  assert.deepEqual(chapter.newCharacterIds,[]);
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,11);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,12);
  const contents=await (await render('/comic/contents')).text();
  assert.ok(contents.includes('/comic/read?chapter=god-remembers-noah'));
  const previous=await (await render('/comic/read?chapter=enter-the-ark&page=10')).text();
@@ -376,9 +376,9 @@ test("Noah's Offering follows the exit from the ark and renders all ten full pag
 test("Noah and His Sons follows chapter ten and ends at eight complete bilingual pages", async () => {
   const previous = await (await render('/comic/read?chapter=noahs-offering&page=10')).text();
   assert.ok(previous.includes('aria-label="下一章：挪亚和他的儿子们"'));
-  assert.ok(previous.includes('href="/comic/read?chapter=noah-and-his-sons&amp;page=1"'));
+  assert.ok(previous.includes('href="/comic/chapter/noah-and-his-sons"'));
   const contents = await (await render('/comic/contents')).text();
-  assert.ok(contents.includes('/comic/read?chapter=noah-and-his-sons'));
+  assert.ok(contents.includes('/comic/chapter/noah-and-his-sons'));
   for (const page of [1,2,3,4,5,6,7,8,99]) {
     const response = await render('/comic/read?chapter=noah-and-his-sons&page=' + page);
     assert.equal(response.status, 200);
@@ -389,6 +389,72 @@ test("Noah and His Sons follows chapter ten and ends at eight complete bilingual
     assert.match(html, /aria-valuemax="8"/);
     assert.doesNotMatch(html, /reindexedArtwork|本章目前提供中文版|本页分镜|对白润色|待用户审核/);
     assert.ok(!html.includes('/comics/noah-and-his-sons-v1/page-09.png'));
+    if (page >= 8) assert.ok(html.includes('aria-label="下一章：洪水以后的列国"'));
+  }
+});
+
+test("homepage features only the latest three chapters while contents keeps every chapter", async () => {
+  const home = await (await render('/')).text();
+  const library = home.match(/<section[^>]*id="library"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(library);
+  assert.match(library, /<h2>最近更新漫画<\/h2>/);
+  assert.ok(library.includes('这里展示最近更新的 3 章，全部故事请查看漫画目录。'));
+  const cards = [...library.matchAll(/<a[^>]*class="comic-feature"[^>]*href="([^"]+)"/g)].map(match => match[1]);
+  assert.deepEqual(cards, [
+    '/comic/chapter/nations-after-the-flood',
+    '/comic/chapter/noah-and-his-sons',
+    '/comic/read?chapter=noahs-offering&amp;page=1',
+  ]);
+  assert.ok(library.includes('查看全部章节'));
+  assert.ok(home.includes('已更新 12 章'));
+  const contents = await (await render('/comic/contents')).text();
+  const catalog = JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
+  for (const chapter of catalog.chapters) assert.ok(contents.includes('chapter/' + chapter.id) || contents.includes('chapter=' + chapter.id));
+});
+
+test("chapter introductions contain only first-time cast and never repeat the companion sheet", async () => {
+  const catalog = JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
+  const introduced = new Set();
+  for (const chapter of catalog.chapters) {
+    const ids = chapter.number === 1 ? [...catalog.mainCharacterIds,...chapter.newCharacterIds] : chapter.newCharacterIds;
+    const response = await render('/comic/chapter/' + chapter.id);
+    if (!ids.length) {
+      assert.equal(response.status,307);
+      assert.equal(response.headers.get('location'),'/comic/read?chapter=' + chapter.id + '&page=1');
+      continue;
+    }
+    assert.equal(response.status,200);
+    const html = await response.text();
+    const names = [...html.matchAll(/<h2>([^<]+)<\/h2>/g)].map(match => match[1]);
+    assert.deepEqual(names,ids.map(id => catalog.characters.find(person => person.id === id).name));
+    assert.equal(html.includes('src="' + catalog.characterSheet + '"'),chapter.number === 1);
+    for (const id of ids) {
+      assert.ok(!introduced.has(id),'repeat introduction: ' + id);
+      introduced.add(id);
+    }
+  }
+  assert.equal(introduced.size,catalog.characters.length);
+  assert.ok(catalog.chapters[4].newCharacterIds.includes('enosh'));
+  assert.ok(!catalog.chapters[5].newCharacterIds.includes('enosh'));
+  assert.deepEqual(catalog.chapters[10].newCharacterIds,['canaan']);
+});
+
+test("chapter twelve follows chapter eleven and renders every complete bilingual page", async () => {
+  const previous = await (await render('/comic/read?chapter=noah-and-his-sons&page=8')).text();
+  assert.ok(previous.includes('href="/comic/chapter/nations-after-the-flood"'));
+  assert.ok(previous.includes('aria-label="下一章：洪水以后的列国"'));
+  const contents = await (await render('/comic/contents')).text();
+  assert.ok(contents.includes('/comic/chapter/nations-after-the-flood'));
+  for (const page of [1,2,3,4,5,6,7,8,99]) {
+    const response = await render('/comic/read?chapter=nations-after-the-flood&page=' + page);
+    assert.equal(response.status,200);
+    const html = await response.text();
+    assert.ok(html.includes('/comics/nations-after-the-flood-v1/page-' + String(Math.min(page,8)).padStart(2,'0') + '.png'));
+    assert.ok(html.includes('/comics/nations-after-the-flood-v1-en/'));
+    assert.match(html,/aria-valuemax="8"/);
+    assert.ok(html.includes('切换至英文漫画'));
+    assert.doesNotMatch(html,/本章目前提供中文版|本页分镜|对白润色|待用户审核|新人物造型待审/);
+    assert.ok(!html.includes('/comics/nations-after-the-flood-v1/page-09.png'));
     if (page >= 8) assert.ok(html.includes('这一章读完啦！'));
   }
 });
