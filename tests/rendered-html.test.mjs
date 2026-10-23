@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v29-bilingual-noah/);
+  assert.match(serviceWorker, /pcmc-bible-story-v30-noah-and-his-sons/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -335,7 +335,7 @@ test("chapter nine follows chapter eight and renders ten complete Chinese pages"
  const chapter=catalog.chapters.find(c=>c.id==='god-remembers-noah');
  assert.deepEqual(chapter.availableLanguages,['zh','en']);
  assert.deepEqual(chapter.newCharacterIds,[]);
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,10);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,11);
  const contents=await (await render('/comic/contents')).text();
  assert.ok(contents.includes('/comic/read?chapter=god-remembers-noah'));
  const previous=await (await render('/comic/read?chapter=enter-the-ark&page=10')).text();
@@ -369,6 +369,26 @@ test("Noah's Offering follows the exit from the ark and renders all ten full pag
     assert.ok(html.includes('切换至英文漫画'));
     assert.match(html, /aria-valuemax="10"/);
     assert.doesNotMatch(html, /reindexedArtwork|本章目前提供中文版|本页分镜|对白润色|待用户审核/);
-    if (page === 10) assert.ok(html.includes('这一章读完啦！'));
+    if (page === 10) assert.ok(html.includes('aria-label="下一章：挪亚和他的儿子们"'));
+  }
+});
+
+test("Noah and His Sons follows chapter ten and ends at eight complete bilingual pages", async () => {
+  const previous = await (await render('/comic/read?chapter=noahs-offering&page=10')).text();
+  assert.ok(previous.includes('aria-label="下一章：挪亚和他的儿子们"'));
+  assert.ok(previous.includes('href="/comic/read?chapter=noah-and-his-sons&amp;page=1"'));
+  const contents = await (await render('/comic/contents')).text();
+  assert.ok(contents.includes('/comic/read?chapter=noah-and-his-sons'));
+  for (const page of [1,2,3,4,5,6,7,8,99]) {
+    const response = await render('/comic/read?chapter=noah-and-his-sons&page=' + page);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes('/comics/noah-and-his-sons-v1/page-' + String(Math.min(page,8)).padStart(2,'0') + '.png'));
+    assert.ok(html.includes('/comics/noah-and-his-sons-v1-en/'));
+    assert.ok(html.includes('切换至英文漫画'));
+    assert.match(html, /aria-valuemax="8"/);
+    assert.doesNotMatch(html, /reindexedArtwork|本章目前提供中文版|本页分镜|对白润色|待用户审核/);
+    assert.ok(!html.includes('/comics/noah-and-his-sons-v1/page-09.png'));
+    if (page >= 8) assert.ok(html.includes('这一章读完啦！'));
   }
 });

@@ -820,6 +820,37 @@
       "referenceEn": "Genesis 8:20–9:17",
       "summaryEn": "Noah builds an altar after leaving the ark. God blesses his family, gives instructions about life, and establishes a covenant with Noah, his descendants, and every living creature, with the rainbow as its sign.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 8:20–9:17."
+    },
+    {
+      "id": "noah-and-his-sons",
+      "edition": "noah-and-his-sons-v1",
+      "number": 11,
+      "title": "挪亚和他的儿子们",
+      "book": "创世记",
+      "reference": "创世记 9:18–29",
+      "summary": "挪亚开始耕种，后来醉酒。含到帐外告诉弟兄，闪和雅弗倒退入帐，为父亲盖上外衣；经文随后记下挪亚的话和寿数。",
+      "dataKey": "noahAndHisSons",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "noah",
+        "shem",
+        "ham",
+        "japheth"
+      ],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》9:18–29呈现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
+      "titleEn": "Noah and His Sons",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 9:18–29",
+      "summaryEn": "After Noah plants a vineyard, he becomes drunk. Ham tells his brothers; Shem and Japheth enter backward and cover their father. The account continues with Noah’s words and the closing record of his life.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 9:18–29."
     }
   ],
   "titleEn": "Bible Comic Stories",

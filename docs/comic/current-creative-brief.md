@@ -7,9 +7,9 @@
 | 层级 | 状态 |
 | --- | --- |
 | App 已发布版本 | 2026-10-23：第1–10章均有中英文版本，合计111页故事、222张故事图片。第8–10章英文30页及第十章中文10页由内容提交99c8d93发布；GitHub Vercel检查success，40张新增线上图片SHA-256全部匹配，8个阅读/目录入口HTTP 200。42项测试、普通和Vercel目标构建、本地浏览器中英切换/跨章/手机390px阅读通过，PWA缓存v29-bilingual-noah，品牌图标仍v26。 |
-| 当前制作任务 | 已完成本批缺失英文补齐与第十章中文接入，正式网站可阅读第1–10章双语内容。第十一章《挪亚和他的儿子们》仅为现有末页预告，尚未制作或发布，不将预告当作创作授权。发布证据见bilingual-noah-v1-release.md及素材目录bilingual-noah-release-online-verification.json。 |
+| 当前制作任务 | 2026-10-23用户明确要求第十一章英文并同步GitHub/Vercel。中文与英文各8页33个主分镜已生成并本地校对，现已接入隔离发布副本；英文为批准中文画面的文字本地化。普通/Vercel构建、43项测试与本地浏览器流程已通过，待正式上线验证，线上状态仍以第一行记录为准。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
-| 最近可定位的完整审核稿 | 第十章`output/comic/noahs-offering-v1/storyboard-review-v1.md`，10页44个主分镜；原稿保留写稿时状态，后续生成授权和实际状态见该目录README.md、status.json；中文成图与本地检查已完成。 |
+| 最近可定位的完整审核稿 | 第十一章output/comic/noah-and-his-sons-v1/storyboard-review-v1.md，8页33格；原文件保留写稿时状态，后续确认、生成授权与实际图片状态见该目录README.md、status.json及storyboard-production-v1.json。中文成图与本地校对已完成。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |
 | 第二章《伊甸园》 | 2026-09-17 新拟审核稿：10页、43格，创2:4–25；见 `eden-storyboard-review-v1.md`。已核对第一章末页与人物参考，明确回看人的受造；用户随后明确要求生成并直接发布到现有App；10页43格已生成、校对并接入本地，见 eden-v1-qa.md 与 eden-v1-release.md。21项测试与Vercel正式构建已通过；GitHub发布、Vercel正式部署与全部10页线上验证已完成。旧8页38格仅为历史提案。 |
 
