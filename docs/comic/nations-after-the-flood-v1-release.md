@@ -12,3 +12,15 @@
 发布前验证：普通构建、47项测试、定向ESLint通过。本地浏览器核对首页12/11/10、章节7名新人物中英文、英文第一页和第8页图片加载及切中文保持页码；没有新增讲义内容。Vercel目标构建和正式发布验证后续追加。
 
 Vercel目标构建已通过。发布前验证全部通过，正式推送及线上验证待执行。
+
+## 正式发布验证结果
+
+2026-10-23，《洪水以后的列国》创10:1–32，中英文各8页33格。
+
+- 内容提交：e1d82c97a046cea9148b79316fce2d6b2da1b11f。经本机既有Danielkh96 SSH身份推送GitHub main成功，原daniels-projects-ce806524/pcmc-walk-through-bible-story的Vercel部署success。终端HTTPS未登录、GitHub连接器403曾阻止推送；使用原有SSH解决，未新增账户、项目或凭据。
+- 普通构建、Vercel目标构建、47项测试和定向ESLint通过；已实际验证中英新人物页、首末图加载、末页切换保留第8页、第11→12章导航。生产浏览器未见控制台错误。
+- 16张新线上图片SHA-256全部匹配，7个首页/目录/人物/阅读入口HTTP 200；越界页99归到第8页；PWA缓存v32-nations-after-the-flood。
+- 首页明确标示最近更新漫画，只展示12、11、10章；完整目录保留12章。各章只介绍首次登场人物，34份旧资料加本章7份，合计41份各介绍一次。
+- 全书中英各127页，合计254张故事图片。剧本、提示词、修正初稿及宣传海报留在本机，线上只展示漫画和正式阅读界面。
+- 正式入口：https://pcmc-walk-through-bible-story.vercel.app/comic/chapter/nations-after-the-flood
+- 机器证据：release-online-verification.json；浏览器记录：browser-verification.json。
