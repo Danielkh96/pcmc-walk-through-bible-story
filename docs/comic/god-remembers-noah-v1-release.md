@@ -1,10 +1,10 @@
-# 第九章《神记念挪亚》中文发布
+# 第九章正式发布验证
 
-2026-10-22用户明确授权同步GitHub及Vercel。
+2026-10-22 中文10页发布完成。
 
-- 创8:1–19，中文10页44个主分镜；仅复制已校对page-01.png至page-10.png，图片哈希与素材assets.json一致。
-- 新增第九章目录、第八章末页到第九章的连接；无新增人物，直接进入正文。
-- 英文尚未生成，英文目录仍为1–7章；第8–9章保留中文可用性提示。
-- PWA缓存v28-god-remembers-noah；品牌图标保持v26。
-- 图片完整显示，不裁切；原稿、提示词、修图初稿及WhatsApp海报不导入公开资源。
-- 发布前执行完整测试、逐页服务器渲染与Vercel目标构建；部署结果与线上哈希验证将单独记录在素材目录release.md及release-online-verification.json。
+- GitHub提交：8d96e0d79f078fc3d8e56b8f6a41d463a04aaf0d
+- GitHub Vercel检查success；40项测试、普通构建及Vercel目标构建通过。
+- 10张正式图片SHA-256逐一与素材一致，目录、首末阅读页及第8章末页HTTP 200，PWA缓存v28。
+- 线上阅读：https://pcmc-walk-through-bible-story.vercel.app/comic/read?chapter=god-remembers-noah&page=1
+- 本章英文尚未生成。
+- 原App工作区创作记录已先备份，其他未跟踪文件保留。

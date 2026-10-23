@@ -746,7 +746,8 @@
       "hidePrintedFolio": false,
       "status": "published",
       "availableLanguages": [
-        "zh"
+        "zh",
+        "en"
       ],
       "titleEn": "Entering the Ark",
       "bookEn": "Genesis",
@@ -778,13 +779,47 @@
       "hidePrintedFolio": false,
       "status": "published",
       "availableLanguages": [
-        "zh"
+        "zh",
+        "en"
       ],
       "titleEn": "God Remembers Noah",
       "bookEn": "Genesis",
       "referenceEn": "Genesis 8:1–19",
       "summaryEn": "God remembers Noah and the waters recede. Noah sends out birds and waits until God tells his household and the animals to leave the ark.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 8:1–19."
+    },
+    {
+      "id": "noahs-offering",
+      "edition": "noahs-offering-v1",
+      "number": 10,
+      "title": "挪亚献祭",
+      "book": "创世记",
+      "reference": "创世记 8:20–9:17",
+      "summary": "挪亚出方舟后向神献祭。神赐下祝福，吩咐人看重生命，并与挪亚、他的后裔和一切活物立约，以云中的虹作为记号。",
+      "dataKey": "noahsOffering",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "noah",
+        "shem",
+        "ham",
+        "japheth",
+        "noahs-wife",
+        "noahs-daughters-in-law"
+      ],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》8:20–9:17呈现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
+      "titleEn": "Noah’s Offering",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 8:20–9:17",
+      "summaryEn": "Noah builds an altar after leaving the ark. God blesses his family, gives instructions about life, and establishes a covenant with Noah, his descendants, and every living creature, with the rainbow as its sign.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 8:20–9:17."
     }
   ],
   "titleEn": "Bible Comic Stories",

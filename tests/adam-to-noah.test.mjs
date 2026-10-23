@@ -7,8 +7,8 @@ test('Chapter six fills the gap with ten complete Chinese and English pages',asy
  const catalog=JSON.parse(await read('app/comic/book-catalog.json'));
  const pages=JSON.parse(await read('app/comic/adam-to-noah-pages.json'));
  const chapters=catalog.chapters.filter(c=>c.availableLanguages.includes('zh'));
- assert.deepEqual(chapters.map(c=>c.number),[1,2,3,4,5,6,7,8,9]);
- assert.deepEqual(chapters.slice(4).map(c=>c.id),['generations','adam-to-noah','noahs-time','enter-the-ark','god-remembers-noah']);
+ assert.deepEqual(chapters.map(c=>c.number),[1,2,3,4,5,6,7,8,9,10]);
+ assert.deepEqual(chapters.slice(4).map(c=>c.id),['generations','adam-to-noah','noahs-time','enter-the-ark','god-remembers-noah','noahs-offering']);
  const c=chapters[5];
  assert.equal(c.reference,'创世记 5:1–32');
  assert.equal(c.hidePrintedFolio,false);
@@ -32,5 +32,5 @@ test('Chapter six fills the gap with ten complete Chinese and English pages',asy
   assert.ok(c.newCharacterIds.includes(id));assert.ok(!chapters[6].newCharacterIds.includes(id));
  }
  assert.ok(ids.has('lamech')&&ids.has('lamech-noah'));
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,7);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,10);
 });

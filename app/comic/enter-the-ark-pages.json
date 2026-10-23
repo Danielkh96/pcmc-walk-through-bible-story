@@ -2,51 +2,71 @@
   {
     "id": 1,
     "title": "现在，要进去了",
-    "image": "/comics/enter-the-ark-v1/page-01.png"
+    "image": "/comics/enter-the-ark-v1/page-01.png",
+    "titleEn": "Time to Go In",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-01.png"
   },
   {
     "id": 2,
     "title": "不全是同一个数量",
-    "image": "/comics/enter-the-ark-v1/page-02.png"
+    "image": "/comics/enter-the-ark-v1/page-02.png",
+    "titleEn": "Not Just One Pair",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-02.png"
   },
   {
     "id": 3,
     "title": "还有七天",
-    "image": "/comics/enter-the-ark-v1/page-03.png"
+    "image": "/comics/enter-the-ark-v1/page-03.png",
+    "titleEn": "Seven More Days",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-03.png"
   },
   {
     "id": 4,
     "title": "一家人进入方舟",
-    "image": "/comics/enter-the-ark-v1/page-04.png"
+    "image": "/comics/enter-the-ark-v1/page-04.png",
+    "titleEn": "The Whole Family Enters",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-04.png"
   },
   {
     "id": 5,
     "title": "它们也进来了",
-    "image": "/comics/enter-the-ark-v1/page-05.png"
+    "image": "/comics/enter-the-ark-v1/page-05.png",
+    "titleEn": "The Animals Come In Too",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-05.png"
   },
   {
     "id": 6,
     "title": "关上的门",
-    "image": "/comics/enter-the-ark-v1/page-06.png"
+    "image": "/comics/enter-the-ark-v1/page-06.png",
+    "titleEn": "The Door Is Shut",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-06.png"
   },
   {
     "id": 7,
     "title": "四十昼夜的雨",
-    "image": "/comics/enter-the-ark-v1/page-07.png"
+    "image": "/comics/enter-the-ark-v1/page-07.png",
+    "titleEn": "Forty Days and Nights of Rain",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-07.png"
   },
   {
     "id": 8,
     "title": "方舟浮起来了",
-    "image": "/comics/enter-the-ark-v1/page-08.png"
+    "image": "/comics/enter-the-ark-v1/page-08.png",
+    "titleEn": "The Ark Begins to Float",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-08.png"
   },
   {
     "id": 9,
     "title": "连高山也淹没了",
-    "image": "/comics/enter-the-ark-v1/page-09.png"
+    "image": "/comics/enter-the-ark-v1/page-09.png",
+    "titleEn": "Even the Mountains Disappear",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-09.png"
   },
   {
     "id": 10,
     "title": "水面上的等待",
-    "image": "/comics/enter-the-ark-v1/page-10.png"
+    "image": "/comics/enter-the-ark-v1/page-10.png",
+    "titleEn": "Waiting on the Water",
+    "imageEn": "/comics/enter-the-ark-v1-en/page-10.png"
   }
 ]
