@@ -666,6 +666,22 @@
       "quoteEn": "",
       "appearanceEn": "Presented through names and family relationships in this chapter",
       "referenceEn": "Genesis 10:25–30"
+    },
+    {
+      "id": "babel-builders",
+      "name": "造城的人们",
+      "kind": "biblical",
+      "tagline": "在示拿地平原定居的人们。",
+      "bio": "他们原本说同一种语言，彼此商量用砖和石漆建造城与塔，为要传扬自己的名，也免得分散。",
+      "quote": "",
+      "appearance": "匿名群体 · 土赭与灰蓝衣服",
+      "reference": "创世记 11:1–4",
+      "nameEn": "The city builders",
+      "taglineEn": "The people who settled on the plain in Shinar.",
+      "bioEn": "They spoke one language and agreed to build a city and tower with bricks and bitumen, to make a name for themselves and keep from being scattered.",
+      "quoteEn": "",
+      "appearanceEn": "An unnamed group · ochre and grey-blue clothing",
+      "referenceEn": "Genesis 11:1–4"
     }
   ],
   "chapters": [
@@ -1120,6 +1136,36 @@
       "referenceEn": "Genesis 10:1–32",
       "summaryEn": "Follow the descendants of Japheth, Ham and Shem as families branch out and settle. Meet Nimrod and the cities, then trace Shem’s line to Eber, Peleg and Joktan.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter presents selected family lines and the overview of nations in Genesis 10:1–32."
+    },
+    {
+      "id": "tower-of-babel",
+      "edition": "tower-of-babel-v1",
+      "number": 13,
+      "title": "巴别塔",
+      "book": "创世记",
+      "reference": "创世记 11:1–9",
+      "summary": "同说一种语言的人们在示拿地定居，商量用砖和石漆造城造塔。小昆和小君看见工人原本顺畅的合作，后来却发生了变化。",
+      "dataKey": "towerOfBabel",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "babel-builders"
+      ],
+      "newCharacterIds": [
+        "babel-builders"
+      ],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》11:1–9呈现，匿名工人的外貌和施工细节属于美术表现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
+      "titleEn": "The Tower of Babel",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 11:1–9",
+      "summaryEn": "People speaking one language settle in Shinar and plan a city and tower built with bricks and bitumen. Xiao Kun and Xiao Jun watch the workers cooperate, until something changes.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 11:1–9. The unnamed workers’ appearances and construction details are artistic depictions."
     }
   ],
   "titleEn": "Bible Comic Stories",

@@ -6,7 +6,7 @@ import { comicChapterEntry, savedComicPage } from "../app/comic/navigation.mjs";
 test("Noah chapters have distinct complete editions in both languages without gaps", async () => {
   const catalog = JSON.parse(await readFile(new URL("../app/comic/book-catalog.json", import.meta.url), "utf8"));
   for (const language of ["zh", "en"]) {
-    assert.deepEqual(catalog.chapters.filter(c => c.availableLanguages.includes(language)).map(c => c.number), Array.from({ length: 12 }, (_, i) => i + 1));
+    assert.deepEqual(catalog.chapters.filter(c => c.availableLanguages.includes(language)).map(c => c.number), Array.from({ length: 13 }, (_, i) => i + 1));
   }
   for (const [id, count] of [["enter-the-ark", 10], ["god-remembers-noah", 10], ["noahs-offering", 10], ["noah-and-his-sons", 8]]) {
     const chapter = catalog.chapters.find(c => c.id === id);

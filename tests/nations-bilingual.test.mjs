@@ -12,7 +12,7 @@ test("Nations After the Flood has two complete eight-page editions and seven new
   assert.deepEqual(chapter.availableLanguages, ["zh", "en"]);
   assert.deepEqual(chapter.newCharacterIds, ["cush", "nimrod", "arpachshad", "shelah", "eber", "peleg", "joktan"]);
   assert.equal(comicChapterEntry(chapter), "/comic/chapter/nations-after-the-flood");
-  const oldCast = new Set(catalog.chapters.slice(0, -1).flatMap(c => c.newCharacterIds));
+  const oldCast = new Set(catalog.chapters.filter(c => c.number < chapter.number).flatMap(c => c.newCharacterIds));
   for (const id of chapter.newCharacterIds) {
     assert.ok(!oldCast.has(id), id + " must not repeat a previous introduction");
     const person = catalog.characters.find(c => c.id === id);

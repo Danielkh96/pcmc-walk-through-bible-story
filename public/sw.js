@@ -1,4 +1,4 @@
-const CACHE_NAME = "pcmc-bible-story-v32-nations-after-the-flood";
+const CACHE_NAME = "pcmc-bible-story-v33-tower-of-babel";
 const APP_SHELL = [
   "/",
   "/comic",

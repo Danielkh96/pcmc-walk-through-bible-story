@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v32-nations-after-the-flood/);
+  assert.match(serviceWorker, /pcmc-bible-story-v33-tower-of-babel/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -335,7 +335,7 @@ test("chapter nine follows chapter eight and renders ten complete Chinese pages"
  const chapter=catalog.chapters.find(c=>c.id==='god-remembers-noah');
  assert.deepEqual(chapter.availableLanguages,['zh','en']);
  assert.deepEqual(chapter.newCharacterIds,[]);
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,12);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,13);
  const contents=await (await render('/comic/contents')).text();
  assert.ok(contents.includes('/comic/read?chapter=god-remembers-noah'));
  const previous=await (await render('/comic/read?chapter=enter-the-ark&page=10')).text();
@@ -401,12 +401,12 @@ test("homepage features only the latest three chapters while contents keeps ever
   assert.ok(library.includes('这里展示最近更新的 3 章，全部故事请查看漫画目录。'));
   const cards = [...library.matchAll(/<a[^>]*class="comic-feature"[^>]*href="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(cards, [
+    '/comic/chapter/tower-of-babel',
     '/comic/chapter/nations-after-the-flood',
     '/comic/chapter/noah-and-his-sons',
-    '/comic/read?chapter=noahs-offering&amp;page=1',
   ]);
   assert.ok(library.includes('查看全部章节'));
-  assert.ok(home.includes('已更新 12 章'));
+  assert.ok(home.includes('已更新 13 章'));
   const contents = await (await render('/comic/contents')).text();
   const catalog = JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
   for (const chapter of catalog.chapters) assert.ok(contents.includes('chapter/' + chapter.id) || contents.includes('chapter=' + chapter.id));
@@ -455,6 +455,23 @@ test("chapter twelve follows chapter eleven and renders every complete bilingual
     assert.ok(html.includes('切换至英文漫画'));
     assert.doesNotMatch(html,/本章目前提供中文版|本页分镜|对白润色|待用户审核|新人物造型待审/);
     assert.ok(!html.includes('/comics/nations-after-the-flood-v1/page-09.png'));
-    if (page >= 8) assert.ok(html.includes('这一章读完啦！'));
+    if (page >= 8) assert.ok(html.includes('href="/comic/chapter/tower-of-babel"'));
+  }
+});
+
+test("Babel links from chapter twelve, introduces only its builders and renders all eight bilingual pages", async () => {
+  const intro = await (await render('/comic/chapter/tower-of-babel')).text();
+  assert.deepEqual([...intro.matchAll(/<h2>([^<]+)<\/h2>/g)].map(m=>m[1]), ['造城的人们']);
+  assert.ok(intro.includes('11:1–4'));
+  const previous = await (await render('/comic/read?chapter=nations-after-the-flood&page=8')).text();
+  assert.ok(previous.includes('href="/comic/chapter/tower-of-babel"'));
+  for (const page of [1,2,3,4,5,6,7,8,99]) {
+    const response = await render('/comic/read?chapter=tower-of-babel&page=' + page);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes('/comics/tower-of-babel-v1/page-' + String(Math.min(page,8)).padStart(2,'0') + '.png'));
+    assert.ok(html.includes('/comics/tower-of-babel-v1-en/'));
+    assert.match(html, /aria-valuemax="8"/);
+    assert.doesNotMatch(html, /本页分镜|待用户审核|Text item|BOY Xiao Kun/);
   }
 });

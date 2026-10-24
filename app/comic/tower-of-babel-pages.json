@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "回到大家还听得懂的时候",
+    "image": "/comics/tower-of-babel-v1/page-01.png",
+    "titleEn": "When Everyone Understood One Another",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-01.png"
+  },
+  {
+    "id": 2,
+    "title": "砖，要先准备好",
+    "image": "/comics/tower-of-babel-v1/page-02.png",
+    "titleEn": "First, Prepare the Bricks",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-02.png"
+  },
+  {
+    "id": 3,
+    "title": "他们想留下什么",
+    "image": "/comics/tower-of-babel-v1/page-03.png",
+    "titleEn": "What They Wanted to Leave Behind",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-03.png"
+  },
+  {
+    "id": 4,
+    "title": "一块接着一块，越造越高",
+    "image": "/comics/tower-of-babel-v1/page-04.png",
+    "titleEn": "One Brick After Another",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-04.png"
+  },
+  {
+    "id": 5,
+    "title": "耶和华察看城和塔",
+    "image": "/comics/tower-of-babel-v1/page-05.png",
+    "titleEn": "The LORD Sees the City and Tower",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-05.png"
+  },
+  {
+    "id": 6,
+    "title": "嘴还在说，话却听不懂了",
+    "image": "/comics/tower-of-babel-v1/page-06.png",
+    "titleEn": "Speaking, but Not Understanding",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-06.png"
+  },
+  {
+    "id": 7,
+    "title": "停下的工地，分开的道路",
+    "image": "/comics/tower-of-babel-v1/page-07.png",
+    "titleEn": "Work Stops and Roads Divide",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-07.png"
+  },
+  {
+    "id": 8,
+    "title": "这个名字，叫巴别",
+    "image": "/comics/tower-of-babel-v1/page-08.png",
+    "titleEn": "The Name Is Babel",
+    "imageEn": "/comics/tower-of-babel-v1-en/page-08.png"
+  }
+]
