@@ -21,7 +21,7 @@ test("published reader uses sixteen mystery edition pages with no runtime archiv
   const publicPages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(publicPages.length, 16);
   assert.deepEqual(publicPages.map(p => p.id), Array.from({ length: 16 }, (_, i) => i + 1));
-  assert.deepEqual(catalog.chapters.map(c => c.id), ["creation", "eden", "temptation", "brothers", "generations", "adam-to-noah", "noahs-time", "enter-the-ark", "god-remembers-noah", "noahs-offering", "noah-and-his-sons", "nations-after-the-flood", "tower-of-babel"]);
+  assert.deepEqual(catalog.chapters.map(c => c.id), ["creation", "eden", "temptation", "brothers", "generations", "adam-to-noah", "noahs-time", "enter-the-ark", "god-remembers-noah", "noahs-offering", "noah-and-his-sons", "nations-after-the-flood", "tower-of-babel", "from-shem-to-abram"]);
   assert.equal(catalog.chapters[0].reference, "创世记 1:1–2:3");
   assert.equal(catalog.chapters[0].hidePrintedFolio, false);
   for (const page of publicPages) {
@@ -143,7 +143,7 @@ test("approved mystery storyboard contains sixteen pages and seventy-eight panel
 
 test("public comic assets exclude deletable local archives and obsolete editions", async () => {
   const directories = await readdir(new URL("../public/comics/", import.meta.url));
-  assert.deepEqual(directories.sort(), ["adam-to-noah-v1", "adam-to-noah-v1-en", "book-v1", "brothers-v1", "brothers-v1-en", "creation-mystery-v4", "creation-mystery-v4-en", "eden-v1", "eden-v1-en", "enter-the-ark-v1", "enter-the-ark-v1-en", "generations-v1", "generations-v1-en", "god-remembers-noah-v1", "god-remembers-noah-v1-en", "nations-after-the-flood-v1", "nations-after-the-flood-v1-en", "noah-and-his-sons-v1", "noah-and-his-sons-v1-en", "noahs-offering-v1", "noahs-offering-v1-en", "noahs-time-v1", "noahs-time-v1-en", "temptation-choice-v1", "temptation-choice-v1-en", "tower-of-babel-v1", "tower-of-babel-v1-en"]);
+  assert.deepEqual(directories.sort(), ["adam-to-noah-v1", "adam-to-noah-v1-en", "book-v1", "brothers-v1", "brothers-v1-en", "creation-mystery-v4", "creation-mystery-v4-en", "eden-v1", "eden-v1-en", "enter-the-ark-v1", "enter-the-ark-v1-en", "from-shem-to-abram-v1", "from-shem-to-abram-v1-en", "generations-v1", "generations-v1-en", "god-remembers-noah-v1", "god-remembers-noah-v1-en", "nations-after-the-flood-v1", "nations-after-the-flood-v1-en", "noah-and-his-sons-v1", "noah-and-his-sons-v1-en", "noahs-offering-v1", "noahs-offering-v1-en", "noahs-time-v1", "noahs-time-v1-en", "temptation-choice-v1", "temptation-choice-v1-en", "tower-of-babel-v1", "tower-of-babel-v1-en"]);
   const pages = JSON.parse(await readFile(new URL("../app/comic/creation-pages.json", import.meta.url), "utf8"));
   assert.equal(new Set(pages.map(page => page.image)).size, 16);
   assert.ok(pages.every(page => !page.image.includes("archive")));

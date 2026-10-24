@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v33-tower-of-babel/);
+  assert.match(serviceWorker, /pcmc-bible-story-v34-from-shem-to-abram/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -335,7 +335,7 @@ test("chapter nine follows chapter eight and renders ten complete Chinese pages"
  const chapter=catalog.chapters.find(c=>c.id==='god-remembers-noah');
  assert.deepEqual(chapter.availableLanguages,['zh','en']);
  assert.deepEqual(chapter.newCharacterIds,[]);
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,13);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,14);
  const contents=await (await render('/comic/contents')).text();
  assert.ok(contents.includes('/comic/read?chapter=god-remembers-noah'));
  const previous=await (await render('/comic/read?chapter=enter-the-ark&page=10')).text();
@@ -401,12 +401,12 @@ test("homepage features only the latest three chapters while contents keeps ever
   assert.ok(library.includes('这里展示最近更新的 3 章，全部故事请查看漫画目录。'));
   const cards = [...library.matchAll(/<a[^>]*class="comic-feature"[^>]*href="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(cards, [
+    '/comic/chapter/from-shem-to-abram',
     '/comic/chapter/tower-of-babel',
     '/comic/chapter/nations-after-the-flood',
-    '/comic/chapter/noah-and-his-sons',
   ]);
   assert.ok(library.includes('查看全部章节'));
-  assert.ok(home.includes('已更新 13 章'));
+  assert.ok(home.includes('已更新 14 章'));
   const contents = await (await render('/comic/contents')).text();
   const catalog = JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
   for (const chapter of catalog.chapters) assert.ok(contents.includes('chapter/' + chapter.id) || contents.includes('chapter=' + chapter.id));
@@ -474,4 +474,25 @@ test("Babel links from chapter twelve, introduces only its builders and renders 
     assert.match(html, /aria-valuemax="8"/);
     assert.doesNotMatch(html, /本页分镜|待用户审核|Text item|BOY Xiao Kun/);
   }
+});
+
+test("chapter fourteen follows Babel, introduces only new family members and renders complete bilingual pages", async () => {
+ const catalog=JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
+ const chapter=catalog.chapters.find(c=>c.id==='from-shem-to-abram');
+ const intro=await(await render('/comic/chapter/'+chapter.id)).text();
+ assert.deepEqual([...intro.matchAll(/<h2>([^<]+)<\/h2>/g)].map(m=>m[1]),chapter.newCharacterIds.map(id=>catalog.characters.find(p=>p.id===id).name));
+ assert.equal(chapter.newCharacterIds.length,11);
+ const nahors=chapter.newCharacterIds.filter(id=>id.startsWith('nahor-'));
+ assert.equal(nahors.length,2);
+ assert.ok(intro.includes('拿鹤（他拉的父亲）')&&intro.includes('拿鹤（他拉的儿子）'));
+ const previous=await(await render('/comic/read?chapter=tower-of-babel&page=8')).text();
+ assert.ok(previous.includes('href="/comic/chapter/from-shem-to-abram"'));
+ for(const page of [1,2,3,4,5,6,7,8,99]){
+  const response=await render('/comic/read?chapter=from-shem-to-abram&page='+page);assert.equal(response.status,200);
+  const html=await response.text();
+  assert.ok(html.includes('/comics/from-shem-to-abram-v1/page-'+String(Math.min(page,8)).padStart(2,'0')+'.png'));
+  assert.ok(html.includes('/comics/from-shem-to-abram-v1-en/'));
+  assert.match(html,/aria-valuemax="8"/);
+  assert.doesNotMatch(html,/本页分镜|待用户审核|PANEL1|Terah planned/);
+ }
 });
