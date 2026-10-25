@@ -6,9 +6,9 @@
 
 | 层级 | 状态 |
 | --- | --- |
-| App 已发布版本 | 2026-10-24：第1–14章全部中英文，中英各143页，合计286张故事图片。第十四章《从闪到亚伯兰》创11:10–32，中英各8页35格，由323f668发布；GitHub推送成功，原Vercel正式项目success，16张线上图SHA-256匹配、7个入口HTTP200。普通/Vercel构建、49项测试、定向ESLint与双语首末图/页码保持浏览器验证通过；PWA缓存v34-from-shem-to-abram，品牌图标v26。 |
+| App 已发布版本 | 2026-10-25：第1–14章中英文各143页、286张故事图片保持不变；新增《巴别塔》（创11:1–9）章末10分钟成功观反思页，4题16选项及总结，中英文、原生单选、无评分或提交。内容提交19c53d6已同步GitHub main，原Vercel正式项目success，正式域名中英选择与390px浏览器验证、6个HTTP入口及PWA版本哈希通过。普通/Vercel目标构建、50项测试与定向ESLint通过；PWA缓存v35-babel-success-reflection，品牌图标v26。 |
 | 上一轮界面优化 | 首页最近更新漫画只展示最新3章，现为14/13/12；完整目录保留14章。各章只介绍首次新增人物，开篇主角不重复展示，无新人物章节直接阅读。全书53份人物资料各介绍一次；第14章新增11份双语资料，两位拿鹤用独立ID与身份括注区分。 |
-| 当前制作任务 | 已完成第十四章《从闪到亚伯兰》中英文各8页35格的生成、逐页校对、11份双语新人物介绍接入、GitHub同步及Vercel正式部署验证。素材output/comic/from-shem-to-abram-v1及-v1-en；发布记录from-shem-to-abram-v1-release.md，机器证据release-online-verification.json。下一章《亚伯兰蒙召》创12:1–9只有预告提案，未编写完整审核稿或绘制。 |
+| 当前制作任务 | 巴别塔章末「你怎样定义成功的人生？」反思页开发、测试与正式发布验证已完成。第十四章《从闪到亚伯兰》仍为中英文各8页35格，人物资料及漫画内容不变。下一章《亚伯兰蒙召》创12:1–9只有预告提案，未编写完整审核稿或绘制。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
 | 最近可定位的完整审核稿 | 第十四章output/comic/from-shem-to-abram-v1/storyboard-review-v1.md，8页35格，已由收到稿后的绘制请求确认；中英文各8页已生成、校对、接入并由323f668正式发布验证。第13章中英各8页已由2b8a112发布，历史记录仍保留。下一章《亚伯兰蒙召》只有预告提案。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |
@@ -151,6 +151,15 @@
 - 用户要求在「巴别塔」故事结束后加入一个10分钟反思讨论页面，主题「你怎样定义成功的人生？」。用户提到《创世记》第11章；实际 App 故事目录为第13章 tower-of-babel（创11:1–9），按故事 ID 接入，不修改目录编号。
 - 同页显示用户提供的4道题、16个选项与原文反思总结；使用原生单选按钮，选择可更换，不提交、不评分、不设标准答案、无倒计时或数据库。英文同步现有语言切换；遵循原有彩色漫画卡片、深浅主题及响应式布局。
 - 接入既有章末反思导航：第8张漫画 → 第9页反思 →《从闪到亚伯兰》。漫画仍为8张，阅读收藏仍记录漫画第8页；现有第四、七章反思、其余漫画及功能不变。PWA 缓存标记 v35-babel-success-reflection。
-- 状态：本地开发与测试完成。正式构建、50项自动测试、两份组件的定向ESLint通过；浏览器验证默认桌面与320/390/768/1024px布局、中英切换、深浅主题、16项原生单选/更换选择、键盘不误翻页、历史前后导航及连接下一章通过。预览 http://127.0.0.1:4341/comic/read?chapter=tower-of-babel&page=9；截图与机器记录保存在素材工作区 outputs/babel-success-reflection-2026-10-25。未推送或部署，线上仍为 v34。
+- 状态：本地开发与测试完成。正式构建、50项自动测试、两份组件的定向ESLint通过；浏览器验证默认桌面与320/390/768/1024px布局、中英切换、深浅主题、16项原生单选/更换选择、键盘不误翻页、历史前后导航及连接下一章通过。预览 http://127.0.0.1:4341/comic/read?chapter=tower-of-babel&page=9；截图与机器记录保存在素材工作区 outputs/babel-success-reflection-2026-10-25。用户随后明确授权同步GitHub/Vercel；内容提交19c53d60ef5649f1c01166df44e2eea274b4f90a已进入main，原Vercel项目自动部署success，正式域名已验证上线。
 - 全量TypeScript检查仍有既有comic-reader/use-language/Cloudflare类型错误，报错源文件均与Git索引一致，本次未修改；本地开发环境body visibility属性的hydration提示亦在未改动的第四章反思页复现，未扩大修改范围。
-- 本机构建前发现第14章中文第6–8页为云端占位文件；从原正式网站取回并逐一核对Git blob SHA-1，字节完全匹配后恢复本地可读文件，不改变漫画内容。仅重建已卸载的生成Vite缓存。其他云端Git归档对象使git status无法完整返回；保留修改前备份及哈希，本次无Git提交或发布。
+- 本机构建前发现第14章中文第6–8页为云端占位文件；从原正式网站取回并逐一核对Git blob SHA-1，字节完全匹配后恢复本地可读文件，不改变漫画内容。仅重建已卸载的生成Vite缓存。为恢复本机Git可读性，使用GitHub官方树元数据与哈希一致的原文件恢复Git对象缓存，不改动工作文件；本机git status已恢复。保留修改前备份及哈希，本次通过连接器只提交9份相关文件。
+
+### 本轮正式发布验证
+
+- 内容提交：19c53d60ef5649f1c01166df44e2eea274b4f90a；原GitHub仓库main，9份相关文件，不含漫画图片、宣传海报或无关草稿。
+- 原Vercel项目：daniels-projects-ce806524/pcmc-walk-through-bible-story；GitHub的Vercel检查success，部署 https://vercel.com/daniels-projects-ce806524/pcmc-walk-through-bible-story/CoKcizkzYktDgErouz8FWG9i5H7M 。
+- 正式入口：https://pcmc-walk-through-bible-story.vercel.app/comic/read?chapter=tower-of-babel&page=9 。巴别塔末页、反思页、下一章介绍、第四/七章原反思及sw.js均HTTP200；4题16选项与总结完整，PWA文件SHA-256与本地一致。
+- 正式Chrome验证中文选择/更换选择、英文全部4题16选项、深浅主题及390px无横向溢出。普通构建、Vercel目标构建与50项测试通过；新组件ESLint通过。
+- Vercel连接器没有原团队权限，未读取生产运行日志；部署成功依据为原项目的GitHub状态和正式域名HTTP、PWA哈希及浏览器检查，不声称运行日志为空。
+- 机器证据与截图在素材工作区outputs/babel-success-reflection-2026-10-25：production-http-verification.json、production-browser-verification.json、production-desktop.png、production-mobile-english-dark.png。
