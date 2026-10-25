@@ -120,3 +120,30 @@
 .reflectionPrompt { margin-top: 28px; padding: 24px clamp(20px, 2.5vw, 36px); border-left: 5px solid var(--comic-accent); border-radius: 0 20px 20px 0; background: var(--comic-surface); }
 .reflectionPrompt h3 { margin-bottom: 10px; font-size: clamp(1.35rem, 2.2vw, 1.8rem); }
 .reflectionPrompt p { margin: 0; line-height: 1.9; color: var(--comic-muted); }
+
+
+/* Babel discussion: native radio groups keep choices private and unscored. */
+.successReflection { max-width: 1120px; margin-inline: auto; padding: clamp(24px, 4vw, 48px) clamp(18px, 3vw, 40px); overflow-wrap: anywhere; }
+.successHeading { margin-bottom: 32px; }
+.successDuration { display: inline-block; margin: 0 0 18px; padding: 7px 12px; border: 2px solid var(--comic-line); border-radius: 12px; background: var(--toon-pop); color: #233b45; box-shadow: 2px 3px 0 var(--toon-shadow); font-size: .875rem; font-weight: 750; }
+.successHeading h2 { margin: 0 0 14px; color: var(--comic-ink); font-size: clamp(1.65rem, 3.2vw, 2.6rem); line-height: 1.4; text-wrap: balance; }
+.successIntro { margin: 0; color: var(--comic-muted); font-size: 1rem; line-height: 1.8; }
+.successQuestions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+.successQuestion { min-width: 0; margin: 0; padding: 12px 16px 20px; border: 2px solid var(--comic-line); border-radius: 22px; background: var(--comic-surface); box-shadow: 4px 5px 0 var(--toon-shadow); }
+.successQuestion legend { max-width: 100%; padding: 0 8px; color: var(--comic-ink); font-size: 1.05rem; font-weight: 750; line-height: 1.7; }
+.successNumber { display: inline-block; margin-right: 8px; padding: 1px 7px; border: 1px solid var(--comic-line); border-radius: 7px; background: var(--toon-pop); color: #233b45; font-size: .875rem; white-space: nowrap; }
+.successOptions { display: grid; gap: 8px; }
+.successOption { position: relative; display: grid; grid-template-columns: 18px 20px minmax(0, 1fr); align-items: start; gap: 8px; min-height: 48px; padding: 11px 10px; border: 1px solid transparent; border-radius: 12px; color: var(--comic-ink); font-size: 1rem; line-height: 1.7; cursor: pointer; }
+.successOption:hover { background: var(--toon-soft); }
+.successOption:has(input:checked) { border-color: var(--comic-accent); background: var(--toon-soft); }
+.successOption:has(input:focus-visible) { outline: 3px solid var(--comic-accent); outline-offset: 2px; }
+.successOption input { width: 18px; height: 18px; margin: .28em 0 0; accent-color: var(--comic-accent); cursor: pointer; }
+.successLetter { font-weight: 750; }
+.successSummary { margin-top: 32px; padding: 22px 24px; border: 2px solid var(--comic-line); border-left: 6px solid var(--toon-pop); border-radius: 18px; background: var(--comic-surface); }
+.successSummary h3 { margin: 0 0 10px; color: var(--comic-accent); font-size: 1rem; line-height: 1.6; }
+.successSummary p { margin: 0; font-size: 1.1rem; line-height: 1.9; }
+@media (max-width: 800px) {
+  .successQuestions { grid-template-columns: minmax(0, 1fr); }
+  .successQuestion { padding-inline: 12px; }
+  .successSummary { padding: 20px; }
+}

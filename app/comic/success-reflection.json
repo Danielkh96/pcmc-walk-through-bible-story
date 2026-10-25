@@ -1,0 +1,101 @@
+{
+  "chapterId": "tower-of-babel",
+  "zh": {
+    "title": "你怎样定义成功的人生？",
+    "duration": "10分钟反思讨论",
+    "intro": "没有标准答案。点选最接近你想法的选项，一起分享与思考。",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "你觉得什么才算成功的人生？",
+        "options": [
+          "赚很多钱，实现财务自由",
+          "拥有理想的工作和事业",
+          "让父母感到骄傲",
+          "拥有幸福的家庭和生活",
+          "完成神给我的使命"
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "你认为谁的人生更成功？",
+        "options": [
+          "月入RM20,000，事业成功，但压力很大",
+          "月入RM5,000，生活稳定，有时间陪伴家人和服事神",
+          "两个人都可能成功，取决于人生的价值观"
+        ]
+      },
+      {
+        "id": "q3",
+        "question": "巴别塔的人努力建造高塔，希望传扬自己的名。你认为他们最大的问题是什么？",
+        "options": [
+          "他们太有野心",
+          "他们只想荣耀自己，而不是神",
+          "他们不应该追求成功",
+          "他们不应该一起合作"
+        ]
+      },
+      {
+        "id": "q4",
+        "question": "如果10年后你已经成功了，你最希望自己成为怎样的人？",
+        "options": [
+          "有钱、有地位的人",
+          "能让家人骄傲的人",
+          "活得快乐、满足的人",
+          "能荣耀神、帮助别人的人"
+        ]
+      }
+    ],
+    "summaryTitle": "反思总结",
+    "summary": "真正的成功，不只是我们取得多少成就，而是我们如何使用神赐给我们的恩赐，荣耀神并成为别人的祝福。"
+  },
+  "en": {
+    "title": "How do you define a successful life?",
+    "duration": "10-minute reflection & discussion",
+    "intro": "There are no right or wrong answers. Choose what best reflects your thoughts, then share and reflect together.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What do you think makes a successful life?",
+        "options": [
+          "Earning a lot of money and achieving financial freedom",
+          "Having my ideal job and career",
+          "Making my parents proud",
+          "Having a happy family and life",
+          "Fulfilling God's calling for my life"
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "Whose life do you consider more successful?",
+        "options": [
+          "Someone earning RM20,000 a month with a successful career, but under a lot of stress",
+          "Someone earning RM5,000 a month with a stable life and time for family and serving God",
+          "Either person could be successful, depending on their values"
+        ]
+      },
+      {
+        "id": "q3",
+        "question": "The people at Babel worked hard to build a tall tower and make a name for themselves. What do you think was their biggest problem?",
+        "options": [
+          "They were too ambitious",
+          "They wanted to glorify themselves rather than God",
+          "They should not have pursued success",
+          "They should not have worked together"
+        ]
+      },
+      {
+        "id": "q4",
+        "question": "If you are successful in 10 years, what kind of person would you most want to be?",
+        "options": [
+          "Someone wealthy and influential",
+          "Someone who makes their family proud",
+          "Someone who is happy and content",
+          "Someone who glorifies God and helps others"
+        ]
+      }
+    ],
+    "summaryTitle": "A thought to take with you",
+    "summary": "True success is not just about how much we achieve, but how we use the gifts God has given us to glorify Him and be a blessing to others."
+  }
+}

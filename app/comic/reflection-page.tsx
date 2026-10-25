@@ -1,13 +1,16 @@
 import reflections from "./reflections.json";
+import successReflection from "./success-reflection.json";
+import SuccessReflection from "./success-reflection";
 import type { Language } from "../use-language";
 import styles from "./comic.module.css";
 
 export function reflectionForChapter(chapterId: string) {
-  return reflections[chapterId as keyof typeof reflections];
+  return chapterId === successReflection.chapterId ? successReflection : reflections[chapterId as keyof typeof reflections];
 }
 
 export default function ReflectionPage({ chapterId, language }: { chapterId: string; language: Language }) {
-  const content = reflectionForChapter(chapterId)?.[language];
+  if (chapterId === successReflection.chapterId) return <SuccessReflection language={language} />;
+  const content = reflections[chapterId as keyof typeof reflections]?.[language];
   if (!content) return null;
   const zh = language === "zh";
   return <section className={styles.reflection} aria-labelledby="reflection-title" lang={zh ? "zh-Hans" : "en"}>

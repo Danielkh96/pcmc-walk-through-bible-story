@@ -21,7 +21,7 @@ test('manifest separates full-bleed and safe-area icons, all cached with the cur
     assert.ok(sw.includes(icon.src));
     await read('public'+icon.src.split('?')[0]);
   }
-  assert.match(sw,/v34-from-shem-to-abram/);
+  assert.match(sw,/v35-babel-success-reflection/);
   const layout=(await read('app/layout.tsx')).toString();
   for(const name of ['favicon.ico','favicon-32.png','favicon-16.png','apple-touch-icon.png'])assert.ok(layout.includes('/'+name+'?v=26'));
 });
