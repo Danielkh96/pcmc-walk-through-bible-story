@@ -6,11 +6,11 @@
 
 | 层级 | 状态 |
 | --- | --- |
-| App 已发布版本 | 2026-10-25：第1–14章中英文各143页、286张故事图片保持不变；新增《巴别塔》（创11:1–9）章末10分钟成功观反思页，4题16选项及总结，中英文、原生单选、无评分或提交。内容提交19c53d6已同步GitHub main，原Vercel正式项目success，正式域名中英选择与390px浏览器验证、6个HTTP入口及PWA版本哈希通过。普通/Vercel目标构建、50项测试与定向ESLint通过；PWA缓存v35-babel-success-reflection，品牌图标v26。 |
-| 上一轮界面优化 | 首页最近更新漫画只展示最新3章，现为14/13/12；完整目录保留14章。各章只介绍首次新增人物，开篇主角不重复展示，无新人物章节直接阅读。全书53份人物资料各介绍一次；第14章新增11份双语资料，两位拿鹤用独立ID与身份括注区分。 |
-| 当前制作任务 | 2026-11-10：用户要求同步GitHub和Vercel，第15章《亚伯兰蒙召》创12:1–9中文版8页36格已接入本地；普通构建、Vercel目标构建和52项测试通过，浏览器8页/上一章连接/390px/语言回退检查通过。正在推送和正式验证，尚未称上线；英文目录保持14章，既有漫画不变。 |
+| App 已发布版本 | 2026-11-10：第15章《亚伯兰蒙召》创12:1–9中文版8页36格已发布，内容提交a75f2e7，原GitHub main与原Vercel正式项目success。中文共15章151张图，英文仍14章143张图；原第1–14章及3组反思页保持不变。线上8图SHA-256、7个HTTP入口、浏览器翻页/390px/中英文首页与PWA哈希通过。普通/Vercel构建与52项测试通过。PWA缓存v36-call-of-abram，品牌图标v26。 |
+| 上一轮界面优化 | 首页最近更新漫画仍只展示3章：中文15/14/13，英文14/13/12。中文目录15章，英文14章；本章不新增具名人物或重复介绍页，原53份人物资料不变。 |
+| 当前制作任务 | 2026-11-10：第15章中文版8页36格已接入、测试、推送并在原Vercel正式站部署验证。用户要求的GitHub/Vercel同步已执行；英文成图未制作、不声明可用。下一章《亚伯兰到埃及》创12:10–20只有标题提案，未写完整稿或绘图。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
-| 最近可定位的完整审核稿 | 第15章output/comic/call-of-abram-v1/storyboard-review-v1.md，创12:1–9，8页36格，2026-11-08获用户确认并完成中文成图，待图片审核。第14章output/comic/from-shem-to-abram-v1/storyboard-review-v1.md，中英文成图及人物资料已发布；历史记录仍保留。 |
+| 最近可定位的完整审核稿 | 第15章output/comic/call-of-abram-v1/storyboard-review-v1.md，创12:1–9，8页36格，2026-11-08获用户确认并完成中文成图；2026-11-10用户要求发布，已正式部署验证。第14章中英文成图及人物资料继续保留。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |
 | 第二章《伊甸园》 | 2026-09-17 新拟审核稿：10页、43格，创2:4–25；见 `eden-storyboard-review-v1.md`。已核对第一章末页与人物参考，明确回看人的受造；用户随后明确要求生成并直接发布到现有App；10页43格已生成、校对并接入本地，见 eden-v1-qa.md 与 eden-v1-release.md。21项测试与Vercel正式构建已通过；GitHub发布、Vercel正式部署与全部10页线上验证已完成。旧8页38格仅为历史提案。 |
 
@@ -193,3 +193,12 @@
 - 普通构建、52项自动测试和Vercel目标构建通过。本机浏览器验证8页实际图片尺寸、1.5显示比例、分页、上一章连接、390px无溢出、英文目录与中文回退；浏览器捕获无error。预览http://localhost:4342/comic/read?chapter=call-of-abram&page=1。
 - 状态：已接入、测试通过，正在发布并验证。尚未在此阶段声称上线。证据、修改前备份在素材工作区output/comic/call-of-abram-v1/release-2026-11-10。
 - Vercel连接器没有原团队权限，沿用既有GitHub→Vercel自动部署；不创建新项目，不声称已读取生产日志。
+
+## 2026-11-10 第15章正式发布验证
+
+- 内容提交a75f2e77e9d1a27f50458223bb83382c98932f22，原仓库Danielkh96/pcmc-walk-through-bible-story main；精确22份相关文件（含8张最终图），没有其他漫画、宣传图或无关草稿。
+- 原Vercel项目daniels-projects-ce806524/pcmc-walk-through-bible-story，GitHub Vercel检查success；部署 https://vercel.com/daniels-projects-ce806524/pcmc-walk-through-bible-story/PyCUZ44ZofUM2VyKX6aDmaaumoiw 。
+- 正式入口 https://pcmc-walk-through-bible-story.vercel.app/comic/read?chapter=call-of-abram&page=1 。全部8张图HTTP200、SHA-256与本机已校对图一致；7个页面入口与sw.js核对通过，缓存v36-call-of-abram。
+- 正式浏览器验证按钮翻页、页码选择、末页结束、中文首页15/14/13、英文首页14/13/12与390px完整1.5比例无横向溢出；捕获console error为空。没有通过连接器读取生产运行日志，不声称生产日志为空。
+- 本地普通构建、Vercel目标构建与52项自动测试通过。证据及截图：素材工作区output/comic/call-of-abram-v1/release-2026-11-10/production-http-verification.json、production-browser-verification.json、production-mobile.png、production-desktop.png。
+- 原第1–14章图片与文字、人物资料及巴别塔等反思功能不变。本次仅中文版，无英文图；下一章仍未制作。
