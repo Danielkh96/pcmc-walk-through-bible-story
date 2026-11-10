@@ -1,0 +1,71 @@
+{
+  "edition": "call-of-abram-v1",
+  "reference": "Genesis 12:1–9",
+  "language": "zh",
+  "pages": [
+    {
+      "page": 1,
+      "panels": 4,
+      "path": "/comics/call-of-abram-v1/page-01.png",
+      "sha256": "0ba9ae5ecdece2eaf5f9a33a7de8fb457c14f8388e3a62dda0fbb4fa190fafe1",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "page": 2,
+      "panels": 5,
+      "path": "/comics/call-of-abram-v1/page-02.png",
+      "sha256": "e248d0f9fac566e29e032762ef955395aaa5dbfdcc7660048fe7e5a0576b0350",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "page": 3,
+      "panels": 5,
+      "path": "/comics/call-of-abram-v1/page-03.png",
+      "sha256": "da62e4e9fbb50b54364f5fc2b7e82aedb90a7ede2cf63a0b153a728438cbd2c9",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "page": 4,
+      "panels": 4,
+      "path": "/comics/call-of-abram-v1/page-04.png",
+      "sha256": "ec2be828c33288a62a0d5f78056710f76d0cc7502fc2f2543af8ddfa030b7331",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "page": 5,
+      "panels": 5,
+      "path": "/comics/call-of-abram-v1/page-05.png",
+      "sha256": "564489e2d2d9aa3018f1651d3ae425b704c3e3773de383079617a79f3ee6b916",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "page": 6,
+      "panels": 4,
+      "path": "/comics/call-of-abram-v1/page-06.png",
+      "sha256": "e1a75a9ffea740ee032933e029b714ec1b56e978ca193ef126008b9f7bddffae",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "page": 7,
+      "panels": 5,
+      "path": "/comics/call-of-abram-v1/page-07.png",
+      "sha256": "1a2c52af6f833986ef4962bda7403c6e75c1eae08a5ac706f01f96270b346fde",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "page": 8,
+      "panels": 4,
+      "path": "/comics/call-of-abram-v1/page-08.png",
+      "sha256": "f2feeafedf38e51212af687e012691a149277e658447dd6b057966fc0421fb5f",
+      "width": 1024,
+      "height": 1536
+    }
+  ]
+}

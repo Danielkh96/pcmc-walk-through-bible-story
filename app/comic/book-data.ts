@@ -20,6 +20,7 @@ import nationsAfterTheFlood from "./nations-after-the-flood-pages.json";
 import towerOfBabel from "./tower-of-babel-pages.json";
 
 import fromShemToAbram from "./from-shem-to-abram-pages.json";
+import callOfAbram from "./call-of-abram-pages.json";
 
 export type ComicPageData = Omit<(typeof creation)[number], "titleEn" | "imageEn"> & { titleEn?: string; imageEn?: string };
 const episodeData: Record<string, ComicPageData[]> = {
@@ -37,6 +38,7 @@ const episodeData: Record<string, ComicPageData[]> = {
   nationsAfterTheFlood,
   towerOfBabel,
   fromShemToAbram,
+  callOfAbram,
 };
 
 export const comicBook = catalog;

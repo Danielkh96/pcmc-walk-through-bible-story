@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v35-babel-success-reflection/);
+  assert.match(serviceWorker, /pcmc-bible-story-v36-call-of-abram/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -401,12 +401,12 @@ test("homepage features only the latest three chapters while contents keeps ever
   assert.ok(library.includes('这里展示最近更新的 3 章，全部故事请查看漫画目录。'));
   const cards = [...library.matchAll(/<a[^>]*class="comic-feature"[^>]*href="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(cards, [
+    '/comic/read?chapter=call-of-abram&amp;page=1',
     '/comic/chapter/from-shem-to-abram',
     '/comic/chapter/tower-of-babel',
-    '/comic/chapter/nations-after-the-flood',
   ]);
   assert.ok(library.includes('查看全部章节'));
-  assert.ok(home.includes('已更新 14 章'));
+  assert.ok(home.includes('已更新 15 章'));
   const contents = await (await render('/comic/contents')).text();
   const catalog = JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
   for (const chapter of catalog.chapters) assert.ok(contents.includes('chapter/' + chapter.id) || contents.includes('chapter=' + chapter.id));
@@ -524,5 +524,29 @@ test("Babel ends with one unscored discussion page before the next chapter", asy
     assert.doesNotMatch(html, /type="submit"|<form\b|checked=""|role="timer"|alt="漫画第/);
     assert.match(html, /aria-valuemax="8"/);
     assert.ok(html.includes('aria-label="下一章：从闪到亚伯兰"'));
+  }
+});
+
+test("chapter fifteen links from Abram's family, skips repeated introductions and renders eight full Chinese pages", async () => {
+  const entry = await render('/comic/chapter/call-of-abram');
+  assert.equal(entry.status, 307);
+  assert.equal(entry.headers.get('location'), '/comic/read?chapter=call-of-abram&page=1');
+  const previous = await (await render('/comic/read?chapter=from-shem-to-abram&page=8')).text();
+  assert.ok(previous.includes('aria-label="下一章：亚伯兰蒙召"'));
+  assert.ok(previous.includes('href="/comic/read?chapter=call-of-abram&amp;page=1"'));
+  const contents = await (await render('/comic/contents')).text();
+  assert.ok(contents.includes('href="/comic/read?chapter=call-of-abram&amp;page=1"'));
+  for (const page of [1, 2, 3, 4, 5, 6, 7, 8, 99]) {
+    const response = await render('/comic/read?chapter=call-of-abram&page=' + page);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes('/comics/call-of-abram-v1/page-' + String(Math.min(page, 8)).padStart(2, '0') + '.png'));
+    assert.match(html, /aria-valuemax="8"/);
+    assert.match(html, /disabled=""[^>]*title="本章目前提供中文版"/);
+    assert.doesNotMatch(html, /reindexedArtwork|call-of-abram-v1-en|本页分镜|待用户审核|正在绘制中/);
+    if (page >= 8) {
+      assert.ok(html.includes('这一章读完啦！'));
+      assert.doesNotMatch(html, /aria-label="下一章：/);
+    }
   }
 });

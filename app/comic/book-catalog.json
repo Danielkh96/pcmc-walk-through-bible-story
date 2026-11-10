@@ -1397,6 +1397,35 @@
       "referenceEn": "Genesis 11:10–32",
       "summaryEn": "Trace Shem’s family line to Terah’s household, distinguish the two Nahors, and meet Abram, Sarai and Lot. The family leaves Ur for Canaan but settles in Haran.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 11:10–32. Appearances, homes and luggage details are artistic depictions."
+    },
+    {
+      "id": "call-of-abram",
+      "edition": "call-of-abram-v1",
+      "number": 15,
+      "title": "亚伯兰蒙召",
+      "book": "创世记",
+      "reference": "创世记 12:1–9",
+      "summary": "耶和华呼召亚伯兰离开熟悉的地方，并应许赐福，使地上的万族因他得福。亚伯兰带着撒莱、罗得和同行的人离开哈兰，来到迦南，筑坛敬拜并继续前行。",
+      "dataKey": "callOfAbram",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "abram",
+        "sarai",
+        "lot"
+      ],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》12:1–9呈现。普通同行者、住处、行李、帐棚与筑坛动作细节属于美术表现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh"
+      ],
+      "titleEn": "The Call of Abram",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 12:1–9",
+      "summaryEn": "The LORD calls Abram to leave his familiar home and promises that all the families of the earth will be blessed through him. Abram leaves Haran with Sarai, Lot and their companions, reaches Canaan, builds altars and continues his journey.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 12:1–9. The unnamed companions, homes, luggage, tent and altar-building details are artistic depictions."
     }
   ],
   "titleEn": "Bible Comic Stories",
