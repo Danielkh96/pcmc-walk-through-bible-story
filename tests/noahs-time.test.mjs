@@ -30,5 +30,5 @@ test("English preference cannot select empty new-chapter art; PWA cache advances
  const reader=await read("app/comic/comic-reader.tsx");
  assert.match(reader,/chapter.availableLanguages.includes\(preferredLanguage\)/);
  assert.match(reader,/disabled=\{!chapter.availableLanguages.includes/);
- assert.match(await read("public/sw.js"),/v36-call-of-abram/);
+ assert.match(await read("public/sw.js"),/v37-abram-egypt-lot-bilingual/);
 });

@@ -1,0 +1,71 @@
+{
+  "edition": "call-of-abram-v1-en",
+  "reference": "Genesis 12:1–9",
+  "language": "en",
+  "pages": [
+    {
+      "page": 1,
+      "path": "/comics/call-of-abram-v1-en/page-01.png",
+      "sha256": "951b856101a7d65318a35ae2f3836e0f7f82cf60223c7fca936bdd278b93caee",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 2,
+      "path": "/comics/call-of-abram-v1-en/page-02.png",
+      "sha256": "fa46819d8344acac7383d99ef35810a1e152e012ae94f6b4c332eb643082b778",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 3,
+      "path": "/comics/call-of-abram-v1-en/page-03.png",
+      "sha256": "4cb6b04b7164a496a95dd845bac59e4da27912d43899e43380c612828b33b0a5",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 4,
+      "path": "/comics/call-of-abram-v1-en/page-04.png",
+      "sha256": "66e14af0df247d46b36fc74075c4c424c201736665b4787437c82e6456f0132f",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 5,
+      "path": "/comics/call-of-abram-v1-en/page-05.png",
+      "sha256": "78441e1fd5efcb4115c8747ed864908047873061ef8ecb7726e0058f8db1d126",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 6,
+      "path": "/comics/call-of-abram-v1-en/page-06.png",
+      "sha256": "1066caa44e7cb66582fee01827e6e9aa50d8009b3d65e57b1895a67a9038a67c",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 7,
+      "path": "/comics/call-of-abram-v1-en/page-07.png",
+      "sha256": "7d74c4c28014ca61b922941857a6c07275a8b80dad5e62590d43bdb80a3d9d28",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 8,
+      "path": "/comics/call-of-abram-v1-en/page-08.png",
+      "sha256": "0d5ac2b540d87f13eda302c155722013350ce4df7f21b43fb563a387d7852017",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    }
+  ]
+}

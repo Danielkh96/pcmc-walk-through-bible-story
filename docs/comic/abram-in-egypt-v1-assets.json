@@ -1,0 +1,71 @@
+{
+  "edition": "abram-in-egypt-v1",
+  "reference": "Genesis 12:10–20",
+  "language": "zh",
+  "pages": [
+    {
+      "page": 1,
+      "path": "/comics/abram-in-egypt-v1/page-01.png",
+      "sha256": "72e8353ab8468ce5dc7784f52a62a499707c07650fbff8759c9ebb431b1dd12b",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 2,
+      "path": "/comics/abram-in-egypt-v1/page-02.png",
+      "sha256": "c55f79393e2a48a505bdc5aacd86f817278ef32f2f891c3f22a6c554b918092d",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 3,
+      "path": "/comics/abram-in-egypt-v1/page-03.png",
+      "sha256": "b2f853d5433322855ca2e0d0a31a48427d6e6622ee0be5b0aa6f9b7a8222f292",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 4,
+      "path": "/comics/abram-in-egypt-v1/page-04.png",
+      "sha256": "bdb310825243df525408f0970ff11ebb77e906a0f25c90eb5edc13589fb58f31",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 5,
+      "path": "/comics/abram-in-egypt-v1/page-05.png",
+      "sha256": "aff20244d3fafc298a157e2f5c80bcc0788f68e2aa78c9373e3ec92dde9bcd34",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 6,
+      "path": "/comics/abram-in-egypt-v1/page-06.png",
+      "sha256": "d66d98766505adf6e9a1435a0ff48b9053c4f8424824c5f879f1ddbc0b010229",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 7,
+      "path": "/comics/abram-in-egypt-v1/page-07.png",
+      "sha256": "fc79c1f7815ca446d217b776698c228a6297a80ccc87e16e03f687f921385d01",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 8,
+      "path": "/comics/abram-in-egypt-v1/page-08.png",
+      "sha256": "7ebf2ee083ed76e46c0ed7729f3659538cc842766fed8202a68db81b50f661a3",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    }
+  ]
+}

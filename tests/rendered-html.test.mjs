@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v36-call-of-abram/);
+  assert.match(serviceWorker, /pcmc-bible-story-v37-abram-egypt-lot-bilingual/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -335,7 +335,7 @@ test("chapter nine follows chapter eight and renders ten complete Chinese pages"
  const chapter=catalog.chapters.find(c=>c.id==='god-remembers-noah');
  assert.deepEqual(chapter.availableLanguages,['zh','en']);
  assert.deepEqual(chapter.newCharacterIds,[]);
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,14);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,17);
  const contents=await (await render('/comic/contents')).text();
  assert.ok(contents.includes('/comic/read?chapter=god-remembers-noah'));
  const previous=await (await render('/comic/read?chapter=enter-the-ark&page=10')).text();
@@ -401,12 +401,12 @@ test("homepage features only the latest three chapters while contents keeps ever
   assert.ok(library.includes('这里展示最近更新的 3 章，全部故事请查看漫画目录。'));
   const cards = [...library.matchAll(/<a[^>]*class="comic-feature"[^>]*href="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(cards, [
+    '/comic/read?chapter=abram-and-lot-separate&amp;page=1',
+    '/comic/chapter/abram-in-egypt',
     '/comic/read?chapter=call-of-abram&amp;page=1',
-    '/comic/chapter/from-shem-to-abram',
-    '/comic/chapter/tower-of-babel',
   ]);
   assert.ok(library.includes('查看全部章节'));
-  assert.ok(home.includes('已更新 15 章'));
+  assert.ok(home.includes('已更新 17 章'));
   const contents = await (await render('/comic/contents')).text();
   const catalog = JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
   for (const chapter of catalog.chapters) assert.ok(contents.includes('chapter/' + chapter.id) || contents.includes('chapter=' + chapter.id));
@@ -527,7 +527,7 @@ test("Babel ends with one unscored discussion page before the next chapter", asy
   }
 });
 
-test("chapter fifteen links from Abram's family, skips repeated introductions and renders eight full Chinese pages", async () => {
+test("chapter fifteen links from Abram's family, skips repeated introductions and renders eight full bilingual pages", async () => {
   const entry = await render('/comic/chapter/call-of-abram');
   assert.equal(entry.status, 307);
   assert.equal(entry.headers.get('location'), '/comic/read?chapter=call-of-abram&page=1');
@@ -542,11 +542,34 @@ test("chapter fifteen links from Abram's family, skips repeated introductions an
     const html = await response.text();
     assert.ok(html.includes('/comics/call-of-abram-v1/page-' + String(Math.min(page, 8)).padStart(2, '0') + '.png'));
     assert.match(html, /aria-valuemax="8"/);
-    assert.match(html, /disabled=""[^>]*title="本章目前提供中文版"/);
-    assert.doesNotMatch(html, /reindexedArtwork|call-of-abram-v1-en|本页分镜|待用户审核|正在绘制中/);
+    assert.ok(html.includes('/comics/call-of-abram-v1-en/'));
+    assert.ok(html.includes('切换至英文漫画'));
+    assert.doesNotMatch(html, /reindexedArtwork|本章目前提供中文版|本页分镜|待用户审核|正在绘制中/);
     if (page >= 8) {
-      assert.ok(html.includes('这一章读完啦！'));
-      assert.doesNotMatch(html, /aria-label="下一章：/);
+      assert.ok(html.includes('下一章：亚伯兰到埃及'));
+      assert.ok(html.includes('aria-label="下一章：亚伯兰到埃及"'));
+    }
+  }
+});
+
+test("Egypt introduces only Pharaoh, then connects all full bilingual pages through Lot's departure", async () => {
+  const intro = await (await render('/comic/chapter/abram-in-egypt')).text();
+  assert.deepEqual([...intro.matchAll(/<h2>([^<]+)<\/h2>/g)].map(m => m[1]), ['法老']);
+  assert.ok(intro.includes('这段经文没有记下他的名字'));
+  assert.ok(intro.includes('href="/comic/read?chapter=abram-in-egypt&amp;page=1"'));
+  for (const [id,count,nextTitle] of [['abram-in-egypt',8,'亚伯兰与罗得分开'],['abram-and-lot-separate',10,null]]) {
+    for (let page=1;page<=count;page++) {
+      const response=await render(`/comic/read?chapter=${id}&page=${page}`);
+      assert.equal(response.status,200);
+      const html=await response.text();
+      assert.ok(html.includes(`/comics/${id}-v1/page-${String(page).padStart(2,'0')}.png`));
+      assert.ok(html.includes(`/comics/${id}-v1-en/`));
+      assert.match(html,new RegExp(`aria-valuemax="${count}"`));
+      assert.doesNotMatch(html,/reindexedArtwork|本章目前提供中文版|本页分镜|待用户审核|正在绘制中/);
+      if(page===count) {
+        if(nextTitle) assert.ok(html.includes(`aria-label="下一章：${nextTitle}"`));
+        else assert.doesNotMatch(html,/aria-label="下一章：/);
+      }
     }
   }
 });

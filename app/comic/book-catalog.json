@@ -858,6 +858,22 @@
       "quoteEn": "",
       "appearanceEn": "Name in the family relationships only",
       "referenceEn": "Genesis 11:29"
+    },
+    {
+      "id": "pharaoh-abram-egypt",
+      "name": "法老",
+      "kind": "biblical",
+      "tagline": "埃及的统治者。",
+      "bio": "埃及的统治者。「法老」是称号；这段经文没有记下他的名字。",
+      "quote": "",
+      "appearance": "成人 · 棕肤、圆润脸形、无须 · 蓝金头巾与白色长衣",
+      "reference": "创世记 12:15–20",
+      "nameEn": "Pharaoh",
+      "taglineEn": "The ruler of Egypt.",
+      "bioEn": "The ruler of Egypt. “Pharaoh” is a title; this passage does not give his name.",
+      "quoteEn": "",
+      "appearanceEn": "Adult · brown skin, rounded face and clean-shaven · blue-and-gold headcloth and white robe",
+      "referenceEn": "Genesis 12:15–20"
     }
   ],
   "chapters": [
@@ -1419,13 +1435,77 @@
       "hidePrintedFolio": false,
       "status": "published",
       "availableLanguages": [
-        "zh"
+        "zh",
+        "en"
       ],
       "titleEn": "The Call of Abram",
       "bookEn": "Genesis",
       "referenceEn": "Genesis 12:1–9",
       "summaryEn": "The LORD calls Abram to leave his familiar home and promises that all the families of the earth will be blessed through him. Abram leaves Haran with Sarai, Lot and their companions, reaches Canaan, builds altars and continues his journey.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 12:1–9. The unnamed companions, homes, luggage, tent and altar-building details are artistic depictions."
+    },
+    {
+      "id": "abram-in-egypt",
+      "edition": "abram-in-egypt-v1",
+      "number": 16,
+      "title": "亚伯兰到埃及",
+      "book": "创世记",
+      "reference": "创世记 12:10–20",
+      "summary": "迦南遭遇饥荒，亚伯兰下埃及暂居。因为害怕被杀，他请撒莱说自己是他的妹妹；撒莱被带进法老的宫里。耶和华降灾于法老和他的全家，法老责问亚伯兰，随后让他们与所有财物离开。",
+      "dataKey": "abramInEgypt",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "abram",
+        "sarai",
+        "lot",
+        "pharaoh-abram-egypt"
+      ],
+      "newCharacterIds": [
+        "pharaoh-abram-egypt"
+      ],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》12:10–20呈现。人物外貌、未具名配角、建筑与生活细节属于美术表现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
+      "titleEn": "Abram in Egypt",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 12:10–20",
+      "summaryEn": "A famine leads Abram to stay in Egypt. Fearing for his life, he asks Sarai to say she is his sister, and she is taken into Pharaoh’s palace. The LORD afflicts Pharaoh and his household; Pharaoh questions Abram and sends them away with all they have.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 12:10–20. Character appearances, unnamed companions, buildings and everyday details are artistic depictions."
+    },
+    {
+      "id": "abram-and-lot-separate",
+      "edition": "abram-and-lot-separate-v1",
+      "number": 17,
+      "title": "亚伯兰与罗得分开",
+      "book": "创世记",
+      "reference": "创世记 13:1–18",
+      "summary": "亚伯兰从埃及回到旧坛旁，求告耶和华。两家的牲畜财物增多，土地容不下他们同住，牧人发生争执。亚伯兰提议分开，让罗得先选；罗得选择约旦河平原。分别以后，耶和华再次向亚伯兰应许土地与后裔，亚伯兰迁到希伯仑并筑坛。",
+      "dataKey": "abramAndLotSeparate",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "abram",
+        "sarai",
+        "lot"
+      ],
+      "newCharacterIds": [],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》13:1–18呈现。人物外貌、未具名配角、建筑与生活细节属于美术表现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
+      "titleEn": "Abram and Lot Part Ways",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 13:1–18",
+      "summaryEn": "Abram returns from Egypt to the former altar and calls on the LORD. Their possessions and herds have grown too large for the land, and the herders quarrel. Abram proposes separating and lets Lot choose first. Lot chooses the Jordan plain. After they part, the LORD renews his promise of land and descendants, and Abram moves to Hebron and builds an altar.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 13:1–18. Character appearances, unnamed companions, buildings and everyday details are artistic depictions."
     }
   ],
   "titleEn": "Bible Comic Stories",

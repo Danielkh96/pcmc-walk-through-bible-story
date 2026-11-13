@@ -22,6 +22,10 @@ import towerOfBabel from "./tower-of-babel-pages.json";
 import fromShemToAbram from "./from-shem-to-abram-pages.json";
 import callOfAbram from "./call-of-abram-pages.json";
 
+import abramInEgypt from "./abram-in-egypt-pages.json";
+
+import abramAndLotSeparate from "./abram-and-lot-separate-pages.json";
+
 export type ComicPageData = Omit<(typeof creation)[number], "titleEn" | "imageEn"> & { titleEn?: string; imageEn?: string };
 const episodeData: Record<string, ComicPageData[]> = {
   creation,
@@ -39,6 +43,8 @@ const episodeData: Record<string, ComicPageData[]> = {
   towerOfBabel,
   fromShemToAbram,
   callOfAbram,
+  abramAndLotSeparate,
+  abramInEgypt,
 };
 
 export const comicBook = catalog;

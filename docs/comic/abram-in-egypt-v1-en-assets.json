@@ -1,0 +1,71 @@
+{
+  "edition": "abram-in-egypt-v1-en",
+  "reference": "Genesis 12:10–20",
+  "language": "en",
+  "pages": [
+    {
+      "page": 1,
+      "path": "/comics/abram-in-egypt-v1-en/page-01.png",
+      "sha256": "3dcf858bc69658cd758c2b646d672be26219bee3d8ceaef3dbef2e678aff7062",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 2,
+      "path": "/comics/abram-in-egypt-v1-en/page-02.png",
+      "sha256": "970b7218bb7a87e7fe21811c768fe649a05c98dd111d637b0fadde60304cf1eb",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 3,
+      "path": "/comics/abram-in-egypt-v1-en/page-03.png",
+      "sha256": "625a063d39c38e92d83d20afc27ecce6ff01d64faa4f4a4c7b2237214f23f380",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 4,
+      "path": "/comics/abram-in-egypt-v1-en/page-04.png",
+      "sha256": "2c1ef30868522ecc000a219e6912788f9c373cc9bb8338c16f4be406b1eef755",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 5,
+      "path": "/comics/abram-in-egypt-v1-en/page-05.png",
+      "sha256": "5f105a9602c18165cbf7c77f6cfb5b9a81e986a8d45c6d6645a5df52d79a7393",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 6,
+      "path": "/comics/abram-in-egypt-v1-en/page-06.png",
+      "sha256": "0d8e919d3f5fbac0c57703dc4c9c7f5aed8e09fad0a6107b25bd8d489b82c9cf",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 7,
+      "path": "/comics/abram-in-egypt-v1-en/page-07.png",
+      "sha256": "6230f28ca650d7b331a0e54255ee0f992912b030e69f4b7d15748de560bc4e31",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 8,
+      "path": "/comics/abram-in-egypt-v1-en/page-08.png",
+      "sha256": "9367d8a1188fa092c43d2ff399fba67f4b885be62bcb225c71dd440bcff04ad4",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    }
+  ]
+}

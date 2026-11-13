@@ -1,0 +1,87 @@
+{
+  "edition": "abram-and-lot-separate-v1-en",
+  "reference": "Genesis 13:1–18",
+  "language": "en",
+  "pages": [
+    {
+      "page": 1,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-01.png",
+      "sha256": "613dd691847e9cbe7117b38e4334b698b8ede8fc0a9a3577f572c6a691c0ae8c",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 2,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-02.png",
+      "sha256": "4f91e17e2bd7e385da6cfa4db6a328e0b482833146b739675d6fef0e39aeac66",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 3,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-03.png",
+      "sha256": "c49bb31b5be2e07338c58da81b02985fe2fae043d4d535094b44c8c47e06be15",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 4,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-04.png",
+      "sha256": "5649eb50f4e3f565b205f1c872c03bf8a45c02ec8e72c290a365a5cc07caeab2",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 5,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-05.png",
+      "sha256": "6dfa73c6e35dc3a99e04292205d18422faae2e9dc89b90d114dce1a85c178bf5",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 6,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-06.png",
+      "sha256": "6f7989b2b116a45246a05060b999455e2bd7894fed577909c3f3196faa65f2ad",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 7,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-07.png",
+      "sha256": "0a99af0e6f30a2239d8a472138b2bc8c3306c92fc38feff89d4fdc5eba7e88de",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 8,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-08.png",
+      "sha256": "af0b57a4a3ba65186fdae58c67ee54736cc3e70a9a532b8c4a39821cf22dc752",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 9,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-09.png",
+      "sha256": "606b037a43da5366af895170b82611ade29bba0aa91341104aaeebc8598b069a",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 10,
+      "path": "/comics/abram-and-lot-separate-v1-en/page-10.png",
+      "sha256": "7a3f95b572bfd4486a2420faf2a0b9169e311a1358b24c4da402e2516ad9a71c",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    }
+  ]
+}

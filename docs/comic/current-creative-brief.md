@@ -8,7 +8,7 @@
 | --- | --- |
 | App 已发布版本 | 2026-11-10：第15章《亚伯兰蒙召》创12:1–9中文版8页36格已发布，内容提交a75f2e7，原GitHub main与原Vercel正式项目success。中文共15章151张图，英文仍14章143张图；原第1–14章及3组反思页保持不变。线上8图SHA-256、7个HTTP入口、浏览器翻页/390px/中英文首页与PWA哈希通过。普通/Vercel构建与52项测试通过。PWA缓存v36-call-of-abram，品牌图标v26。 |
 | 上一轮界面优化 | 首页最近更新漫画仍只展示3章：中文15/14/13，英文14/13/12。中文目录15章，英文14章；本章不新增具名人物或重复介绍页，原53份人物资料不变。 |
-| 当前制作任务 | 2026-11-10：第15章中文版8页36格已接入、测试、推送并在原Vercel正式站部署验证。用户要求的GitHub/Vercel同步已执行；英文成图未制作、不声明可用。下一章《亚伯兰到埃及》创12:10–20只有标题提案，未写完整稿或绘图。 |
+| 当前制作任务 | 2026-11-10：按用户“帮我生成英文版本”完成第15章《亚伯兰蒙召》英文8页36格文字本地化。内置image_gen逐页编辑已发布中文成图，逐页视觉检查、34段OCR单词核对与PNG校验通过，见素材工作区output/comic/call-of-abram-v1-en/preview.html与qa.md。英文图已生成并校对，尚未接入App或发布；正式站仍中文15章、英文14章。第16章中英文8页及第17章中英文10页已生成并校对；2026-11-13用户授权一并接入并发布。 |
 | 用户最新创作方向 | 要加强逻辑与神秘感：约定读经、忘带、去借、找不到、寻找旧书、尘封圣经、读后才出现异象。该方向已经明确要求。 |
 | 最近可定位的完整审核稿 | 第15章output/comic/call-of-abram-v1/storyboard-review-v1.md，创12:1–9，8页36格，2026-11-08获用户确认并完成中文成图；2026-11-10用户要求发布，已正式部署验证。第14章中英文成图及人物资料继续保留。 |
 | 第一章交付记录 | 已完成：新稿16页接入App（15张重制、1张保留），19项测试及Vercel正式构建通过，GitHub推送和线上验证完成。276个旧文件已实际移至本机archive。详情见 `creation-mystery-v4-release.md`。 |
@@ -16,9 +16,9 @@
 
 ## 当前目录与同步证据
 
-- 正式App源码：`/Users/tankhoonhean/Documents/Codex/2026-08-22/realtime-voice-chat`。
-- 漫画创作素材：`/Users/tankhoonhean/Desktop/PCMC/Walk Through Bible Story`；已确认素材搬移，未丢失。
-- Projects历史入口：`/Users/tankhoonhean/Desktop/Projects/Walk Through Bible Story`，包含App及素材目录链接和本轮本地备份。
+- 正式App源码：`/Users/danieltan/Documents/Codex/2026-08-22/realtime-voice-chat`。
+- 漫画创作素材：`/Users/danieltan/Desktop/PCMC/Walk Through Bible Story`；已确认素材搬移，未丢失。
+- Projects历史入口：`/Users/danieltan/Desktop/Projects/Walk Through Bible Story`，包含App及素材目录链接和本轮本地备份。
 - 校验清单：`sync-2026-10-22-assets.json`；构建与测试摘要：`sync-2026-10-22.md`。
 
 ## 制作历史记录
@@ -202,3 +202,21 @@
 - 正式浏览器验证按钮翻页、页码选择、末页结束、中文首页15/14/13、英文首页14/13/12与390px完整1.5比例无横向溢出；捕获console error为空。没有通过连接器读取生产运行日志，不声称生产日志为空。
 - 本地普通构建、Vercel目标构建与52项自动测试通过。证据及截图：素材工作区output/comic/call-of-abram-v1/release-2026-11-10/production-http-verification.json、production-browser-verification.json、production-mobile.png、production-desktop.png。
 - 原第1–14章图片与文字、人物资料及巴别塔等反思功能不变。本次仅中文版，无英文图；下一章仍未制作。
+
+## 2026-11-10 第15章英文成图完成
+
+- 用户要求“帮我生成英文版本”，范围为第15章《亚伯兰蒙召》英文文字本地化，8页36格；不改变已确认镜头、角色、动作或剧情。没有将当前生成请求扩大为App接入或发布授权。
+- 中文源图逐页实际查看，以中文最终图为编辑目标，使用内置image_gen共8次调用完成英文8张1024×1536图。中文原图SHA-256保持不变。
+- 34段英文与中文逐项对应，以和合本及WEB创12:1–9交叉核对；英文旁白/神的话属于忠实翻译或转述，不冒充WEB逐字原句。使用Abram、Sarai、Lot、LORD等统一拼写。
+- 8页逐格检查文字、气泡归属、人物服装、行李、地名与两次筑坛；OCR单词/数字34段全部匹配，标点经人工复核，无中文残留。PNG CRC、解压、尺寸、哈希与预览引用通过。
+- 素材工作区output/comic/call-of-abram-v1-en：最终page-01.png至page-08.png，translation.json，prompts/prompt-set.txt，assets.json，qa.md，ocr.json，text-check.json，file-verification.json与preview.html。
+- 阶段：英文成图已生成并经助手校对，待用户审阅。本轮未接入App、未改语言可用性或PWA、未推送部署。正式中文15章/英文14章状态不变。
+
+
+## 2026-11-13 第15章英文与第16–17章双语同步
+
+- 用户明确要求“帮我同步上传 github 和 vercel”，本次授权接入、推送及原项目正式部署。
+- 范围：第15章英文8页36格；第16章《亚伯兰到埃及》创12:10–20，中英各8页36格；第17章《亚伯兰与罗得分开》创13:1–18，中英各10页44格。共44张新增最终图。
+- 全部1024×1536完整显示，目录与两种语言各17章169张图；新增法老的简短双语身份介绍，第17章不重复人物。原第1–14章、第15章中文及反思页保持不变。首页最近3章更新为17/16/15。
+- PWA缓存v37-abram-egypt-lot-bilingual，品牌图标仍v26。图片来源与SHA-256见各版assets清单；脚本、提示词、初图与宣传素材不进入学生页面。
+- 当前阶段：已接入隔离发布副本，构建、测试与正式部署尚待验证。原线上版本仍以顶部旧发布记录为准；完成后另补正式证据。
