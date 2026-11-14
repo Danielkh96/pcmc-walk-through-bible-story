@@ -874,6 +874,70 @@
       "quoteEn": "",
       "appearanceEn": "Adult · brown skin, rounded face and clean-shaven · blue-and-gold headcloth and white robe",
       "referenceEn": "Genesis 12:15–20"
+    },
+    {
+      "id": "chedorlaomer",
+      "name": "基大老玛",
+      "nameEn": "Chedorlaomer",
+      "tagline": "以拦王，与另外三位王结盟。",
+      "taglineEn": "King of Elam, allied with three other kings.",
+      "bio": "他是以拦王，与另外三位王结盟。所多玛等五城的王曾经臣服于他。",
+      "bioEn": "He is the king of Elam and an ally of three other kings. The kings of Sodom and four other cities had served him.",
+      "appearance": "成人 · 深棕发与短直须 · 暗蓝灰长衣、棕色外层与窄金属额饰",
+      "appearanceEn": "Adult · dark-brown hair and short straight beard · dark blue-gray robe, brown outer layer and narrow metal headband",
+      "reference": "创世记 14:1、4–5、9",
+      "referenceEn": "Genesis 14:1, 4–5, 9",
+      "kind": "biblical",
+      "quote": "",
+      "quoteEn": ""
+    },
+    {
+      "id": "mamre-ally",
+      "name": "幔利",
+      "nameEn": "Mamre",
+      "tagline": "与亚伯兰结盟的亚摩利人。",
+      "taglineEn": "An Amorite allied with Abram.",
+      "bio": "他是亚摩利人，与亚伯兰结盟。以实各和亚乃是他的弟兄。",
+      "bioEn": "He is an Amorite allied with Abram. Eshcol and Aner are his brothers.",
+      "appearance": "成人 · 宽肩、圆方脸与方短须 · 深青绿长衣、米色肩布",
+      "appearanceEn": "Adult · broad shoulders, rounded square face and short square beard · deep teal robe and beige shoulder cloth",
+      "reference": "创世记 14:13",
+      "referenceEn": "Genesis 14:13",
+      "kind": "biblical",
+      "quote": "",
+      "quoteEn": ""
+    },
+    {
+      "id": "eshcol-ally",
+      "name": "以实各",
+      "nameEn": "Eshcol",
+      "tagline": "幔利和亚乃的弟兄。",
+      "taglineEn": "The brother of Mamre and Aner.",
+      "bio": "他是幔利和亚乃的弟兄，与亚伯兰结盟。",
+      "bioEn": "He is the brother of Mamre and Aner and an ally of Abram.",
+      "appearance": "成人 · 修长体态、深色短发与短须 · 灰蓝长衣、赭色头布",
+      "appearanceEn": "Adult · slender build, short dark hair and beard · gray-blue robe and ochre headcloth",
+      "reference": "创世记 14:13",
+      "referenceEn": "Genesis 14:13",
+      "kind": "biblical",
+      "quote": "",
+      "quoteEn": ""
+    },
+    {
+      "id": "aner-ally",
+      "name": "亚乃",
+      "nameEn": "Aner",
+      "tagline": "幔利和以实各的弟兄。",
+      "taglineEn": "The brother of Mamre and Eshcol.",
+      "bio": "他是幔利和以实各的弟兄，与亚伯兰结盟。",
+      "bioEn": "He is the brother of Mamre and Eshcol and an ally of Abram.",
+      "appearance": "成人 · 宽额、深色短发与无须面孔 · 砖赭长衣、浅灰头布",
+      "appearanceEn": "Adult · broad forehead, short dark hair and clean-shaven face · brick-ochre robe and pale-gray headcloth",
+      "reference": "创世记 14:13",
+      "referenceEn": "Genesis 14:13",
+      "kind": "biblical",
+      "quote": "",
+      "quoteEn": ""
     }
   ],
   "chapters": [
@@ -1506,6 +1570,45 @@
       "referenceEn": "Genesis 13:1–18",
       "summaryEn": "Abram returns from Egypt to the former altar and calls on the LORD. Their possessions and herds have grown too large for the land, and the herders quarrel. Abram proposes separating and lets Lot choose first. Lot chooses the Jordan plain. After they part, the LORD renews his promise of land and descendants, and Abram moves to Hebron and builds an altar.",
       "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 13:1–18. Character appearances, unnamed companions, buildings and everyday details are artistic depictions."
+    },
+    {
+      "id": "abram-rescues-lot",
+      "edition": "abram-rescues-lot-v1",
+      "number": 18,
+      "title": "亚伯兰营救罗得",
+      "book": "创世记",
+      "reference": "创世记 14:1–16",
+      "summary": "四王击败五王，住在所多玛的罗得与他的财物被掳走。逃出来的人把消息带到亚伯兰那里；亚伯兰率家中受过训练的318人追赶，在夜间分队进击，将罗得、财物和其他被掳的人带回来。",
+      "dataKey": "abramRescuesLot",
+      "characterIds": [
+        "xiao-kun",
+        "xiao-jun",
+        "abram",
+        "sarai",
+        "lot",
+        "chedorlaomer",
+        "mamre-ally",
+        "eshcol-ally",
+        "aner-ally"
+      ],
+      "newCharacterIds": [
+        "chedorlaomer",
+        "mamre-ally",
+        "eshcol-ally",
+        "aner-ally"
+      ],
+      "introduction": "小昆和小君是虚构观察者；本章依据《创世记》14:1–16呈现。人物外貌、未具名配角、装备、建筑与生活细节属于美术表现。",
+      "hidePrintedFolio": false,
+      "status": "published",
+      "availableLanguages": [
+        "zh",
+        "en"
+      ],
+      "titleEn": "Abram Rescues Lot",
+      "bookEn": "Genesis",
+      "referenceEn": "Genesis 14:1–16",
+      "summaryEn": "Four kings defeat five, and Lot and his possessions are taken from Sodom. A survivor brings the news to Abram. Abram pursues with 318 trained men from his household, divides his forces at night, and brings back Lot, the goods and the other captives.",
+      "introductionEn": "Xiao Kun and Xiao Jun are fictional observers; this chapter follows Genesis 14:1–16. Appearances, unnamed companions, equipment, buildings and everyday details are artistic depictions."
     }
   ],
   "titleEn": "Bible Comic Stories",

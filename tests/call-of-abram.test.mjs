@@ -16,7 +16,7 @@ test("Abram's call publishes eight approved images in each language without rein
   assert.deepEqual(chapter.availableLanguages, ["zh", "en"]);
   assert.deepEqual(chapter.newCharacterIds, []);
   assert.deepEqual(chapter.characterIds, ["xiao-kun", "xiao-jun", "abram", "sarai", "lot"]);
-  assert.equal(catalog.chapters.filter(item => item.availableLanguages.includes("en")).length, 17);
+  assert.equal(catalog.chapters.filter(item => item.availableLanguages.includes("en")).length, 18);
   assert.deepEqual(pages.map(item => item.id), [1,2,3,4,5,6,7,8]);
   assert.equal(assets.pages.reduce((sum, item) => sum + item.panels, 0), 36);
   for (const page of pages) {

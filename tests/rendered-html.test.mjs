@@ -64,7 +64,7 @@ test("retains launch, appearance, PWA updates and reduced-motion support without
   assert.match(css, /touch-action:\s*pan-y/);
   assert.match(css, /\.mobile-settings-sheet/);
   assert.match(css, /\.featured-book/);
-  assert.match(serviceWorker, /pcmc-bible-story-v37-abram-egypt-lot-bilingual/);
+  assert.match(serviceWorker, /pcmc-bible-story-v38-abram-rescues-lot-bilingual/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*catch\(\(\) => caches\.match\(event\.request\)\)/);
   assert.match(layout, /Newsreader/);
   assert.match(layout, /Noto_Serif_SC/);
@@ -335,7 +335,7 @@ test("chapter nine follows chapter eight and renders ten complete Chinese pages"
  const chapter=catalog.chapters.find(c=>c.id==='god-remembers-noah');
  assert.deepEqual(chapter.availableLanguages,['zh','en']);
  assert.deepEqual(chapter.newCharacterIds,[]);
- assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,17);
+ assert.equal(catalog.chapters.filter(c=>c.availableLanguages.includes('en')).length,18);
  const contents=await (await render('/comic/contents')).text();
  assert.ok(contents.includes('/comic/read?chapter=god-remembers-noah'));
  const previous=await (await render('/comic/read?chapter=enter-the-ark&page=10')).text();
@@ -401,12 +401,12 @@ test("homepage features only the latest three chapters while contents keeps ever
   assert.ok(library.includes('这里展示最近更新的 3 章，全部故事请查看漫画目录。'));
   const cards = [...library.matchAll(/<a[^>]*class="comic-feature"[^>]*href="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(cards, [
+    '/comic/chapter/abram-rescues-lot',
     '/comic/read?chapter=abram-and-lot-separate&amp;page=1',
     '/comic/chapter/abram-in-egypt',
-    '/comic/read?chapter=call-of-abram&amp;page=1',
   ]);
   assert.ok(library.includes('查看全部章节'));
-  assert.ok(home.includes('已更新 17 章'));
+  assert.ok(home.includes('已更新 18 章'));
   const contents = await (await render('/comic/contents')).text();
   const catalog = JSON.parse(await readFile(new URL('../app/comic/book-catalog.json',import.meta.url),'utf8'));
   for (const chapter of catalog.chapters) assert.ok(contents.includes('chapter/' + chapter.id) || contents.includes('chapter=' + chapter.id));
@@ -557,7 +557,7 @@ test("Egypt introduces only Pharaoh, then connects all full bilingual pages thro
   assert.deepEqual([...intro.matchAll(/<h2>([^<]+)<\/h2>/g)].map(m => m[1]), ['法老']);
   assert.ok(intro.includes('这段经文没有记下他的名字'));
   assert.ok(intro.includes('href="/comic/read?chapter=abram-in-egypt&amp;page=1"'));
-  for (const [id,count,nextTitle] of [['abram-in-egypt',8,'亚伯兰与罗得分开'],['abram-and-lot-separate',10,null]]) {
+  for (const [id,count,nextTitle] of [['abram-in-egypt',8,'亚伯兰与罗得分开'],['abram-and-lot-separate',10,'亚伯兰营救罗得']]) {
     for (let page=1;page<=count;page++) {
       const response=await render(`/comic/read?chapter=${id}&page=${page}`);
       assert.equal(response.status,200);
@@ -570,6 +570,30 @@ test("Egypt introduces only Pharaoh, then connects all full bilingual pages thro
         if(nextTitle) assert.ok(html.includes(`aria-label="下一章：${nextTitle}"`));
         else assert.doesNotMatch(html,/aria-label="下一章：/);
       }
+    }
+  }
+});
+
+
+test("chapter 18 introduces four new people, renders full artwork and bounds navigation to nine pages", async () => {
+  const intro = await (await render('/comic/chapter/abram-rescues-lot')).text();
+  assert.deepEqual([...intro.matchAll(/<h2>([^<]+)<\/h2>/g)].map(m => m[1]), ['基大老玛','幔利','以实各','亚乃']);
+  assert.ok(intro.includes('href="/comic/read?chapter=abram-rescues-lot&amp;page=1"'));
+  assert.doesNotMatch(intro, /characters-approved|麦基洗德/);
+  for (const page of [0,1,2,3,4,5,6,7,8,9,99]) {
+    const response = await render('/comic/read?chapter=abram-rescues-lot&page='+page);
+    assert.equal(response.status,200);
+    const html=await response.text();
+    const bounded=Math.min(9,Math.max(1,page));
+    assert.ok(html.includes('/comics/abram-rescues-lot-v1/page-'+String(bounded).padStart(2,'0')+'.png'));
+    assert.ok(html.includes('/comics/abram-rescues-lot-v1-en/'));
+    assert.match(html,/aria-valuemax="9"/);
+    assert.match(html,/width="1024" height="1536"/);
+    assert.equal((html.match(/aria-label="漫画翻页"/g)||[]).length,1);
+    assert.doesNotMatch(html,/reindexedArtwork|本页分镜|待用户审核|正在绘制中|本章目前提供中文版/);
+    if(page>=9) {
+      assert.ok(html.includes('这一章读完啦！'));
+      assert.doesNotMatch(html,/aria-label="下一章：/);
     }
   }
 });

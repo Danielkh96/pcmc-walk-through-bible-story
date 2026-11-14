@@ -5,10 +5,10 @@ import { createHash } from "node:crypto";
 import { comicChapterEntry } from "../app/comic/navigation.mjs";
 const read = path => readFile(new URL("../" + path, import.meta.url));
 
-test("chapters 15–17 offer distinct final images in both languages and introduce Pharaoh once", async () => {
+test("chapters 15–18 offer distinct final images in both languages and introduce Pharaoh once", async () => {
   const catalog = JSON.parse(await read("app/comic/book-catalog.json"));
   for (const language of ["zh", "en"]) {
-    assert.equal(catalog.chapters.filter(c => c.availableLanguages.includes(language)).length, 17);
+    assert.equal(catalog.chapters.filter(c => c.availableLanguages.includes(language)).length, 18);
   }
   const egypt = catalog.chapters.find(c => c.id === "abram-in-egypt");
   const lot = catalog.chapters.find(c => c.id === "abram-and-lot-separate");
@@ -22,7 +22,7 @@ test("chapters 15–17 offer distinct final images in both languages and introdu
   assert.match(pharaoh.bio, /称号/);
   assert.match(pharaoh.bioEn, /does not give his name/);
   let total = 0;
-  for (const [id, count, panels] of [["call-of-abram",8,36],["abram-in-egypt",8,36],["abram-and-lot-separate",10,44]]) {
+  for (const [id, count, panels] of [["call-of-abram",8,36],["abram-in-egypt",8,36],["abram-and-lot-separate",10,44],["abram-rescues-lot",9,40]]) {
     const chapter = catalog.chapters.find(c => c.id === id);
     assert.equal(chapter.hidePrintedFolio, false);
     assert.deepEqual(chapter.availableLanguages, ["zh","en"]);
@@ -44,5 +44,5 @@ test("chapters 15–17 offer distinct final images in both languages and introdu
       }
     }
   }
-  assert.equal(total,52);
+  assert.equal(total,70);
 });

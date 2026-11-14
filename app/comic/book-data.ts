@@ -26,6 +26,8 @@ import abramInEgypt from "./abram-in-egypt-pages.json";
 
 import abramAndLotSeparate from "./abram-and-lot-separate-pages.json";
 
+import abramRescuesLot from "./abram-rescues-lot-pages.json";
+
 export type ComicPageData = Omit<(typeof creation)[number], "titleEn" | "imageEn"> & { titleEn?: string; imageEn?: string };
 const episodeData: Record<string, ComicPageData[]> = {
   creation,
@@ -44,6 +46,7 @@ const episodeData: Record<string, ComicPageData[]> = {
   fromShemToAbram,
   callOfAbram,
   abramAndLotSeparate,
+  abramRescuesLot,
   abramInEgypt,
 };
 

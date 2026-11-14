@@ -1,0 +1,79 @@
+{
+  "edition": "abram-rescues-lot-v1",
+  "reference": "Genesis 14:1–16",
+  "language": "zh",
+  "pages": [
+    {
+      "page": 1,
+      "path": "/comics/abram-rescues-lot-v1/page-01.png",
+      "sha256": "82d527fc24fc6f6b3b39c76702a279104cb9ce3c96a7d2e9bf13e8ee8410a121",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 2,
+      "path": "/comics/abram-rescues-lot-v1/page-02.png",
+      "sha256": "1e9b5e6e972c008e68cb315731b2fdae46bbbdf601b2c42801f4bcba1dd53997",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 3,
+      "path": "/comics/abram-rescues-lot-v1/page-03.png",
+      "sha256": "a4fda7c32c752bcb62f3a9ca57c8724a0c633cb4244151d44f1069f1334e3c64",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 4,
+      "path": "/comics/abram-rescues-lot-v1/page-04.png",
+      "sha256": "ded79a05ecb0a464cd4eaf7d74d4e7baeec456c226a1e1261727a453ef2335e2",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 5,
+      "path": "/comics/abram-rescues-lot-v1/page-05.png",
+      "sha256": "77270329e4b2592d60f5bea9e55cc77c5c79937c1f655ad4f782f79159ecef1f",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 6,
+      "path": "/comics/abram-rescues-lot-v1/page-06.png",
+      "sha256": "b2f8d6286900268f5e6dcd617902c0c05df3fc29b9cc6e85b4498edf655cf9c2",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 7,
+      "path": "/comics/abram-rescues-lot-v1/page-07.png",
+      "sha256": "16e4d48a956c63be776b6849853d9b4024c9c2707e88a486cc6a8432f44d52ff",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    },
+    {
+      "page": 8,
+      "path": "/comics/abram-rescues-lot-v1/page-08.png",
+      "sha256": "2b7677a8a5b76d97084d3d335b960e31c3b69c2c027964068f260b396aff77e5",
+      "width": 1024,
+      "height": 1536,
+      "panels": 5
+    },
+    {
+      "page": 9,
+      "path": "/comics/abram-rescues-lot-v1/page-09.png",
+      "sha256": "ecaec38a915337eda91e485aeccaa06bb59168b4392a1c58638c1d056667506f",
+      "width": 1024,
+      "height": 1536,
+      "panels": 4
+    }
+  ]
+}
